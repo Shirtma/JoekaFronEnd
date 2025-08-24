@@ -47,7 +47,7 @@ const Navbar = () => {
         </Link>
          <Button
            text='Order!'
-           backgroundColour={colours.royalBurgundy}
+           backgroundColour={colours.onyxBlack}
            iconColour={colours.royalBurgundy}
            width='14.3rem'
          />
