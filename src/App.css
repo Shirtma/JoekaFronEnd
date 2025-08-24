@@ -1,38 +1,163 @@
-.App {
+
+
+/* Button */
+
+.Button {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  /* border-radius: 4px; */
+  padding: .8rem;
+  /* margin: 0 0.5rem; */
+  height: 3.2rem;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.pay-button{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2.4rem;
+    margin-left: 2.4rem;
+    width: 15.6rem;
+    color: #FFFFFF;
+
+    background: #000000;
+    /* border-radius: 4px; */
+    padding: .8rem !important;
+    height: 3.2rem !important;
+    justify-content: center !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.ButtonIcon {
+  align-self: center;
+}
+
+.ButtonIcon-with-text {
+  margin-right: 1rem;
+}
+
+.ButtonTitle {
+  margin: 0;
+  font-size: 1.4rem;
+line-height: 1.7rem;
+font-weight: 400;
   text-align: center;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ButtonTitle-with-icon {
+  display: inline-block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.WideButton {
+  flex-direction: row;
+  width: 5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.SmallButton {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 4px;
+  padding: 0.4rem;
+}
+.not-active-btn {
+  pointer-events: none !important;
+  cursor: default !important;
+  color: #FFFFFF !important;
+  background-color: #B29A7B !important;
 }
 
-.App-link {
-  color: #61dafb;
+.tertiary{
+   border: 1px solid black;
+   background-color: transparent;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tertiary:hover {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+.tertiary-text{
+  color: black;
+}
+
+ .tertiary:hover > .tertiary-text{
+  
+  color: #FFFFFF;
+}
+
+.google{
+  width: 100%;
+display: flex;
+justify-content: space-between;
+}
+
+.secondary-text{
+  color: #FFFFFF;
+}
+
+.explore-button{
+  background-color: #DFC09A;
+  min-height: 48px;
+  padding: 0 16px;
+}
+
+.explore-button:hover{
+background-color: #B29A7B;
+}
+
+.explore-button:hover  .tertiary-text{
+  color: #FFFFFF;
+}
+
+/* .btn-with-icon{
+  
+} */
+
+.inner{
+  width: 24.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* end of button */
+
+
+/* text */
+.text{
+   font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+}
+
+a{
+  text-decoration: none;
+}
+
+/* react-date-picker */
+.react-date-picker {
+  width: 100% !important;
+  margin-top: 5px;
+}
+
+.react-date-picker__wrapper {
+  width: 100% !important;
+  background-color: #fff !important;
+  height: 48px !important;
+  padding: 8px !important;
+  cursor: pointer !important;
+  border: 1px solid #cccccc !important;
+  color: #4d4d4d !important;
+  font-weight: 300;
+  font-size: 1.6rem;
 }
