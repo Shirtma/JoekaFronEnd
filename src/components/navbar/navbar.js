@@ -1,13 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import logo from '../../images/JOEKA.png'
-// import logo from '../../images/thehouse-logo.png'
 import { Link } from 'react-router-dom'
 import { links } from '../../util/constants'
 import Button from '../button'
 import colours from '../../lib/colours'
-// import { useProductsContext } from '../context/products_context'
-// import { useUserContext } from '../context/user_context'
 
 const Navbar = () => {
  // const { openSideBar } = useProductsContext()

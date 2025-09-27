@@ -1,9 +1,9 @@
 export const links = [
-  {
-    id: 1,
-    text: 'ABOUT',
-    url: '/about',
-  },
+  // {
+  //   id: 1,
+  //   text: 'ABOUT',
+  //   url: '/about',
+  // },
   {
     id: 2,
     text: 'SHOP',
@@ -14,12 +14,11 @@ export const links = [
     text: 'COMING',
     url: '/soon',
   },
-  {
-    id: 4,
-    // eslint-disable-next-line no-useless-concat
-    text: 'RESERVE' + '\xa0' + 'A' + '\xa0' + 'SPACE',
-    url: '/reserve',
-  },
+  // {
+  //   id: 4,
+  //   text: 'RESERVE' + '\xa0' + 'A' + '\xa0' + 'SPACE',
+  //   url: '/reserve',
+  // },
 ];
 
 export const accLinks = [

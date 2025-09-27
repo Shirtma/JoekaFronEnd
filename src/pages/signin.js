@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
-import Input from '../components/input';
-import { useUserContext } from '../context/user_context';
-import { onChangeInput } from '../util/helpers';
-import { validateLogin } from '../util/formValidationRules';
-import { LOGIN_ERROR, LOGIN_LOAD, LOGIN_SUCCESS } from '../action';
-import Icon from 'components/icon';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Input from "../components/input";
+import { useUserContext } from "../context/user_context";
+import { onChangeInput } from "../util/helpers";
+import { validateLogin } from "../util/formValidationRules";
+import { LOGIN_ERROR, LOGIN_LOAD, LOGIN_SUCCESS } from "../action";
+import Icon from "../components/icon";
 
 const rootUrl = `${process.env.REACT_APP_API_URL}`;
 
 function Signin() {
   const { isLoading, loginErrors, dispatch } = useUserContext();
   const [view, setView] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [state, setState] = useState({
-    username: '',
-    password: '',
-    loginError: '',
+    username: "",
+    password: "",
+    loginError: "",
     validationErrors: {},
   });
 
@@ -34,14 +34,14 @@ function Signin() {
       dispatch({ type: LOGIN_LOAD });
       try {
         const response = await axios({
-          method: 'post',
+          method: "post",
           url: `${rootUrl}/auth/login`,
           data: values,
         });
         dispatch({ type: LOGIN_SUCCESS, payload: response.data });
 
-        if (response.data.status === 'OK') {
-          history.push('/restaurant');
+        if (response.data.status === "OK") {
+          navigate("/restaurant");
           window.location.reload();
         }
       } catch (error) {
@@ -54,54 +54,54 @@ function Signin() {
       <form className="signin__form">
         <div className="signin__form-intro">
           <p className="signin__form-intro--text1">Sign in to your account</p>
-            {loginErrors && (
-              <div className="error__div">
-                <p>{loginErrors}</p>
-              </div>
-            )}
-          </div>
+          {loginErrors && (
+            <div className="error__div">
+              <p>{loginErrors}</p>
+            </div>
+          )}
+        </div>
 
-          <div className="signin__form-input1">
-            <Input
-              label="Email address"
-              name="username"
-              type="email"
-              labelClassName="contact__form-label"
-              className="contact__form-input"
-              outClassName="contact__form-out"
-              value={state.username}
-              onChange={(e) => onChangeInput(e, state, setState)}
-              placeholder="Email address"
-              error={state.validationErrors.username}
-              required
-            />
-          </div>
+        <div className="signin__form-input1">
+          <Input
+            label="Email address"
+            name="username"
+            type="email"
+            labelClassName="contact__form-label"
+            className="contact__form-input"
+            outClassName="contact__form-out"
+            value={state.username}
+            onChange={(e) => onChangeInput(e, state, setState)}
+            placeholder="Email address"
+            error={state.validationErrors.username}
+            required
+          />
+        </div>
 
-          <div className="signin__form-input2">
-            <Input
-              label="Password"
-              name="password"
-              type={Boolean(view) ? 'text' : 'password'}
-              labelClassName="contact__form-label"
-              className="contact__form-input"
-              outClassName="contact__form-out"
-              value={state.firstName}
-              onChange={(e) => onChangeInput(e, state, setState)}
-              placeholder="Password"
-              error={state.validationErrors.password}
-              required
+        <div className="signin__form-input2">
+          <Input
+            label="Password"
+            name="password"
+            type={Boolean(view) ? "text" : "password"}
+            labelClassName="contact__form-label"
+            className="contact__form-input"
+            outClassName="contact__form-out"
+            value={state.firstName}
+            onChange={(e) => onChangeInput(e, state, setState)}
+            placeholder="Password"
+            error={state.validationErrors.password}
+            required
           >
             <Icon
-              Name={ Boolean(view) ? 'Eye' : 'EyeClosed' }
-              height='16px'
-              width='16px'
-              onClick={ () => setView(!view) }
-              className='toggle-visibility'
+              Name={Boolean(view) ? "Eye" : "EyeClosed"}
+              height="16px"
+              width="16px"
+              onClick={() => setView(!view)}
+              className="toggle-visibility"
             />
           </Input>
-          </div>
+        </div>
 
-          <div className="signin__form-btn signin_cont">
+        <div className="signin__form-btn signin_cont">
           <button
             onClick={Login}
             className="buttonload flex submit-btn"
@@ -110,17 +110,16 @@ function Signin() {
             <i className={isLoading ? "fa fa-spinner fa-spin" : ""}></i>
             SIGN IN
           </button>
-          </div>
-          <div className="signin__link">
-            <p className="signin__link-text">
-              Don’t have an account with us?
-              {' '}
-              <Link to="/register" className="signup__link">
-                Sign up here
-              </Link>
-            </p>
-          </div>
-        </form>
+        </div>
+        <div className="signin__link">
+          <p className="signin__link-text">
+            Don’t have an account with us?{" "}
+            <Link to="/register" className="signup__link">
+              Sign up here
+            </Link>
+          </p>
+        </div>
+      </form>
     </SigninContainer>
   );
 }
@@ -128,66 +127,66 @@ function Signin() {
 export default Signin;
 
 const SigninContainer = styled.div`
-    background-color: #fcf9f5;
-    padding: 57px 16px;
+  background-color: #fcf9f5;
+  padding: 57px 16px;
 
-    .signin__form {
-      @media (min-width: 768px) {
-        width: 50%;
-        margin: 0 auto;
-      }
-      @media (min-width: 1024px) {
-        width: 400px;
-        margin-bottom: 144px;
-      }
-      &-intro {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+  .signin__form {
+    @media (min-width: 768px) {
+      width: 50%;
+      margin: 0 auto;
+    }
+    @media (min-width: 1024px) {
+      width: 400px;
+      margin-bottom: 144px;
+    }
+    &-intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
 
-        &--text1 {
-          font-family: "Space Grotesk", sans-serif;
-          font-style: normal;
-          font-weight: 300;
-          font-size: 4rem;
-          line-height: 4.8rem;
-          color: #000000;
-        }
-
-        &--text2 {
-          font-family: "Space Grotesk", sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 1.6rem;
-          line-height: 2.8rem;
-          color: #000000;
-        }
+      &--text1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 4rem;
+        line-height: 4.8rem;
+        color: #000000;
       }
 
-      &-btn {
-        margin-top: -2rem;
-        cursor: pointer;
-
-        &:hover {
-          color: #fff;
-        }
+      &--text2 {
+        font-family: "Space Grotesk", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.6rem;
+        line-height: 2.8rem;
+        color: #000000;
       }
     }
 
-    .signin__link {
-      text-decoration: none;
-      font-family: "Space Grotesk", sans-serif;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      margin-top: 2rem;
-      color: #000000;
+    &-btn {
+      margin-top: -2rem;
+      cursor: pointer;
 
-      .signup__link {
-        font-weight: 500;
+      &:hover {
+        color: #fff;
       }
     }
+  }
+
+  .signin__link {
+    text-decoration: none;
+    font-family: "Space Grotesk", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+    margin-top: 2rem;
+    color: #000000;
+
+    .signup__link {
+      font-weight: 500;
+    }
+  }
 
   .flex {
     display: flex;
@@ -203,7 +202,7 @@ const SigninContainer = styled.div`
     height: 47px;
     display: flex;
     align-items: center;
-    .submit-btn{
+    .submit-btn {
       height: 100%;
       width: 100%;
     }
@@ -256,7 +255,7 @@ const SigninContainer = styled.div`
     }
   }
   .buttonload {
-    background-color: #DFC09A;
+    background-color: #dfc09a;
     border: none;
     color: #000000;
     min-height: 48px;

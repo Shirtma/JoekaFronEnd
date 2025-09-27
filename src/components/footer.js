@@ -1,19 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import colours from 'lib/colours';
-import Icon from './icon';
-import logo from 'images/thehouse-logo.png';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+// import colours from 'lib/colours';
+import Icon from "./icon";
+import logo from "../images/JOEKA.png";
+import brandColours from "../lib/colours";
 
 function Footer() {
+  const currentDate = new Date();
   return (
     <FooterContainer>
       <div className="footer__container">
         <div className="app__links">
           <div className="app__links-col1">
-            <Link to="/rooms">SPACES</Link>
-            <Link to="/restaurant">RESTAURANT</Link>
-            <Link to="/">PLAYLISTS & EVENTS</Link>
+            <Link to="/shop">TOPS</Link>
+            <Link to="/shop">THE MEN</Link>
+            <Link to="/shop">OUR STYLE</Link>
           </div>
           <div className="app__links-col2">
             <Link to="/about">ABOUT US</Link>
@@ -24,7 +26,7 @@ function Footer() {
 
         <div className="social__links">
           <Link
-            to={{ pathname: 'https://www.instagram.com/thehouselagos' }}
+            to={{ pathname: "https://www.instagram.com/thehouselagos" }}
             target="_blank"
           >
             <Icon
@@ -32,12 +34,12 @@ function Footer() {
               colour="transparent"
               height="24px"
               width="24px"
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: "10px" }}
             />
             <span>INSTAGRAM</span>
           </Link>
           <Link
-            to={{ pathname: 'https://www.twitter.com/thehouselagos' }}
+            to={{ pathname: "https://www.twitter.com/thehouselagos" }}
             className="footer__socials"
             target="_blank"
           >
@@ -46,13 +48,13 @@ function Footer() {
               colour="transparent"
               height="24px"
               width="24px"
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: "10px" }}
             />
             <span>TWITTER</span>
           </Link>
           <Link
             to={{
-              pathname: 'https://www.linkedin.com/company/the-house-lagos',
+              pathname: "https://www.linkedin.com/company/the-house-lagos",
             }}
             className="footer__socials"
             target="_blank"
@@ -62,7 +64,7 @@ function Footer() {
               colour="transparent"
               height="24px"
               width="24px"
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: "10px" }}
             />
             <span>LINKEDIN</span>
           </Link>
@@ -70,8 +72,8 @@ function Footer() {
 
         <form className="call-to-action" onSubmit={() => false}>
           <p>
-            Subscribe to hear the latest about events, news and
-            activities from The House
+            Subscribe to hear the latest about events, news and activities from
+            The House
           </p>
 
           <span className="subscription__form">
@@ -103,11 +105,16 @@ function Footer() {
         <div className="copy-right">
           <span className="logo">
             <Link to="/">
-              <img src={logo} alt="The House NG" width="128px" height="19.91px" />
+              <img
+                src={logo}
+                alt="The House NG"
+                width="28px"
+                height="auto"
+              />
             </Link>
           </span>
-          <span className="name">&copy; THE HOUSE</span>
-          <span className="year">2021</span>
+          <span className="name">&copy; JOEKA INC</span>
+          <span className="year">{currentDate.getFullYear()}</span>
         </div>
       </div>
     </FooterContainer>
@@ -147,18 +154,19 @@ const FooterContainer = styled.footer`
       &-col1 {
         grid-column: 1 / 6;
         @media (min-width: 768px) {
-          grid-column:  1 / 8;
+          grid-column: 1 / 8;
         }
       }
 
       &-col2 {
         grid-column: 6 / -1;
-          @media (min-width: 768px) {
+        @media (min-width: 768px) {
           grid-column: 8 / -1;
         }
       }
 
-      &-col1, &-col2 {
+      &-col1,
+      &-col2 {
         display: flex;
         flex-direction: column;
         column-gap: 16px;
@@ -171,52 +179,53 @@ const FooterContainer = styled.footer`
       flex-direction: column;
       @media (min-width: 768px) {
         grid-row: 1 / 2;
-        grid-column:  8 / -1;
+        grid-column: 8 / -1;
       }
       @media (min-width: 1024px) {
         grid-column: 6 / 9;
       }
     }
-    .app__links, .social__links {
+    .app__links,
+    .social__links {
       a {
-          height: 48px;
-          color: ${colours.primarygrey900};
-          display: flex;
-          align-items: center;
-        }
+        height: 48px;
+        color: ${brandColours.primarygrey900};
+        display: flex;
+        align-items: center;
+      }
     }
 
     .call-to-action {
-        grid-row: 4 / 5;
-        grid-column: 1 / -1;
-        margin: 24px 0 40px;
-        display: flex;
-        flex-direction: column;
-        column-gap: 16px;
-        width: 295px;
-        p {
-          color: ${colours.primarygrey900};
-          padding-right: 20px;
-          font-size: 16px;
-          margin-bottom: 29px;
+      grid-row: 4 / 5;
+      grid-column: 1 / -1;
+      margin: 24px 0 40px;
+      display: flex;
+      flex-direction: column;
+      column-gap: 16px;
+      width: 295px;
+      p {
+        color: ${brandColours.primarygrey900};
+        padding-right: 20px;
+        font-size: 16px;
+        margin-bottom: 29px;
 
+        @media (min-width: 1024px) {
+          grid-column: 1 / 12;
+        }
+      }
+
+      /* Input field and label container element */
+      .subscription__form {
+        /* Input label */
+        &-label {
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 17px;
           @media (min-width: 1024px) {
-            grid-column: 1 / 12;
+            grid-row: 1 / 2;
+            grid-column: 1 / -1;
           }
         }
-
-        /* Input field and label container element */
-      .subscription__form {
-          /* Input label */
-          &-label {
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 17px;
-            @media (min-width: 1024px){
-              grid-row: 1 / 2;
-              grid-column: 1 / -1;
-            }
-          }
 
         /* Input field */
         &-input {
@@ -228,7 +237,7 @@ const FooterContainer = styled.footer`
           border-radius: 0;
           outline: 0;
           ::placeholder {
-            color: ${colours.primarygrey300}
+            color: ${brandColours.primarygrey300};
           }
           @media (min-width: 768px) {
             width: 100% !important;
@@ -245,8 +254,8 @@ const FooterContainer = styled.footer`
         /* Subscribe button */
         &-btn {
           border: 0;
-          background-color: ${colours.primarygrey900};
-          color: ${colours.defaultwhite};
+          background-color: ${brandColours.primarygrey900};
+          color: ${brandColours.defaultwhite};
           height: 48px;
           display: flex;
           align-items: center;
@@ -263,59 +272,38 @@ const FooterContainer = styled.footer`
           }
         }
         @media (min-width: 1024px) {
-            grid-column: 1 / -1;
-            grid-row: 2 / 3;
-            display: grid;
-            grid-template: repeat(2, auto) / repeat(12, 1fr);
-          }
-        }
-
-        @media (min-width: 768px) {
-          grid-row: 2 / 3;
           grid-column: 1 / -1;
-          width: 100%;
-        }
-
-        @media (min-width: 1024px) {
-          margin: 0;
-          grid-row: 1 / 2;
-          grid-column: 9 / -1;
+          grid-row: 2 / 3;
           display: grid;
-          grid-template: repeat(2, minmax(50px, auto)) / repeat(12, 1fr);
+          grid-template: repeat(2, auto) / repeat(12, 1fr);
+        }
+      }
+
+      @media (min-width: 768px) {
+        grid-row: 2 / 3;
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+
+      @media (min-width: 1024px) {
+        margin: 0;
+        grid-row: 1 / 2;
+        grid-column: 9 / -1;
+        display: grid;
+        grid-template: repeat(2, minmax(50px, auto)) / repeat(12, 1fr);
       }
     }
 
     .copy-right {
-      width: 295px;
+      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       img {
-        width: 128px;
-        height: 19.91px;
+        width: 28px;
+        height: auto;
       }
-      @media (min-width: 768px){
-        width: 100% !important;
-        grid-column: 1 / -1;
-      }
-      @media (min-width: 1024px) {
-        margin-top: 40px;
-        display: grid;
-        grid-template: 1 auto / 12 1fr;
-
-        .logo {
-          grid-column: 1 / 5;
-        }
-
-        .name {
-          grid-column: 5 / 7;
-            margin-left: -60px;
-        }
-        .year {
-          grid-column: 7 / 12;
-            text-align: right;
-        }
-      }
+    
     }
   }
 `;

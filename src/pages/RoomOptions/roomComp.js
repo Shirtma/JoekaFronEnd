@@ -1,35 +1,29 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Icon from '../../components/icon';
-import colours from '../../lib/colours';
-import { useProductsContext } from '../../context/products_context';
+import React from "react";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import colours from "../../lib/colours";
+import LinkButton from "../../components/linkButton";
+// import { useProductsContext } from '../../context/products_context';
 
-function RoomComp({ text, Image, spaceId }) {
-  const [display, setDisplay] = useState(false);
-  const { setRoomText } = useProductsContext();
+function RoomComp({ Image, spaceId, amount, title, desc }) {
+  // const navigate = useNavigate();
+  // const { setRoomText } = useProductsContext();
 
   return (
     <RoomCont>
       <div className="room__flex">
-        <div
-          onMouseEnter={() => setDisplay(true)}
-          onMouseLeave={() => setDisplay(false)}
+        <Link
+          className="room__flex__text"
+          // onClick={() => navigate(`rooms/space/${spaceId}`)}
         >
-          <Link onClick={() => setRoomText(text)} to={`rooms/space/${spaceId}`}>
-            {text}
-          </Link>
-        </div>
-        {display && (
-          <div className="room__iconCont">
-            <Icon
-              Name="ArrowRightWhite"
-              colour={colours.neutral1}
-              style={{ zIndex: 2 }}
-            />
+          <h1>{title}</h1>
+          <p>{desc}</p>
+          <div>
+            <p>₦{amount}</p>
+            <LinkButton to='#' label="Add to cart" />
           </div>
-        )}
-        {display && <img src={Image} alt="gallery" />}
+        </Link>
+        <img src={Image} alt="gallery" />
       </div>
     </RoomCont>
   );
@@ -37,87 +31,94 @@ function RoomComp({ text, Image, spaceId }) {
 
 const RoomCont = styled.div`
   .room {
+    width: 100%;
+    height: auto;
+
     &__flex {
+      width: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       margin-bottom: 10px;
       position: relative;
-      width: 90%;
       margin: 0 auto;
-      text-align: center;
+      text-align: center;_
+      min-height: 2rem;
+      height: 50rem;
+      max-height: 50rem;
+      border-radius: 8px;
+      border: 1px solid #b29a7b;
+      overflow: hidden;
 
-      @media only screen and (max-width: 768px) {
+      &__text {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        display: flex;
+        padding: 8px;
         flex-direction: column;
-        margin-bottom: 10rem;
-      }
-    }
-    &__flex > div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    &__flex > div > a {
-      z-index: 2;
-      font-family: Space Grotesk;
-      font-size: 90px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 122px;
-      letter-spacing: 0em;
-      text-align: center;
-      margin-left: 4rem;
-      margin-right: 4rem;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #b29a7b;
-      text-transform: uppercase;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;  
+        background: #f5ece1;
+        border-radius: 8px;
+        color: ${colours.primarygrey900};
+        min-height: 50px;
 
-      @media only screen and (max-width: 768px) {
-        font-family: Space Grotesk;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 61px;
-        letter-spacing: 0em;
-        text-align: center;
+        h1 {
+          font-family: "Space Grotesk", sans-serif;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 32px;
+          letter-spacing: 0em;
+          text-align: left;
+          margin: 0;
+        }
+        p {
+          font-family: "Montserrat", sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: 0em;
+          text-align: left;
+          margin: 0;
+        }
+        div {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          
+          p {
+            font-family: "Montserrat", sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0em;
+            text-align: left;
+            margin: 0;
+          }
+        }
       }
 
-      &:hover {
-        -webkit-text-fill-color: #dfc09a;
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: #dfc09a;
-      }
-    }
-
-    &__iconCont {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: #dfc09a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-    }
+              img {
+     display: block;
+    width: 100%;
+    heigh: auto;
+    max-height: 50rem;
+    object-fit: contain;
   }
 
-  img {
-    width: 50rem;
-    height: 34rem;
-    position: absolute;
-    z-index: 1;
-    transform: translateX(72%);
-    object-fit: cover;
-
-    @media only screen and (max-width: 768px) {
-      transform: translateX(0%);
-      position: fixed;
-      width: 100%;
-      height: 90vh;
-      top: 7.2rem;
     }
+
   }
+
+
 `;
 
 export default RoomComp;
