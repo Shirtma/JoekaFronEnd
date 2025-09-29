@@ -1,50 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 // import Icon from "../../components/icon";
 
-import { Link } from "react-router-dom";
 
 import RoomComp from "./roomComp";
-import Icon from "../../components/icon";
-import { useProductsContext } from "../../context/products_context";
+import { products } from "./data";
 
 const Rooms = () => {
-  const [isHover, setHover] = useState(false);
-  const { spaces } = useProductsContext();
+
+  console.log("products", products);
 
   return (
     <RoomsContainer>
       <div className="rooms__wrapper">
         <div className="rooms__container">
           <div className="rooms__div">
-            {spaces?.map((space, index) => (
+            {products?.map((item, index) => (
               <RoomComp
                 key={index}
-                text={space.space}
-                Image={space.image1}
-                spaceId={space.id}
+                Image={item?.image}
+                spaceId={item?.id}
+                amount={item?.price}
+                title={item?.name}
+                desc={item?.description}
               />
             ))}
           </div>
           <p>
-            Our Spaces are creative rooms for The House friends to visit with up
-            to two or more guests. Friends can eat and drink, party, meet up and
-            catch-a-vibe.
+            Our collections are crafted for trendsetters who want to express
+            themselves with confidence. Each piece is designed to be worn
+            anywhere — whether you’re out with friends, at an event, or just
+            catching a vibe. With styles that mix comfort and creativity, our
+            brand makes sure you always look and feel your best.
           </p>
-          <Link to="register">
-            <div
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
-              className="rooms__btnCont"
-            >
-              <p className="hovered">Become a member</p>
-              <Icon
-                Name={isHover ? "ArrowRightGold" : "ArrowRightWhite"}
-                colour="transparent"
-                width="2.5rem"
-              />
-            </div>
-          </Link>
         </div>
       </div>
     </RoomsContainer>
@@ -54,6 +42,7 @@ const Rooms = () => {
 const RoomsContainer = styled.div`
   position: relative;
   width: 100%;
+  padding: 40px 24px;
 
   @media only screen and (max-width: 768px) {
     height: 300vh;
@@ -75,24 +64,27 @@ const RoomsContainer = styled.div`
     &__container {
       width: 100%;
       height: 100%;
-      overflow-y: auto;
+      // overflow-y: auto;
       margin-top: 7.2rem;
     }
 
     &__div {
-      margin-bottom: 12rem;
-      margin-top: 12rem;
+      width: 100%;
+      margin-bottom: 4rem;
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
     }
     &__container > p {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 4rem;
+      font-size: 3.2rem;
       font-style: normal;
       font-weight: 400;
       line-height: 48px;
       letter-spacing: 0em;
       text-align: left;
-      margin-left: 4rem;
-      margin-right: 4rem;
+      margin: 4rem;
     }
     &__btnCont {
       height: 4.8rem;

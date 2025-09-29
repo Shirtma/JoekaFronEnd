@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // import Icon from '../components/icon'
-import Sidebar from 'components/sidebar';
+// import Sidebar from 'components/sidebar';
 import Input from '../components/input';
 import Button from '../components/button';
 import colours from '../lib/colours';
@@ -9,7 +9,7 @@ import colours from '../lib/colours';
 function Signup() {
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <SignupContainer>
         <div className="signup">
           <form className="signup__form">
@@ -44,6 +44,7 @@ function Signup() {
                 backgroundColour={colours.primarygold600}
                 iconColour={colours.primarygold100}
                 width="13.7rem"
+                disabled={false}
               />
             </div>
           </form>
