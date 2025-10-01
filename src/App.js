@@ -7,6 +7,7 @@ import Rooms from './pages/RoomOptions/rooms';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
 import { UserProvider } from './context/user_context';
+import ProductDetail from './pages/RoomOptions/ProductDetail';
 // import Aboutus from './pages/AboutUs/aboutus';
 
 
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/shop" element={<Rooms />} />
+            <Route path="/shop/product/:id" element={<ProductDetail />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/register" element={<Signup />} />
             {/* <Route path="/about" element={<Aboutus />} /> */}

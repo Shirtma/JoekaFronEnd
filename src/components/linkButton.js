@@ -52,12 +52,22 @@ const StyledLink = styled(Link)`
   z-index: 15;
   background-color: #DFC09A;
 
+  @media only screen and (max-width: 480px) {
+    padding: 0px 6px !important;
+    min-height: 32px;
+  }
+
   .LinkButton__text {
     font-weight: 400;
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
     color: #000000;
     line-height: 17px;
+
+    @media only screen and (max-width: 480px) {
+      font-size: 12px;
+      line-height: 15px;
+    }
   }
 
   .LinkButton__endIcon {
