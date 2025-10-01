@@ -1,29 +1,21 @@
-import React from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import colours from "../../lib/colours";
 import LinkButton from "../../components/linkButton";
-// import { useProductsContext } from '../../context/products_context';
 
 function RoomComp({ Image, spaceId, amount, title, desc }) {
-  // const navigate = useNavigate();
-  // const { setRoomText } = useProductsContext();
-
   return (
     <RoomCont>
       <div className="room__flex">
-        <Link
-          className="room__flex__text"
-          // onClick={() => navigate(`rooms/space/${spaceId}`)}
-        >
+        <Link to={`/shop/product/${spaceId}`} className="room__flex__text">
           <h1>{title}</h1>
           <p>{desc}</p>
           <div>
             <p>₦{amount}</p>
-            <LinkButton to='#' label="Add to cart" />
+            <LinkButton to={`/shop/product/${spaceId}`} label="View Details" />
           </div>
         </Link>
-        <img src={Image} alt="gallery" />
+        <img src={Image} alt={title} />
       </div>
     </RoomCont>
   );
@@ -43,13 +35,20 @@ const RoomCont = styled.div`
       margin-bottom: 10px;
       position: relative;
       margin: 0 auto;
-      text-align: center;_
+      text-align: center;
       min-height: 2rem;
       height: 50rem;
       max-height: 50rem;
       border-radius: 8px;
       border: 1px solid #b29a7b;
       overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
 
       &__text {
         position: absolute;
@@ -61,11 +60,12 @@ const RoomCont = styled.div`
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 10px;  
+        gap: 10px;
         background: #f5ece1;
         border-radius: 8px;
         color: ${colours.primarygrey900};
         min-height: 50px;
+        text-decoration: none;
 
         h1 {
           font-family: "Space Grotesk", sans-serif;
@@ -92,7 +92,7 @@ const RoomCont = styled.div`
           display: flex;
           align-items: center;
           justify-content: space-between;
-          
+
           p {
             font-family: "Montserrat", sans-serif;
             font-size: 20px;
@@ -106,19 +106,15 @@ const RoomCont = styled.div`
         }
       }
 
-              img {
-     display: block;
-    width: 100%;
-    heigh: auto;
-    max-height: 50rem;
-    object-fit: contain;
-  }
-
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 50rem;
+        object-fit: cover;
+      }
     }
-
   }
-
-
 `;
 
 export default RoomComp;

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// import colours from 'lib/colours';
 import Icon from "./icon";
 import logo from "../images/JOEKA.png";
 import brandColours from "../lib/colours";
@@ -22,99 +21,59 @@ function Footer() {
             <Link to="/contact">PAY A VISIT</Link>
             <Link to="/contact">CONTACT US</Link>
           </div>
-        </div>
 
-        <div className="social__links">
-          <Link
-            to={{ pathname: "https://www.instagram.com/thehouselagos" }}
-            target="_blank"
-          >
-            <Icon
-              Name="Instagram"
-              colour="transparent"
-              height="24px"
-              width="24px"
-              style={{ marginRight: "10px" }}
-            />
-            <span>INSTAGRAM</span>
-          </Link>
-          <Link
-            to={{ pathname: "https://www.twitter.com/thehouselagos" }}
-            className="footer__socials"
-            target="_blank"
-          >
-            <Icon
-              Name="Twitter"
-              colour="transparent"
-              height="24px"
-              width="24px"
-              style={{ marginRight: "10px" }}
-            />
-            <span>TWITTER</span>
-          </Link>
-          <Link
-            to={{
-              pathname: "https://www.linkedin.com/company/the-house-lagos",
-            }}
-            className="footer__socials"
-            target="_blank"
-          >
-            <Icon
-              Name="LinkdIn"
-              colour="transparent"
-              height="24px"
-              width="24px"
-              style={{ marginRight: "10px" }}
-            />
-            <span>LINKEDIN</span>
-          </Link>
-        </div>
-
-        <form className="call-to-action" onSubmit={() => false}>
-          <p>
-            Subscribe to hear the latest about events, news and activities from
-            The House
-          </p>
-
-          <span className="subscription__form">
-            <label htmlFor="subscribe" className="subscription__form-label">
-              Email Address
-            </label>
-            <input
-              name="subscribe"
-              id="subscribe"
-              type="email"
-              className="subscription__form-input"
-              width="22.8rem"
-              placeholder="Email address"
-              // error="Please enter a valid email address"
-              required
-            />
-            <button type="submit" className="subscription__form-btn">
-              <span>SUBSCRIBE</span>
-              <Icon
-                Name="ArrowRightWhite"
-                colour="transparent"
-                height="24px"
-                width="24px"
+          <form className="call-to-action" onSubmit={() => false}>
+            <p>
+              Subscribe to hear the latest about events, news and activities
+              from The House
+            </p>
+            <span className="subscription__form">
+              <input
+                name="subscribe"
+                id="subscribe"
+                type="email"
+                className="subscription__form-input"
+                placeholder="Enter your email"
+                required
               />
-            </button>
-          </span>
-        </form>
+              <button type="submit" className="subscription__form-btn">
+                SUBSCRIBE
+              </button>
+            </span>
+          </form>
+        </div>
 
         <div className="copy-right">
           <span className="logo">
             <Link to="/">
-              <img
-                src={logo}
-                alt="The House NG"
-                width="28px"
-                height="auto"
-              />
+              <img src={logo} alt="JOEKA INC" />
             </Link>
           </span>
-          <span className="name">&copy; JOEKA INC</span>
-          <span className="year">{currentDate.getFullYear()}</span>
+          <span className="name">
+            &copy; {currentDate.getFullYear()} JOEKA INC
+          </span>
+          <div className="social__links">
+            <Link
+              to={{ pathname: "https://www.instagram.com/thehouselagos" }}
+              target="_blank"
+            >
+              <Icon Name="Instagram" height="24px" width="24px" />
+            </Link>
+            <Link
+              to={{ pathname: "https://www.twitter.com/thehouselagos" }}
+              target="_blank"
+            >
+              <Icon Name="Twitter" height="24px" width="24px" />
+            </Link>
+            <Link
+              to={{
+                pathname: "https://www.linkedin.com/company/the-house-lagos",
+              }}
+              target="_blank"
+            >
+              <Icon Name="LinkdIn" height="24px" width="24px" />
+            </Link>
+          </div>
         </div>
       </div>
     </FooterContainer>
@@ -126,184 +85,99 @@ const FooterContainer = styled.footer`
 
   .footer__container {
     padding: 40px 24px;
-
-    @media (min-width: 768px) {
-      display: grid;
-      grid-template: repeat(3, minmax(50px, auto)) / repeat(12, 1fr);
-    }
-
-    @media (min-width: 1024px) {
-      grid-template: repeat(2, minmax(50px, auto)) / repeat(12, 1fr);
-      padding: 40px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 
     .app__links {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template: repeat(1, auto) / repeat(12, 1fr);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
 
-      @media (min-width: 768px) {
-        grid-row: 1 / 2;
-        grid-column: 1 / 8;
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 0;
       }
 
-      @media (min-width: 1024px) {
-        grid-column: 1 / 6;
+      a {
+        color: ${brandColours.primarygrey900};
+        margin: 5px 0;
+        text-decoration: none;
+        font-size: 17px;
       }
 
-      &-col1 {
-        grid-column: 1 / 6;
-        @media (min-width: 768px) {
-          grid-column: 1 / 8;
-        }
-      }
-
-      &-col2 {
-        grid-column: 6 / -1;
-        @media (min-width: 768px) {
-          grid-column: 8 / -1;
-        }
-      }
-
-      &-col1,
-      &-col2 {
+      > div {
         display: flex;
         flex-direction: column;
-        column-gap: 16px;
-      }
-    }
-    .social__links {
-      grid-row: 2 / 4;
-      grid-column: 1 / -1;
-      display: flex;
-      flex-direction: column;
-      @media (min-width: 768px) {
-        grid-row: 1 / 2;
-        grid-column: 8 / -1;
-      }
-      @media (min-width: 1024px) {
-        grid-column: 6 / 9;
-      }
-    }
-    .app__links,
-    .social__links {
-      a {
-        height: 48px;
-        color: ${brandColours.primarygrey900};
-        display: flex;
-        align-items: center;
+        gap: 4px;
       }
     }
 
     .call-to-action {
-      grid-row: 4 / 5;
-      grid-column: 1 / -1;
-      margin: 24px 0 40px;
-      display: flex;
-      flex-direction: column;
-      column-gap: 16px;
-      width: 295px;
-      p {
-        color: ${brandColours.primarygrey900};
-        padding-right: 20px;
-        font-size: 16px;
-        margin-bottom: 29px;
+      text-align: center;
 
-        @media (min-width: 1024px) {
-          grid-column: 1 / 12;
-        }
+      p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-align: left;
       }
 
-      /* Input field and label container element */
       .subscription__form {
-        /* Input label */
-        &-label {
-          font-weight: 300;
-          font-size: 14px;
-          line-height: 17px;
-          @media (min-width: 1024px) {
-            grid-row: 1 / 2;
-            grid-column: 1 / -1;
-          }
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: 768px) {
+          flex-direction: row;
         }
 
-        /* Input field */
         &-input {
-          min-width: 100%;
-          height: 48px;
-          padding: 8px 0 8px 8px;
-          border: 0;
-          margin: 0 0 8px 0;
-          border-radius: 0;
-          outline: 0;
-          ::placeholder {
-            color: ${brandColours.primarygrey300};
-          }
-          @media (min-width: 768px) {
-            width: 100% !important;
-            grid-row: 2 / 3;
-            grid-column: 1 / 6;
-          }
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid ${brandColours.primarygrey300};
+          border-radius: 4px;
 
-          @media (min-width: 1024px) {
-            grid-row: 2 / 3;
-            grid-column: 1 / 9;
-            /* width: 228px; */
+          @media (min-width: 768px) {
+            margin-bottom: 0;
+            margin-right: 10px;
           }
         }
-        /* Subscribe button */
+
         &-btn {
-          border: 0;
+          padding: 10px;
           background-color: ${brandColours.primarygrey900};
           color: ${brandColours.defaultwhite};
-          height: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 16px;
-          font-size: 14px;
-          font-weight: 400;
-          width: 100%;
+          border: none;
           cursor: pointer;
-
-          @media (min-width: 1024px) {
-            grid-row: 2 / 3;
-            grid-column: 9 / -1;
-          }
+          border-radius: 4px;
         }
-        @media (min-width: 1024px) {
-          grid-column: 1 / -1;
-          grid-row: 2 / 3;
-          display: grid;
-          grid-template: repeat(2, auto) / repeat(12, 1fr);
-        }
-      }
-
-      @media (min-width: 768px) {
-        grid-row: 2 / 3;
-        grid-column: 1 / -1;
-        width: 100%;
-      }
-
-      @media (min-width: 1024px) {
-        margin: 0;
-        grid-row: 1 / 2;
-        grid-column: 9 / -1;
-        display: grid;
-        grid-template: repeat(2, minmax(50px, auto)) / repeat(12, 1fr);
       }
     }
 
     .copy-right {
-      width: 100%;
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      img {
-        width: 28px;
+      width: 100%;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .logo img {
+        width: 150px;
         height: auto;
       }
-    
+
+
+      .social__links {
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 `;

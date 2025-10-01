@@ -40,30 +40,12 @@ function Homepage() {
   return (
     <HomeContainer>
       <div className="hero">
-        <h1>Joeka Inc.</h1>
+        <h1>STAY JOEKED</h1>
 
         <div className="about__subsection">
           <div>
-            <h2 className="">Fashion That Inspires</h2>
-            <LinkButton
-              to="/about"
-              label="READ ABOUT US"
-              className="link-btn"
-            />
-          </div>
-          <div className="about__subsection-into">
-            <p>
-              At <span>Joeka Inc.</span>, we believe clothing is more than what
-              you wear — it’s how you express who you are.
-            </p>
-            <p>
-              From timeless classics to bold new trends, our collections are
-              made to inspire confidence, comfort, and individuality.
-            </p>
-            <p>
-              We’re more than a fashion brand — we’re your everyday style
-              companion.
-            </p>
+            <h2 className="">Dare to Be Bold</h2>
+            <LinkButton to="/shop" label="Explore Shop" className="link-btn" />
           </div>
         </div>
 
@@ -87,7 +69,7 @@ function Homepage() {
       </div>
 
       <section className="explore">
-        <h3>Explore The Joeka Experience</h3>
+        <h3>Explore Latest Drops</h3>
         <div className="explore_tab home-1">
           <img
             src={`https://res.cloudinary.com/dxjprordi/image/upload/v1758745412/joeka_web/model1_uu4kgq.jpg`}
@@ -97,7 +79,7 @@ function Homepage() {
           />
           <LinkButton
             to="/shop"
-            label="THE MEN"
+            label="Explore All Products"
             endIcon="RArrow"
             className="explore_tab__name"
             endIconColor={`${hover ? "white" : "black"}`}
@@ -117,7 +99,7 @@ function Homepage() {
           />
           <LinkButton
             to="/shop"
-            label="OUR TOP STYLES"
+            label="This is Joeka"
             endIcon="RArrow"
             className="explore_tab__name"
             endIconColor={`${hover1 ? "white" : "black"}`}
@@ -130,14 +112,14 @@ function Homepage() {
 
         <div className="explore_tab home-3">
           <img
-            src={`https://res.cloudinary.com/dxjprordi/image/upload/v1758745411/joeka_web/shirt3_giocms.jpg`}
+            src={`https://res.cloudinary.com/dxjprordi/image/upload/v1758745413/joeka_web/shirt1_mfu7bp.jpg`}
             alt="House 1"
             className="explore_tab__img img"
             loading="lazy"
           />
           <LinkButton
             to="/shop"
-            label="TRENDING NOW"
+            label="Lookbook"
             endIcon="RArrow"
             className="explore_tab__name disabled"
             endIconColor={`${hover2 ? "white" : "black"}`}
@@ -159,7 +141,7 @@ function Homepage() {
                 onMouseLeave={() => setOrderHover(false)}
                 className="inside pad-left"
               >
-                <p>Order Best OutFits</p>
+                <p>This is Joeka</p>
                 <span className="check">
                   <Icon
                     Name={orderHover ? "ArrowRightWhite" : "RArrow"}
@@ -178,7 +160,7 @@ function Homepage() {
                 onMouseLeave={() => setReserveHover(false)}
                 className="inside pad-right"
               >
-                <p>Checkout Our Styles</p>
+                <p>Lookbook</p>
                 <span className="check">
                   <Icon
                     Name={reserveHover ? "ArrowRightWhite" : "RArrow"}
