@@ -197,7 +197,7 @@ const RoomsContainer = styled.div`
       margin-bottom: 2rem;
       margin-top: 4rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       min-height: 400px;
 
@@ -205,13 +205,18 @@ const RoomsContainer = styled.div`
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1.5rem;
         margin-top: 3rem;
+        min-height: 350px;
       }
 
       @media only screen and (max-width: 480px) {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
         margin-top: 2rem;
         min-height: 300px;
+      }
+
+      @media only screen and (max-width: 360px) {
+        gap: 0.8rem;
       }
     }
     &__container > p {
