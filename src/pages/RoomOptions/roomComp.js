@@ -3,20 +3,24 @@ import { Link } from "react-router-dom";
 import colours from "../../lib/colours";
 import LinkButton from "../../components/linkButton";
 
-function RoomComp({ Image, spaceId, amount, title, desc }) {
+function RoomComp({ Image, id, amount, title, desc }) {
   return (
     <RoomCont>
-      <div className="room__flex">
-        <Link to={`/shop/product/${spaceId}`} className="room__flex__text">
+      <Link to={`/shop/product/${id}`} className="room__flex">
+        <img src={Image} alt={title} />
+        <div className="room__flex__text">
           <h1>{title}</h1>
           <p>{desc}</p>
           <div>
             <p>₦{amount}</p>
-            <LinkButton to={`/shop/product/${spaceId}`} label="View Details" />
+            <LinkButton
+              to={`/shop/product/${id}`}
+              label="View Details"
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
-        </Link>
-        <img src={Image} alt={title} />
-      </div>
+        </div>
+      </Link>
     </RoomCont>
   );
 }
@@ -39,8 +43,9 @@ const RoomCont = styled.div`
     border: 1px solid #b29a7b;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background: #fff;
+    text-decoration: none;
+    color: inherit;
 
     @media only screen and (max-width: 768px) {
       height: 35rem;
@@ -78,8 +83,8 @@ const RoomCont = styled.div`
       border-radius: 8px;
       color: ${colours.primarygrey900};
       min-height: 80px;
-      text-decoration: none;
       transition: all 0.3s ease;
+      z-index: 2;
 
       @media only screen and (max-width: 768px) {
         padding: 10px;
@@ -99,11 +104,6 @@ const RoomCont = styled.div`
         bottom: 4px;
         right: 4px;
         left: 4px;
-      }
-
-      &:hover {
-        background: rgba(245, 236, 225, 1);
-        transform: translateY(-1px);
       }
 
       h1 {

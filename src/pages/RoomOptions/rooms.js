@@ -94,7 +94,7 @@ const Rooms = () => {
               <RoomComp
                 key={`${item?.id}-${currentPage}`}
                 Image={item?.image}
-                spaceId={item?.id}
+                id={item?.id}
                 amount={item?.price}
                 title={item?.name}
                 desc={item?.description}

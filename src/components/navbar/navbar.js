@@ -30,10 +30,7 @@ const Navbar = () => {
 
   // Helper function to convert category name to URL parameter
   const getCategoryParam = (categoryName) => {
-    return categoryName
-      .toLowerCase()
-      .replace(/ & /g, "-")
-      .replace(/ /g, "-");
+    return categoryName.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-");
   };
 
   useEffect(() => {
@@ -104,7 +101,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="categories-menu"
               >
-                Shop by Categories <FiChevronDown />
+                Shop by Categories <FiChevronDown color="#000" />
               </button>
               <ul
                 id="categories-menu"
@@ -145,7 +142,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="profile-menu"
               >
-                <FiUser /> Profile <FiChevronDown />
+                <FiUser color="#000" /> Profile <FiChevronDown color="#000" />
               </button>
               <ul
                 id="profile-menu"
@@ -165,7 +162,7 @@ const Navbar = () => {
             </div>
 
             <Link to="/cart" className="cart-link" aria-label="Cart">
-              <AiOutlineShoppingCart size={20} />
+              <AiOutlineShoppingCart color="#000" size={20} />
             </Link>
           </div>
 
@@ -175,7 +172,11 @@ const Navbar = () => {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             ref={menuRef}
           >
-            {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            {menuOpen ? (
+              <FaTimes size={20} color="#000" />
+            ) : (
+              <FaBars size={20} color="#000" />
+            )}
           </button>
         </div>
       </div>
@@ -197,7 +198,7 @@ const Navbar = () => {
               aria-expanded={catOpen}
               aria-controls="drawer-cats"
             >
-              Shop by Categories <FiChevronDown />
+              Shop by Categories <FiChevronDown color="#000" />
             </button>
             <ul
               id="drawer-cats"
@@ -250,9 +251,9 @@ const Navbar = () => {
                     gap: "0.6rem",
                   }}
                 >
-                  <FiUser /> Account
+                  <FiUser color="#000" /> Account
                 </span>
-                <FiChevronDown />
+                <FiChevronDown color="#000" />
               </button>
               <ul
                 id="mobile-profile-list"
@@ -288,7 +289,7 @@ const Navbar = () => {
               className="mobile-link"
               onClick={() => setMenuOpen(false)}
             >
-              <AiOutlineShoppingCart /> Cart
+              <AiOutlineShoppingCart color="#000" /> Cart
             </Link>
           </div>
         </nav>
@@ -307,6 +308,10 @@ const NavContainer = styled.header`
   position: relative;
   z-index: 40;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+
+  a {
+    color: "#000";
+  }
 
   .nav-inner {
     width: 100%;
