@@ -123,11 +123,48 @@ const CartPage = () => {
                     </div>
                   </div>
 
+                  <div className="mobile-right-section mobile-only">
+                    <div className="item-quantity">
+                      <div className="quantity-controls">
+                        <button
+                          className="qty-btn"
+                          onClick={() => handleQuantityChange(item, "dec")}
+                          disabled={item.amount <= 1}
+                          aria-label="Decrease quantity"
+                        >
+                          <FiMinus />
+                        </button>
+                        <span className="quantity-display">{item.amount}</span>
+                        <button
+                          className="qty-btn"
+                          onClick={() => handleQuantityChange(item, "inc")}
+                          aria-label="Increase quantity"
+                        >
+                          <FiPlus />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="item-total">
+                      ₦{(item.price * item.amount).toLocaleString()}
+                    </div>
+
+                    <div className="item-remove">
+                      <button
+                        className="remove-btn"
+                        onClick={() => handleRemoveItem(item)}
+                        aria-label={`Remove ${item.name} from cart`}
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  </div>
+
                   <div className="item-price desktop-only">
                     ₦{item.price.toLocaleString()}
                   </div>
 
-                  <div className="item-quantity">
+                  <div className="item-quantity desktop-only">
                     <div className="quantity-controls">
                       <button
                         className="qty-btn"
@@ -148,11 +185,11 @@ const CartPage = () => {
                     </div>
                   </div>
 
-                  <div className="item-total">
+                  <div className="item-total desktop-only">
                     ₦{(item.price * item.amount).toLocaleString()}
                   </div>
 
-                  <div className="item-remove">
+                  <div className="item-remove desktop-only">
                     <button
                       className="remove-btn"
                       onClick={() => handleRemoveItem(item)}
@@ -223,7 +260,7 @@ const CartPage = () => {
 
 const CartContainer = styled.div`
   font-family: "Montserrat", sans-serif;
-  padding-top: 7.2rem;
+  padding-top: 1.2rem;
   min-height: 100vh;
   background: #fafafa;
 
@@ -287,20 +324,19 @@ const CartContainer = styled.div`
     }
 
     .continue-shopping-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: #d4af37;
-      color: white;
-      text-decoration: none;
-      padding: 1.5rem 3rem;
+      padding: 1.5rem 2rem;
       border-radius: 8px;
       font-size: 1.6rem;
       font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      border: 1px solid #0a0a0a;
+      background: rgba(245, 236, 225, 0.95);
+      color: #0a0a0a;
       transition: all 0.3s ease;
 
-      &:hover {
-        background: #b8941f;
+      &:hover:not(:disabled) {
+        background: rgba(245, 236, 225, 1);
         transform: translateY(-2px);
       }
     }
@@ -353,17 +389,25 @@ const CartContainer = styled.div`
 
     @media (max-width: 768px) {
       display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      padding: 1.5rem 0;
+      flex-direction: row;
+      align-items: center;
+      padding: 1.5rem;
       gap: 1rem;
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
   .item-image {
     @media (max-width: 768px) {
-      order: 1;
-      align-self: center;
+      flex-shrink: 0;
     }
 
     img {
@@ -373,16 +417,17 @@ const CartContainer = styled.div`
       border-radius: 8px;
 
       @media (max-width: 768px) {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
       }
     }
   }
 
   .item-details {
     @media (max-width: 768px) {
-      order: 2;
-      text-align: center;
+      flex: 1;
+      text-align: left;
+      margin-right: 1rem;
     }
 
     .item-name {
@@ -391,6 +436,11 @@ const CartContainer = styled.div`
       color: #333;
       margin: 0 0 0.5rem 0;
       line-height: 1.4;
+
+      @media (max-width: 768px) {
+        font-size: 1.4rem;
+        margin: 0 0 0.3rem 0;
+      }
     }
 
     .item-category {
@@ -398,6 +448,11 @@ const CartContainer = styled.div`
       color: #666;
       margin: 0 0 0.5rem 0;
       text-transform: capitalize;
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+        margin: 0 0 0.3rem 0;
+      }
     }
 
     .item-options {
@@ -410,15 +465,32 @@ const CartContainer = styled.div`
         padding: 0.2rem 0.6rem;
         border-radius: 4px;
         margin-right: 0.5rem;
+
+        @media (max-width: 768px) {
+          font-size: 1rem;
+          padding: 0.1rem 0.4rem;
+        }
       }
     }
 
     .mobile-price {
       font-size: 1.8rem;
       font-weight: 600;
-      color: #d4af37;
+      color: #333;
       margin-top: 1rem;
+
+      @media (max-width: 768px) {
+        display: none; /* Hide since we'll show price in the right section */
+      }
     }
+  }
+
+  .mobile-right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+    flex-shrink: 0;
   }
 
   .item-price {
@@ -429,9 +501,7 @@ const CartContainer = styled.div`
 
   .item-quantity {
     @media (max-width: 768px) {
-      order: 3;
-      display: flex;
-      justify-content: center;
+      flex-shrink: 0;
     }
 
     .quantity-controls {
@@ -441,6 +511,11 @@ const CartContainer = styled.div`
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 0.5rem;
+
+      @media (max-width: 768px) {
+        padding: 0.3rem;
+        gap: 0.3rem;
+      }
 
       .qty-btn {
         width: 36px;
@@ -454,6 +529,11 @@ const CartContainer = styled.div`
         cursor: pointer;
         transition: all 0.3s ease;
 
+        @media (max-width: 768px) {
+          width: 28px;
+          height: 28px;
+        }
+
         &:hover:not(:disabled) {
           background: #f0f0f0;
         }
@@ -465,6 +545,10 @@ const CartContainer = styled.div`
 
         svg {
           font-size: 1.4rem;
+
+          @media (max-width: 768px) {
+            font-size: 1.2rem;
+          }
         }
       }
 
@@ -473,6 +557,11 @@ const CartContainer = styled.div`
         font-weight: 600;
         min-width: 40px;
         text-align: center;
+
+        @media (max-width: 768px) {
+          font-size: 1.4rem;
+          min-width: 30px;
+        }
       }
     }
   }
@@ -480,20 +569,19 @@ const CartContainer = styled.div`
   .item-total {
     font-size: 1.6rem;
     font-weight: 600;
-    color: #d4af37;
+    color: #333;
 
     @media (max-width: 768px) {
-      order: 4;
-      text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-left: 0.5rem;
     }
   }
 
   .item-remove {
     @media (max-width: 768px) {
-      order: 5;
-      display: flex;
-      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 0.5rem;
     }
 
     .remove-btn {
@@ -509,6 +597,11 @@ const CartContainer = styled.div`
       justify-content: center;
       transition: all 0.3s ease;
 
+      @media (max-width: 768px) {
+        width: 32px;
+        height: 32px;
+      }
+
       &:hover {
         background: #ff4444;
         color: white;
@@ -516,6 +609,10 @@ const CartContainer = styled.div`
 
       svg {
         font-size: 1.6rem;
+
+        @media (max-width: 768px) {
+          font-size: 1.4rem;
+        }
       }
     }
   }
@@ -534,7 +631,7 @@ const CartContainer = styled.div`
     }
 
     .continue-shopping {
-      color: #d4af37;
+      color: #333;
       text-decoration: none;
       font-weight: 600;
       font-size: 1.4rem;
@@ -618,9 +715,9 @@ const CartContainer = styled.div`
 
       .checkout-btn {
         width: 100%;
-        background: #d4af37;
-        color: white;
-        border: none;
+        border: 1px solid #0a0a0a;
+        background: rgba(245, 236, 225, 0.95);
+        color: #0a0a0a;
         padding: 1.8rem 2rem;
         border-radius: 8px;
         font-size: 1.6rem;
@@ -634,7 +731,7 @@ const CartContainer = styled.div`
         margin-bottom: 2rem;
 
         &:hover {
-          background: #b8941f;
+          background: rgba(245, 236, 225, 1);
           transform: translateY(-2px);
         }
 
@@ -672,7 +769,7 @@ const CartContainer = styled.div`
     display: none;
 
     @media (max-width: 768px) {
-      display: block;
+      display: flex;
     }
   }
 `;

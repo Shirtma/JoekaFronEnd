@@ -10,14 +10,14 @@ const CategoryFilter = ({
   onCategoryChange,
   onClearAll,
   title = "Filter by Category",
-  layout = "grid", // "grid" or "inline"
+  layout = "grid", 
   showClearButton = true,
   className = "",
-  syncWithURL = false, // New prop to enable URL synchronization
+  syncWithURL = false, 
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(true); // State for mobile collapse
+  const [isOpen, setIsOpen] = useState(false); 
 
   // Helper function to convert category name to URL parameter
   const getCategoryParam = (categoryName) => {
