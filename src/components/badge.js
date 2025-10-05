@@ -1,10 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import Icon from './icon';
+import React from "react";
+import styled from "styled-components";
+import Icon from "./icon";
 
-function Badges({
-  text, background, price, icon = '', color,
-}) {
+function Badges({ text, background, price, icon = "", color }) {
   return (
     <BadgeCont className={`sidebar__card ${background}`}>
       <p>{text}</p>
@@ -16,7 +14,7 @@ function Badges({
             <p
               style={{
                 color,
-                marginRight: '0.3rem',
+                marginRight: "0.3rem",
               }}
             >
               &#8358;
@@ -72,7 +70,7 @@ export const BadgeCont = styled.div`
     color: #fff;
   }
   .golden {
-    background: #dfc09a;
+    background: #fcf9f5;
 
     &:hover {
       cursor: pointer;

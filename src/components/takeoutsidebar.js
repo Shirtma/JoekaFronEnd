@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import colours from '../lib/colours';
-import Icon from './icon';
+import React, { useCallback, useEffect, useState } from "react";
+import styled from "styled-components";
+import colours from "../lib/colours";
+import Icon from "./icon";
 // import Image1 from "../images/our-playlist-image.jpg";
-import { useProductsContext } from '../context/products_context';
+import { useProductsContext } from "../context/products_context";
 // import Image2 from "../images/nigeria-naira-currency-symbol.png";
-import Badges from './badge';
-import { Link } from 'react-router-dom';
-import { DECREASE, INCREASE } from '../action';
-import {zIndexes} from 'util/constants'
+import Badges from "./badge";
+import { Link } from "react-router-dom";
+import { DECREASE, INCREASE } from "../action";
+import { zIndexes } from "util/constants";
 
 const Takeoutsidebar = () => {
   const [hover, setHover] = useState(false);
@@ -29,31 +29,31 @@ const Takeoutsidebar = () => {
     quantity,
     form,
     deliveryPrice,
-    setDeliveryPrice
+    setDeliveryPrice,
   } = useProductsContext();
 
   const deliverPrice = useCallback(() => {
-    if (form?.city === 'Ajah' || selectedOption === 'Ajah') {
+    if (form?.city === "Ajah" || selectedOption === "Ajah") {
       setDeliveryPrice(3000);
-    } else if (form?.city === 'Surulere' || selectedOption === 'Surulere') {
+    } else if (form?.city === "Surulere" || selectedOption === "Surulere") {
       setDeliveryPrice(2000);
     } else if (
-      form?.city === 'Lekki Phase 1' ||
-      selectedOption === 'Lekki Phase 1'
+      form?.city === "Lekki Phase 1" ||
+      selectedOption === "Lekki Phase 1"
     ) {
       setDeliveryPrice(1000);
-    } else if (form?.city === 'Fadeyi' || selectedOption === 'Fadeyi') {
+    } else if (form?.city === "Fadeyi" || selectedOption === "Fadeyi") {
       setDeliveryPrice(2000);
-    } else if (form?.city === 'Costain' || selectedOption === 'Costain') {
+    } else if (form?.city === "Costain" || selectedOption === "Costain") {
       setDeliveryPrice(2000);
-    } else if (form?.city === 'Yaba' || selectedOption === 'Yaba') {
+    } else if (form?.city === "Yaba" || selectedOption === "Yaba") {
       setDeliveryPrice(2000);
     } else if (
-      form?.city === 'Lagos Island' ||
-      selectedOption === 'Lagos Island'
+      form?.city === "Lagos Island" ||
+      selectedOption === "Lagos Island"
     ) {
       setDeliveryPrice(1000);
-    } else if (form?.city === 'VGC' || selectedOption === 'VGC') {
+    } else if (form?.city === "VGC" || selectedOption === "VGC") {
       setDeliveryPrice(2000);
     }
   }, [selectedOption, setDeliveryPrice, form?.city]);
@@ -65,10 +65,10 @@ const Takeoutsidebar = () => {
   return (
     <TakeoutsidebarContainer cart={cart} quantity={quantity}>
       {quantity > 0 && (
-        <div className={`${isTakeoutSideBarOpen ? 'takeout__div' : ''}`}>
+        <div className={`${isTakeoutSideBarOpen ? "takeout__div" : ""}`}>
           <aside
             className={`${
-              isTakeoutSideBarOpen ? 'sidebar show-sidebar' : 'sidebar'
+              isTakeoutSideBarOpen ? "sidebar show-sidebar" : "sidebar"
             }`}
           >
             <div className="sidebar__header">
@@ -77,9 +77,14 @@ const Takeoutsidebar = () => {
                 type="button"
                 onClick={closeTakeoutSideBar}
               >
-                <Icon Name="XTransparent" colour="white" height="24px" width="24px" />
+                <Icon
+                  Name="XTransparent"
+                  colour="white"
+                  height="24px"
+                  width="24px"
+                />
               </button>
-              <p style={{ color: '#fff' }}>MY CART</p>
+              <p style={{ color: "#fff" }}>MY CART</p>
             </div>
             <div className="sidebar__width">
               <div className="sidebar__innerWidth">
@@ -90,53 +95,56 @@ const Takeoutsidebar = () => {
 
                       <div className="sidebar__midDetail">
                         <div className="sidebar__midDetail-header">
-                          <h5 className='cart-name'>{ cart.menuItem }</h5>
+                          <h5 className="cart-name">{cart.menuItem}</h5>
                           <div className="cart-price">
                             <p>{cart.price}</p>
                             <Icon
-                              style={{ cursor: 'pointer', marginLeft: '13.25px' }}
+                              style={{
+                                cursor: "pointer",
+                                marginLeft: "13.25px",
+                              }}
                               Name="Trash"
                               colour="transparent"
                               height="24px"
                               width="24px"
-                              onClick={ () => removeFromCart(cart.id) }
+                              onClick={() => removeFromCart(cart.id)}
                             />
                           </div>
                         </div>
                         <p className="description">
-                          { cart.description.slice(0, 40) }...
+                          {cart.description.slice(0, 40)}...
                         </p>
-                      <div className="action">
-                        <button
-                          disabled={cart.quantity > 1 ? false : true}
-                          onClick={() => toggleAmount(cart.id, DECREASE)}
-                          style={{
-                              width:          '18px',
-                              height:         '18px',
-                              display:        'flex',
-                              alignItems:     'center',
-                              justifyContent: 'center',
-                              borderRadius:   '50%',
+                        <div className="action">
+                          <button
+                            disabled={cart.quantity > 1 ? false : true}
+                            onClick={() => toggleAmount(cart.id, DECREASE)}
+                            style={{
+                              width: "18px",
+                              height: "18px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              borderRadius: "50%",
                               border:
                                 cart.quantity > 1
-                                  ? '1px solid #fff'
-                                  : '1px solid grey'
+                                  ? "1px solid #fff"
+                                  : "1px solid grey",
                             }}
                           >
                             <Icon
-                              style={{ cursor: 'pointer' }}
+                              style={{ cursor: "pointer" }}
                               Name={
-                                cart.quantity > 1 ? 'MinusWhite' : 'MinusGrey'
+                                cart.quantity > 1 ? "MinusWhite" : "MinusGrey"
                               }
                               colour="transparent"
                               width="18px"
                             />
                           </button>
 
-                          <p className='cart-quantity'>{cart.quantity}</p>
+                          <p className="cart-quantity">{cart.quantity}</p>
                           <button className="sidebar__iconCont">
                             <Icon
-                              style={{ cursor: 'pointer' }}
+                              style={{ cursor: "pointer" }}
                               Name="PlusWhite"
                               colour="transparent"
                               width="18px"
@@ -173,7 +181,7 @@ const Takeoutsidebar = () => {
                   <Badges
                     text="PROCEED TO CHECKOUT"
                     icon="RArrow"
-                    color={hover ? '#fff' : '#000'}
+                    color={hover ? "#fff" : "#000"}
                     background="golden"
                   />
                 </Link>
@@ -188,7 +196,7 @@ const Takeoutsidebar = () => {
 
 export const TakeoutsidebarContainer = styled.div`
   text-align: center;
-  .sidebar-st{
+  .sidebar-st {
     position: sticky;
     bottom: 0px;
     padding: 8px 8px 0px;
@@ -254,7 +262,7 @@ export const TakeoutsidebarContainer = styled.div`
       width: 100%;
       display: flex;
       gap: 8px;
-      box-shadow: 0px 1px 0px #4D4D4D;
+      box-shadow: 0px 1px 0px #4d4d4d;
     }
 
     &__midDetail {
@@ -346,7 +354,7 @@ export const TakeoutsidebarContainer = styled.div`
 
   .show-sidebar {
     transform: ${(props) =>
-    props.quantity === 0 ? 'translate(100%)' : 'translate(0%)'};
+      props.quantity === 0 ? "translate(100%)" : "translate(0%)"};
     z-index: 999;
     transition: all 800ms ease;
   }
@@ -387,7 +395,7 @@ export const TakeoutsidebarContainer = styled.div`
     text-align: left;
   }
   .golden {
-    background: #dfc09a;
+    background: #fcf9f5;
     transition: all 1s ease;
 
     &:hover {
@@ -411,7 +419,7 @@ export const TakeoutsidebarContainer = styled.div`
 
   a {
     text-decoration: none;
-    color: #000;
+    color: #0a0a0a;
   }
 
   button {

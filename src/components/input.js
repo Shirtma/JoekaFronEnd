@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 function Input({
   name,
@@ -38,7 +38,7 @@ function Input({
         value={value}
         defaultValue={defaultValue}
         onKeyUp={onKeyUp}
-        className={`input__test ${className}  ${error && 'error__input'}`}
+        className={`input__test ${className}  ${error && "error__input"}`}
         style={{ width, backgroundColor }}
         disabled={disabled}
       />
@@ -49,7 +49,6 @@ function Input({
 }
 
 const InputContainer = styled.div`
-  
   .input {
     &__label {
       display: flex;
@@ -59,7 +58,7 @@ const InputContainer = styled.div`
       font-weight: 300;
       font-size: 1.4rem;
       line-height: 1.4rem;
-      color: #000000;
+      color: #0a0a0a;
       width: 100%;
     }
     &__test {
@@ -86,7 +85,7 @@ const InputContainer = styled.div`
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2rem;
-    color: #B3B3B3;
+    color: #b3b3b3;
   }
   .input__test:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
@@ -95,7 +94,7 @@ const InputContainer = styled.div`
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2rem;
-    color:  #B3B3B3;
+    color: #b3b3b3;
     opacity: 1;
   }
   .input__test::-moz-placeholder {
@@ -105,7 +104,7 @@ const InputContainer = styled.div`
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2rem;
-    color:  #B3B3B3;
+    color: #b3b3b3;
     opacity: 1;
   }
   .input__test:-ms-input-placeholder {
@@ -115,7 +114,7 @@ const InputContainer = styled.div`
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2rem;
-    color:  #B3B3B3;
+    color: #b3b3b3;
   }
   .input__test::-ms-input-placeholder {
     /* Microsoft Edge */
@@ -124,7 +123,7 @@ const InputContainer = styled.div`
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2rem;
-    color:  #B3B3B3;
+    color: #b3b3b3;
   }
 
   .input__test::placeholder {
@@ -134,7 +133,7 @@ const InputContainer = styled.div`
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2rem;
-    color: #B3B3B3;
+    color: #b3b3b3;
   }
 
   .error__input-text {
@@ -163,14 +162,14 @@ const InputContainer = styled.div`
 `;
 
 Input.defaultProps = {
-  type: 'text',
-  className: '',
-  error: '',
+  type: "text",
+  className: "",
+  error: "",
 };
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'number', 'password', 'email', 'file']),
+  type: PropTypes.oneOf(["text", "number", "password", "email", "file"]),
   className: PropTypes.string,
   value: PropTypes.any,
   // onChange: PropTypes.func.isRequired,

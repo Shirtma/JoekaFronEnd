@@ -16,7 +16,7 @@ import visa from "../../images/Visa1.png";
 import { useProductsContext } from "../../context/products_context";
 import axios from "axios";
 import { CHECKOUT_INFO_LOAD, CHECKOUT_INFO_SUCCESS } from "../../action";
-import useMouseClick from 'hooks/useMouseClick';
+import useMouseClick from "hooks/useMouseClick";
 
 const Checkout = () => {
   const {
@@ -35,7 +35,7 @@ const Checkout = () => {
     deliveryPrice,
     setDeliveryPrice,
     setDeliveryLocation,
-    options
+    options,
   } = useProductsContext();
   const [succeeded, setSucceeded] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -76,7 +76,7 @@ const Checkout = () => {
   }, [selectedOption, setDeliveryPrice, form?.city]);
 
   useEffect(() => {
-    deliverPrice()
+    deliverPrice();
   }, [selectedOption, deliverPrice, form?.city]);
 
   const formValidate = naijaNumber.isValid(form.phone_number);
@@ -88,7 +88,7 @@ const Checkout = () => {
   };
 
   const handleChangeNotSignedIn = (e) => {
-      setEmail(e.target.value);
+    setEmail(e.target.value);
   };
 
   const order = cart.map(({ price, menuItem, quantity }) => {
@@ -110,21 +110,23 @@ const Checkout = () => {
     e.preventDefault();
     if (!formValidate) {
       setError(true);
-    } else if(!isValidLocation) {
-      setLocationError(true)
-    }
-     else {
+    } else if (!isValidLocation) {
+      setLocationError(true);
+    } else {
       dispatch({ type: CHECKOUT_INFO_LOAD });
       // try {
       setError(false);
-      setLocationError(false)
+      setLocationError(false);
       const { data } = await axios.post(
         process.env.REACT_APP_API_POST,
         {
           address: form.address,
           email: emailP || email,
           fullName: form.first_name + " " + form.last_name,
-          orders: [...order, { amount: deliveryPrice, item: "Delivery", quantity: 1 }],
+          orders: [
+            ...order,
+            { amount: deliveryPrice, item: "Delivery", quantity: 1 },
+          ],
           phoneNumber: form.phone_number,
         },
         {
@@ -215,19 +217,22 @@ const Checkout = () => {
 
   // Check when delivery location option is clicked and allow user to modify
   const { ref, isClicked, setIsClicked } = useMouseClick();
-  
+
   return (
     <CheckoutContainer>
       <div className="checkout__container">
         <div className="checkout__div">
           <div className="checkout__header">
             <div className="checkout__header-navback">
-            <button className="checkout__flex" onClick={()=> history.goBack()}>
-              <div className="check">
-                <Icon Name="ArrowLeft" colour="transparent" />
-              </div>
-              <p>Back</p>
-            </button>
+              <button
+                className="checkout__flex"
+                onClick={() => history.goBack()}
+              >
+                <div className="check">
+                  <Icon Name="ArrowLeft" colour="transparent" />
+                </div>
+                <p>Back</p>
+              </button>
             </div>
             <div className="checkout__right">
               <p>CHECKOUT</p>
@@ -299,11 +304,13 @@ const Checkout = () => {
                           text="Continue"
                           backgroundColour={colours.primarygrey900}
                           iconColour={colours.primarygold100}
-                            onClick={
-                              isValidEmail(email) ? handleUserNotSignedIn : () => false
-                            }
-                            disabled={isValidEmail(email) ? false : true}
-                            className="unsigned-button"
+                          onClick={
+                            isValidEmail(email)
+                              ? handleUserNotSignedIn
+                              : () => false
+                          }
+                          disabled={isValidEmail(email) ? false : true}
+                          className="unsigned-button"
                         />
                       </div>
                     </div>
@@ -354,7 +361,7 @@ const Checkout = () => {
                         height: "48px",
                         width: "48px",
                         borderRadius: "50%",
-                        background: "#DFC09A",
+                        background: "#FCF9F5",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -476,7 +483,7 @@ const Checkout = () => {
                             colour="transparent"
                             width="20px"
                             onClick={copy}
-                            style={{marginLeft: 'auto'}}
+                            style={{ marginLeft: "auto" }}
                           />
                         </div>
                         {copied && <p className="copied">Copied</p>}
@@ -506,32 +513,32 @@ const Checkout = () => {
                       {!localStorage.user && (
                         <div>
                           <div className="checkout__name-input">
-                          <div className="checkout__formNo4">
-                            <Input
-                              name="first_name"
-                              value={form?.first_name}
-                              type="text"
-                              labelClassName="contact__form-label"
-                              className="contact__form-input"
-                              outClassName="contact__form-out1"
-                              placeholder="Firstname"
-                              onChange={handleChange}
-                              required
-                            />
-                          </div>
-                          <div className="checkout__formNo4">
-                            <Input
-                              name="last_name"
-                              value={form?.last_name}
-                              type="text"
-                              labelClassName="contact__form-label"
-                              className="contact__form-input"
-                              outClassName="contact__form-out1"
-                              placeholder="Lastname"
-                              onChange={handleChange}
-                              required
-                            />
-                          </div>
+                            <div className="checkout__formNo4">
+                              <Input
+                                name="first_name"
+                                value={form?.first_name}
+                                type="text"
+                                labelClassName="contact__form-label"
+                                className="contact__form-input"
+                                outClassName="contact__form-out1"
+                                placeholder="Firstname"
+                                onChange={handleChange}
+                                required
+                              />
+                            </div>
+                            <div className="checkout__formNo4">
+                              <Input
+                                name="last_name"
+                                value={form?.last_name}
+                                type="text"
+                                labelClassName="contact__form-label"
+                                className="contact__form-input"
+                                outClassName="contact__form-out1"
+                                placeholder="Lastname"
+                                onChange={handleChange}
+                                required
+                              />
+                            </div>
                           </div>
                           <div className="checkout__formNo4">
                             <Input
@@ -587,15 +594,22 @@ const Checkout = () => {
                               placeholder="City"
                               onClick={() => setIsClicked(true)}
                             />
-                            {isClicked && <ul className="delivery__location--options">
+                            {isClicked && (
+                              <ul className="delivery__location--options">
                                 {options.map((option, i) => (
-                                  <li onClick={() => {
-                                    setDeliveryLocation(option);
-                                    setIsClicked(false);
-                                  }} key={i}>{option}</li>
+                                  <li
+                                    onClick={() => {
+                                      setDeliveryLocation(option);
+                                      setIsClicked(false);
+                                    }}
+                                    key={i}
+                                  >
+                                    {option}
+                                  </li>
                                 ))}
-                              </ul>}
-                             {locationError && !isValidLocation && (
+                              </ul>
+                            )}
+                            {locationError && !isValidLocation && (
                               <p
                                 style={{
                                   color: "red",
@@ -626,12 +640,12 @@ const Checkout = () => {
                               className="input__check"
                               style={{
                                 marginRight: "10px",
-                                background: "#DFC09A",
+                                background: "#FCF9F5",
                               }}
                             />
                             <label
                               for="address"
-                              style={{ fontSize: "16px", color: "#DFC09A" }}
+                              style={{ fontSize: "16px", color: "#FCF9F5" }}
                             >
                               {" "}
                               Use same address as billing address
@@ -664,33 +678,33 @@ const Checkout = () => {
                         <div>
                           <div className="checkout__name-input">
                             <div className="checkout__formNo4">
-                            <Input
-                              name="first_name"
-                              // value={form?.first_name}
-                              defaultValue={checkoutFirstName}
-                              type="text"
-                              labelClassName="contact__form-label"
-                              className="contact__form-input"
-                              outClassName="contact__form-out1"
-                              placeholder="Firstname"
-                              onChange={handleChange}
-                              required
-                            />
-                          </div>
-                          <div className="checkout__formNo4">
-                            <Input
-                              name="last_name"
-                              // value={form?.last_name}
-                              defaultValue={checkoutLastName}
-                              type="text"
-                              labelClassName="contact__form-label"
-                              className="contact__form-input"
-                              outClassName="contact__form-out1"
-                              placeholder="Lastname"
-                              onChange={handleChange}
-                              required
-                            />
-                          </div>
+                              <Input
+                                name="first_name"
+                                // value={form?.first_name}
+                                defaultValue={checkoutFirstName}
+                                type="text"
+                                labelClassName="contact__form-label"
+                                className="contact__form-input"
+                                outClassName="contact__form-out1"
+                                placeholder="Firstname"
+                                onChange={handleChange}
+                                required
+                              />
+                            </div>
+                            <div className="checkout__formNo4">
+                              <Input
+                                name="last_name"
+                                // value={form?.last_name}
+                                defaultValue={checkoutLastName}
+                                type="text"
+                                labelClassName="contact__form-label"
+                                className="contact__form-input"
+                                outClassName="contact__form-out1"
+                                placeholder="Lastname"
+                                onChange={handleChange}
+                                required
+                              />
+                            </div>
                           </div>
                           <div className="checkout__formNo4">
                             <Input
@@ -744,14 +758,21 @@ const Checkout = () => {
                               placeholder="City"
                               onClick={() => setIsClicked(true)}
                             />
-                            {isClicked && <ul className="delivery__location--options">
+                            {isClicked && (
+                              <ul className="delivery__location--options">
                                 {options.map((option, i) => (
-                                  <li onClick={() => {
-                                    setDeliveryLocation(option);
-                                    setIsClicked(false);
-                                  }} key={i}>{option}</li>
+                                  <li
+                                    onClick={() => {
+                                      setDeliveryLocation(option);
+                                      setIsClicked(false);
+                                    }}
+                                    key={i}
+                                  >
+                                    {option}
+                                  </li>
                                 ))}
-                              </ul>}
+                              </ul>
+                            )}
                             {locationError && !isValidLocation && (
                               <p
                                 style={{
@@ -782,12 +803,12 @@ const Checkout = () => {
                               className="input__check"
                               style={{
                                 marginRight: "10px",
-                                background: "#DFC09A",
+                                background: "#FCF9F5",
                               }}
                             />
                             <label
                               for="address"
-                              style={{ fontSize: "16px", color: "#DFC09A" }}
+                              style={{ fontSize: "16px", color: "#FCF9F5" }}
                             >
                               {" "}
                               Use same address as billing address
@@ -797,7 +818,7 @@ const Checkout = () => {
                             <button
                               onClick={handleClick}
                               className="buttonload"
-                              style={{ cursor: "pointer"}}
+                              style={{ cursor: "pointer" }}
                             >
                               {/* <i className="fa fa-spinner fa-spin"></i> */}
                               <i
@@ -871,13 +892,13 @@ const Checkout = () => {
                       <span className="checkout__pay--graph">
                         <img src={verve} alt="graph" />
                       </span>
-                        <span className="checkout__pay--graph">
+                      <span className="checkout__pay--graph">
                         <img src={mastercard} alt="graph" />
                       </span>
-                        <span className="checkout__pay--graph">
+                      <span className="checkout__pay--graph">
                         <img src={visa} alt="graph" />
                       </span>
-                        <span className="checkout__pay--graph small">
+                      <span className="checkout__pay--graph small">
                         <img src={paystack} alt="graph" />
                       </span>
                     </div>
@@ -980,18 +1001,18 @@ const Checkout = () => {
                     </div>
                   </div>
                   <div className={`checkout__card dark`}>
-                    <p style={{ color: "#DFC09A", fontSize: "14px" }}>TOTAL</p>
+                    <p style={{ color: "#FCF9F5", fontSize: "14px" }}>TOTAL</p>
                     <div className="checkout__cardFlex">
                       <p
                         style={{
-                          color: "#DFC09A",
+                          color: "#FCF9F5",
                           fontSize: "14px",
                           marginRight: "3px",
                         }}
                       >
                         &#8358;
                       </p>
-                      <p style={{ color: "#DFC09A", fontSize: "14px" }}>
+                      <p style={{ color: "#FCF9F5", fontSize: "14px" }}>
                         {total + deliveryPrice}
                       </p>
                     </div>
@@ -1000,7 +1021,7 @@ const Checkout = () => {
               </div>
               <div
                 className="checkout__orderBottom"
-                style={{ border: "1px solid #DFC09A", background: "#DFC09A" }}
+                style={{ border: "1px solid #FCF9F5", background: "#FCF9F5" }}
               >
                 <div
                   style={{
@@ -1032,20 +1053,20 @@ const CheckoutContainer = styled.div`
   font-family: "Space Grotesk", sans-serif;
   margin-bottom: 10rem;
   .checkout {
-  &__detailFlex {
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
-    @media (min-width: 1024px) {
-      flex-direction: row;
-      justify-content: space-between;
+    &__detailFlex {
+      display: flex;
+      flex-direction: column;
+      gap: 17px;
+      @media (min-width: 1024px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
     }
-  }
     &__name-input {
       .checkout__formNo4 {
         width: 100%;
       }
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         display: flex;
         gap: 16px;
         width: 375px;
@@ -1057,7 +1078,8 @@ const CheckoutContainer = styled.div`
       flex-direction: column;
       background-color: #333;
     }
-    &__form {}
+    &__form {
+    }
     &__formNo4 {
       display: flex;
       flex-direction: column;
@@ -1096,7 +1118,7 @@ const CheckoutContainer = styled.div`
       padding-left: 20px;
       font-size: 16px;
       color: #fff;
-      font-family: 'Space Grotesk';
+      font-family: "Space Grotesk";
     }
     &__right {
       text-align: center;
@@ -1131,7 +1153,7 @@ const CheckoutContainer = styled.div`
       padding: 24px;
       color: #fff;
     }
-  
+
     &__gridTop {
       display: flex;
       align-items: center;
@@ -1143,7 +1165,7 @@ const CheckoutContainer = styled.div`
       }
     }
     &__gridTop1 {
-      .contact__form-out1{
+      .contact__form-out1 {
         width: 100%;
         @media (min-width: 1024px) {
           width: 375px;
@@ -1204,7 +1226,6 @@ const CheckoutContainer = styled.div`
     &__orderContainer {
       width: 100%;
       padding: 23.08px;
-
     }
     &__orderCont {
       display: flex;
@@ -1246,7 +1267,7 @@ const CheckoutContainer = styled.div`
     &__midFlex > span {
       font-size: 17px;
       padding: 20px 0;
-      color: #dfc09a;
+      color: #fcf9f5;
     }
     &__btn {
       height: 40px;
@@ -1356,7 +1377,7 @@ const CheckoutContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1378,7 +1399,7 @@ const CheckoutContainer = styled.div`
     color: #fff;
   }
   .dark {
-    background: #000000;
+    background: #0a0a0a;
     color: #fff;
   }
   .custom-select {
@@ -1409,11 +1430,11 @@ const CheckoutContainer = styled.div`
     outline: none;
     cursor: pointer;
     &:hover {
-      color: #dfc09a;
+      color: #fcf9f5;
     }
   }
   a {
-    color: #dfc09a;
+    color: #fcf9f5;
   }
   .estimate {
     font-family: Space Grotesk;
@@ -1444,17 +1465,17 @@ const CheckoutContainer = styled.div`
     line-height: 17px;
     letter-spacing: 0em;
     text-align: left;
-    color: #dfc09a;
+    color: #fcf9f5;
   }
   .button-bg {
     &:hover {
       .button-text {
-        color: #dfc09a;
+        color: #fcf9f5;
       }
     }
   }
   .buttonload {
-    background-color: #000000;
+    background-color: #0a0a0a;
     border: none;
     color: white;
     min-height: 48px;
@@ -1469,14 +1490,14 @@ const CheckoutContainer = styled.div`
     text-align: center;
     position: relative;
     &:hover {
-      color: #dfc09a;
+      color: #fcf9f5;
     }
     @media (min-width: 1024px) {
       width: 156px;
     }
   }
   .button {
-    background-color: #000000;
+    background-color: #0a0a0a;
     border: none;
     color: white;
     height: 48px;
@@ -1491,7 +1512,7 @@ const CheckoutContainer = styled.div`
     text-align: center;
     margin: auto 0;
     &:hover {
-      color: #dfc09a;
+      color: #fcf9f5;
     }
 
     @media screen and (max-width: 768px) {
@@ -1540,32 +1561,33 @@ const CheckoutContainer = styled.div`
     }
   }
 
-/* Style delivery location options */
+  /* Style delivery location options */
   .location-input {
     position: relative;
   }
   .delivery__location--options {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-      min-width: 100%;
-      background-color: #FFFFFF;
-      box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
-      position: absolute;
-      top: 50px;
-      z-index: 1;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    min-width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 50px;
+    z-index: 1;
 
-      li {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 24px;
-        cursor: pointer;
-        font-size: 14px;
-      }
-      @media (min-width: 768px) {
-        min-width: 343px;
-      }
+    li {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    @media (min-width: 768px) {
+      min-width: 343px;
+    }
   }
 
   .edit__input {

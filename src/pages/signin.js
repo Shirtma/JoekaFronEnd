@@ -150,7 +150,7 @@ const SigninContainer = styled.div`
         font-weight: 300;
         font-size: 4rem;
         line-height: 4.8rem;
-        color: #000000;
+        color: #0a0a0a;
       }
 
       &--text2 {
@@ -159,7 +159,7 @@ const SigninContainer = styled.div`
         font-weight: normal;
         font-size: 1.6rem;
         line-height: 2.8rem;
-        color: #000000;
+        color: #0a0a0a;
       }
     }
 
@@ -181,7 +181,7 @@ const SigninContainer = styled.div`
     font-size: 1.6rem;
     line-height: 2.8rem;
     margin-top: 2rem;
-    color: #000000;
+    color: #0a0a0a;
 
     .signup__link {
       font-weight: 500;
@@ -246,7 +246,7 @@ const SigninContainer = styled.div`
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 2.8rem;
-    color: #000000;
+    color: #0a0a0a;
   }
   .contact__form-out {
     margin-top: 16px;
@@ -255,9 +255,9 @@ const SigninContainer = styled.div`
     }
   }
   .buttonload {
-    background-color: #dfc09a;
+    background-color: #fcf9f5;
     border: none;
-    color: #000000;
+    color: #0a0a0a;
     min-height: 48px;
     width: 100%;
     cursor: pointer;
@@ -273,7 +273,7 @@ const SigninContainer = styled.div`
     justify-content: center;
     position: relative;
     /* &:hover {
-      color: #dfc09a;
+      color: #FCF9F5;
     } */
     @media (min-width: 1024px) {
       width: 156px;

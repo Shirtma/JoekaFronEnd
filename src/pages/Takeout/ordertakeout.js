@@ -1,11 +1,11 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
-import styled from 'styled-components';
-import Icon from '../../components/icon';
-import Mealcard from '../../components/mealcard';
-import { useProductsContext } from '../../context/products_context';
-import Product from './Product';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-scroll";
+import styled from "styled-components";
+import Icon from "../../components/icon";
+import Mealcard from "../../components/mealcard";
+import { useProductsContext } from "../../context/products_context";
+import Product from "./Product";
 
 function OrderTakeout({ storage, setStorage, track }) {
   const {
@@ -25,9 +25,9 @@ function OrderTakeout({ storage, setStorage, track }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
   const [hasSelected, setHasSelected] = useState(false);
-  const [tab, setTab] = useState('Breakfast');
-  const [activeTab, setActiveTab] = useState('Breakfast');
-  const [searchText, setSearchText] = useState('');
+  const [tab, setTab] = useState("Breakfast");
+  const [activeTab, setActiveTab] = useState("Breakfast");
+  const [searchText, setSearchText] = useState("");
   const [filteredSearch, setFilteredSearch] = useState([]);
 
   const toggling = () => setIsOpen(!isOpen);
@@ -44,15 +44,17 @@ function OrderTakeout({ storage, setStorage, track }) {
   };
 
   useEffect(() => {
-    setStorage(localStorage.getItem('selectedOption'));
+    setStorage(localStorage.getItem("selectedOption"));
     // eslint-disable-next-line
   }, []);
 
   const handleFilter = (e) => {
     const text = e.target.value;
     setSearchText(text);
-    if (text !== '') {
-      const newFilter = products.filter((product) => product.description.toLowerCase().includes(text.toLowerCase()));
+    if (text !== "") {
+      const newFilter = products.filter((product) =>
+        product.description.toLowerCase().includes(text.toLowerCase())
+      );
       setFilteredSearch(newFilter);
     }
   };
@@ -60,7 +62,7 @@ function OrderTakeout({ storage, setStorage, track }) {
   const filteredFunc = (array, item) => array.some((x) => x.category === item);
 
   const removeText = () => {
-    setSearchText('');
+    setSearchText("");
     setSearchClicked(false);
   };
 
@@ -69,79 +71,74 @@ function OrderTakeout({ storage, setStorage, track }) {
       if (!!selectedOption) {
         setHasSelected(true);
       }
-    }, 0)
-  }, [ selectedOption ]);
+    }, 0);
+  }, [selectedOption]);
 
   return (
     <OrderTakeOutContainer
-      storage={ storage }
-      track={ track }
-      searchIsActive={ searchClicked }
+      storage={storage}
+      track={track}
+      searchIsActive={searchClicked}
       selectedDeliveryLocation={hasSelected}
     >
       <section className="delivery__location">
         <aside>
-        <div className="delivery__location--searchbox">
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={handleFilter}
-            value={searchText}
-          />
-          <Icon
-            Name={searchText.length > 0 ? 'TimesCircle' : 'Search'}
-            colour="transparent"
-            width="48px"
-            height="48px"
-            onClick={searchText.length > 0 ? removeText : () => setSearchClicked(!searchClicked)}
-            className="icon"
-          />
-        </div>
-           <div className="takeout__menuContainer">
-              <h2 className="heading">Menu</h2>
-              <button className="takeout__foodDish">
-                <div className="check3">
-                  <Icon
-                    Name="RArrowWhite"
-                    colour="transparent"
-                    width="2.0rem"
-                  />
-                </div>
-                <p>FOOD &amp; DISHES</p>
-              </button>
-              <div className="takeout__drinks">
-                <p>DRINKS &amp; BEVERAGES</p>
+          <div className="delivery__location--searchbox">
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={handleFilter}
+              value={searchText}
+            />
+            <Icon
+              Name={searchText.length > 0 ? "TimesCircle" : "Search"}
+              colour="transparent"
+              width="48px"
+              height="48px"
+              onClick={
+                searchText.length > 0
+                  ? removeText
+                  : () => setSearchClicked(!searchClicked)
+              }
+              className="icon"
+            />
+          </div>
+          <div className="takeout__menuContainer">
+            <h2 className="heading">Menu</h2>
+            <button className="takeout__foodDish">
+              <div className="check3">
+                <Icon Name="RArrowWhite" colour="transparent" width="2.0rem" />
               </div>
+              <p>FOOD &amp; DISHES</p>
+            </button>
+            <div className="takeout__drinks">
+              <p>DRINKS &amp; BEVERAGES</p>
             </div>
+          </div>
         </aside>
         <div className="delivery__location--area2" onClick={toggling}>
           <div className="delivery__location--area2-row1">
             <p>DELIVERING TO:</p>
             <div className="cta">
-              <span>
-                {!storage
-                  ? 'Select delivery area'
-                    : selectedOption}
-              </span>
-              <Icon
-                Name="AngleDown"
-                colour="transparent"
-                width="3.0rem"
-              />
+              <span>{!storage ? "Select delivery area" : selectedOption}</span>
+              <Icon Name="AngleDown" colour="transparent" width="3.0rem" />
             </div>
           </div>
           {!storage && (
             <p>
-              Select from our available areas where we deliver to. More locations coming soon
+              Select from our available areas where we deliver to. More
+              locations coming soon
             </p>
-          ) }
+          )}
           {isOpen && (
             <ul className="delivery__location--options">
               {options.map((option, i) => (
-                <li onClick={() => onOptionClicked(option)} key={i}>{option}</li>
+                <li onClick={() => onOptionClicked(option)} key={i}>
+                  {option}
+                </li>
               ))}
             </ul>
-            )}
+          )}
         </div>
       </section>
       <section className="meals__type">
@@ -149,151 +146,146 @@ function OrderTakeout({ storage, setStorage, track }) {
           <div className="delivery__location--area-row1">
             <p>DELIVERING TO:</p>
             <div className="cta">
-              <span>
-                {!storage
-                  ? 'Select delivery area'
-                    : selectedOption}
-              </span>
-              <Icon
-                Name="AngleDown"
-                colour="transparent"
-                width="3.0rem"
-              />
+              <span>{!storage ? "Select delivery area" : selectedOption}</span>
+              <Icon Name="AngleDown" colour="transparent" width="3.0rem" />
             </div>
           </div>
           {!storage && (
             <p>
-              Select from our available areas where we deliver to. More locations coming soon
+              Select from our available areas where we deliver to. More
+              locations coming soon
             </p>
-          ) }
+          )}
           {isOpen && (
             <ul className="delivery__location--options">
               {options.map((option, i) => (
-                <li onClick={() => onOptionClicked(option)} key={i}>{option}</li>
+                <li onClick={() => onOptionClicked(option)} key={i}>
+                  {option}
+                </li>
               ))}
             </ul>
-            )}
+          )}
         </div>
         <div
-            onClick={() => setIsOpen(false)}
-            className={
-                isOpen
-                  ? 'takeout__mainContainer__ overlay'
-                  : 'takeout__mainContainer__'
-              }
-          >
-            {searchText.length === 0 && (
-              <div className="meals__type--optiontab">
-                <button
-                  className={
-                        tab === 'Breakfast'
-                          ? 'takeout__mainItem active'
-                          : 'takeout__mainItem'
-                      }
-                  onClick={handleTab}
-                >
+          onClick={() => setIsOpen(false)}
+          className={
+            isOpen
+              ? "takeout__mainContainer__ overlay"
+              : "takeout__mainContainer__"
+          }
+        >
+          {searchText.length === 0 && (
+            <div className="meals__type--optiontab">
+              <button
+                className={
+                  tab === "Breakfast"
+                    ? "takeout__mainItem active"
+                    : "takeout__mainItem"
+                }
+                onClick={handleTab}
+              >
                 Breakfast
-                </button>
-                <button
-                  className={
-                        tab === 'Starters salads & platter'
-                          ? 'takeout__mainItem active'
-                          : 'takeout__mainItem'
-                      }
-                  onClick={handleTab}
-                >
+              </button>
+              <button
+                className={
+                  tab === "Starters salads & platter"
+                    ? "takeout__mainItem active"
+                    : "takeout__mainItem"
+                }
+                onClick={handleTab}
+              >
                 Starters salads &amp; platter
-                </button>
-                <button
-                  className={
-                        tab === 'Mains'
-                          ? 'takeout__mainItem active'
-                          : 'takeout__mainItem'
-                      }
-                  onClick={handleTab}
-                >
+              </button>
+              <button
+                className={
+                  tab === "Mains"
+                    ? "takeout__mainItem active"
+                    : "takeout__mainItem"
+                }
+                onClick={handleTab}
+              >
                 Mains
-                </button>
-                <button
-                  className={
-                        tab === 'Sides'
-                          ? 'takeout__mainItem active'
-                          : 'takeout__mainItem'
-                      }
-                   onClick={handleTab}
-                >
+              </button>
+              <button
+                className={
+                  tab === "Sides"
+                    ? "takeout__mainItem active"
+                    : "takeout__mainItem"
+                }
+                onClick={handleTab}
+              >
                 Sides
-                </button>
-                <button
-                  className={
-                        tab === 'Desserts'
-                          ? 'takeout__mainItem active'
-                          : 'takeout__mainItem'
-                      }
-                  onClick={handleTab}
-                >
+              </button>
+              <button
+                className={
+                  tab === "Desserts"
+                    ? "takeout__mainItem active"
+                    : "takeout__mainItem"
+                }
+                onClick={handleTab}
+              >
                 Desserts
-                </button>
-              </div>
-          ) }
-          </div>
+              </button>
+            </div>
+          )}
+        </div>
       </section>
       <main className="meals__listing">
-          {searchText.length === 0 && <Product tab={tab} />}
-            {searchText.length > 0 && (
-            <p
-              className="search"
-              style={{ marginTop: '20px', marginBottom: '20px' }}
-            >
-              Search Result
-            </p>
-        ) }
+        {searchText.length === 0 && <Product tab={tab} />}
+        {searchText.length > 0 && (
+          <p
+            className="search"
+            style={{ marginTop: "20px", marginBottom: "20px" }}
+          >
+            Search Result
+          </p>
+        )}
 
-          {searchText.length > 0 && (
-            <>
-              <div
-                className="takeout__mealContainer1"
-                style={{ marginBottom: '3rem' }}
-              >
-                {filteredSearch
-                      && filteredSearch.map(
-                        (product) => product.category === activeTab && (
-                        <Mealcard
-                          className1="takeout__mealDetail"
-                          className2="takeout__mealTopFlex"
-                          className3="takeout__mealRightFlex"
-                          price={product.price}
-                          text={product.menuItem}
-                          innerText={product.description}
-                          Image={product.image}
-                          handleClick={() => addToCart(product)}
-                        />
-                        ),
-                      )}
-              </div>
-            </>
-            )}
+        {searchText.length > 0 && (
+          <>
+            <div
+              className="takeout__mealContainer1"
+              style={{ marginBottom: "3rem" }}
+            >
+              {filteredSearch &&
+                filteredSearch.map(
+                  (product) =>
+                    product.category === activeTab && (
+                      <Mealcard
+                        className1="takeout__mealDetail"
+                        className2="takeout__mealTopFlex"
+                        className3="takeout__mealRightFlex"
+                        price={product.price}
+                        text={product.menuItem}
+                        innerText={product.description}
+                        Image={product.image}
+                        handleClick={() => addToCart(product)}
+                      />
+                    )
+                )}
+            </div>
+          </>
+        )}
       </main>
       <div
         className="cart__respCont"
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
         onClick={openTakeoutSideBar}
-        >
-          <div className="cartBtn__cont">
-            <Icon Name={isHover ? 'CartDark' : 'Cart'} />
-            <p className="lead bold quantity">{quantity}</p>
-            <div className="takeout__cardFlex">
+      >
+        <div className="cartBtn__cont">
+          <Icon Name={isHover ? "CartDark" : "Cart"} />
+          <p className="lead bold quantity">{quantity}</p>
+          <div className="takeout__cardFlex">
             <p className="lead">
-              &#8358; {' '}
-                {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-              </p>
-            </div>
+              &#8358; {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
+            </p>
           </div>
-          <div className="cart__rightCont">
-            <p className="lead">View Cart</p>
-            <Icon Name="ArrowRightGold" />
-          </div>
+        </div>
+        <div className="cart__rightCont">
+          <p className="lead">View Cart</p>
+          <Icon Name="ArrowRightGold" />
+        </div>
       </div>
       <div className="cta-overlay" />
     </OrderTakeOutContainer>
@@ -307,16 +299,17 @@ const OrderTakeOutContainer = styled.div`
   position: relative;
 
   /* An overlay which prompts a user to select delivery location */
-.cta-overlay {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #191919;
-  opacity: 0.8;
-  z-index: 3;
-  display: ${({selectedDeliveryLocation}) => !!selectedDeliveryLocation ? 'none' : 'block'};
-}
+  .cta-overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #191919;
+    opacity: 0.8;
+    z-index: 3;
+    display: ${({ selectedDeliveryLocation }) =>
+      !!selectedDeliveryLocation ? "none" : "block"};
+  }
   @media (min-width: 1024px) {
     display: grid;
     grid-template: repeat(3, auto) / repeat(12, 1fr);
@@ -327,7 +320,7 @@ const OrderTakeOutContainer = styled.div`
     position: relative;
     @media (min-width: 1024px) {
       background-color: rgba(0, 0, 0, 0.2);
-      box-shadow: 1px 0px 0px #4D4D4D, -1px 0px 0px #4D4D4D;
+      box-shadow: 1px 0px 0px #4d4d4d, -1px 0px 0px #4d4d4d;
       margin-right: 41px;
       padding: 23px 40px;
     }
@@ -344,7 +337,7 @@ const OrderTakeOutContainer = styled.div`
       input {
         height: 48px;
         width: 100%;
-        color: #B3B3B3;
+        color: #b3b3b3;
         padding: 8px;
         font-family: Montserrat;
         background-color: transparent;
@@ -354,7 +347,7 @@ const OrderTakeOutContainer = styled.div`
 
       input::placeholder {
         font-family: Montserrat;
-        color: #B3B3B3;
+        color: #b3b3b3;
       }
 
       .icon {
@@ -392,7 +385,7 @@ const OrderTakeOutContainer = styled.div`
         align-items: center;
         justify-content: space-between;
         background-color: #191919;
-        color: #B3B3B3;
+        color: #b3b3b3;
         @media (min-width: 1024px) {
           padding: 8px;
           width: 412px;
@@ -400,7 +393,7 @@ const OrderTakeOutContainer = styled.div`
       }
 
       p {
-        color: #B3B3B3;
+        color: #b3b3b3;
       }
       .cta {
         display: inherit;
@@ -409,19 +402,19 @@ const OrderTakeOutContainer = styled.div`
         color: white;
       }
 
-      &2{
+      &2 {
         width: 100%;
         @media (min-width: 1024px) {
           display: none;
         }
         &-row1 {
           min-height: 48px;
-          display: ${(props) => props.searchIsActive ? 'none' : 'flex'};
+          display: ${(props) => (props.searchIsActive ? "none" : "flex")};
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
           background-color: #191919;
-          color: #B3B3B3;
+          color: #b3b3b3;
           position: absolute;
           top: 0;
           left: 0;
@@ -429,7 +422,7 @@ const OrderTakeOutContainer = styled.div`
           padding: 0px 8px;
         }
         p {
-          color: #B3B3B3;
+          color: #b3b3b3;
         }
         .cta {
           position: relative;
@@ -437,7 +430,6 @@ const OrderTakeOutContainer = styled.div`
           align-items: center;
           flex-direction: row;
           color: white;
-
         }
       }
     }
@@ -447,8 +439,9 @@ const OrderTakeOutContainer = styled.div`
       padding: 0;
       list-style-type: none;
       min-width: 343px;
-      background-color: #FFFFFF;
-      box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+      background-color: #ffffff;
+      box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0px 4px 6px -2px rgba(0, 0, 0, 0.05);
       position: absolute;
       top: 46px;
 
@@ -488,13 +481,13 @@ const OrderTakeOutContainer = styled.div`
         cursor: pointer;
         color: #999999;
         border: 0;
-        font-family: 'Space Grotesk';
+        font-family: "Space Grotesk";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
         line-height: 18px;
         &.active {
-          color: #DFC09A;
+          color: #fcf9f5;
           background-color: #191919;
           pointer-events: none;
         }
@@ -517,12 +510,12 @@ const OrderTakeOutContainer = styled.div`
   }
 
   .takeout {
-  /* Left Bar */
+    /* Left Bar */
     &__menuContainer {
       display: none;
       margin-top: 40px;
       .heading {
-        font-family: 'Space Grotesk';
+        font-family: "Space Grotesk";
         font-style: normal;
         font-weight: 600;
         font-size: 16px;
@@ -542,7 +535,7 @@ const OrderTakeOutContainer = styled.div`
       justify-content: flex-start;
       gap: 8px;
       background-color: transparent;
-      font-family: 'Space Grotesk';
+      font-family: "Space Grotesk";
       width: 100%;
       border: 0;
       font-size: 16px;
@@ -558,7 +551,7 @@ const OrderTakeOutContainer = styled.div`
       align-items: center;
       margin-top: 2rem;
       opacity: 20%;
-      font-family: 'Space Grotesk';
+      font-family: "Space Grotesk";
       pointer-events: none;
       & > p {
         font-size: 16px;
@@ -668,18 +661,18 @@ const OrderTakeOutContainer = styled.div`
   .check3 {
     width: 32px;
     height: 32px;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     color: #fff;
-    background: #dfc09a;
+    background: #fcf9f5;
   }
   .active {
     background: #000;
     border-radius: 50px;
-    color: #dfc09a;
+    color: #fcf9f5;
   }
 
   img {
@@ -703,7 +696,7 @@ const OrderTakeOutContainer = styled.div`
     justify-content: space-between;
     width: 343px;
     padding: 20px;
-    background-color: #000000;
+    background-color: #0a0a0a;
     box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
     cursor: pointer;
@@ -711,11 +704,12 @@ const OrderTakeOutContainer = styled.div`
     &:hover {
       background-color: #fff;
 
-      .cartBtn__cont, .cart__rightCont {
-        color: #000;
+      .cartBtn__cont,
+      .cart__rightCont {
+        color: #0a0a0a;
       }
     }
-    @media (min-width: 1024px){
+    @media (min-width: 1024px) {
       display: none;
     }
   }
@@ -730,7 +724,7 @@ const OrderTakeOutContainer = styled.div`
     .quantity {
       width: 26px;
       height: 26px;
-      background-color: #DFC09A;
+      background-color: #fcf9f5;
       border-radius: 40px;
       display: flex;
       align-items: center;
@@ -784,7 +778,7 @@ const OrderTakeOutContainer = styled.div`
     letter-spacing: 0em;
     text-align: left;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 16px 0px 24px;
   }
 `;

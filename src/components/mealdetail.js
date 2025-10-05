@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import Icon from './icon';
-import { useProductsContext } from '../context/products_context';
-import { DECREASE, INCREASE } from '../action';
+import React from "react";
+import styled from "styled-components";
+import Icon from "./icon";
+import { useProductsContext } from "../context/products_context";
+import { DECREASE, INCREASE } from "../action";
 
 function Mealdetail({
   Image,
@@ -13,13 +13,19 @@ function Mealdetail({
   icon2,
   price,
   icon3,
-  id
+  id,
 }) {
   const { removeFromCart, toggleAmount } = useProductsContext();
   return (
     <CheckoutContainer>
       <div className="menu__cartContainer">
-        <img src={Image} alt="gallery"   height="86.38px" width="82.51px" className="img"/>
+        <img
+          src={Image}
+          alt="gallery"
+          height="86.38px"
+          width="82.51px"
+          className="img"
+        />
         <div className="menu__midDetail">
           <div className="menu__midDet1">
             <div className="menu__textCont">
@@ -46,31 +52,31 @@ function Mealdetail({
               disabled={number > 1 ? false : true}
               className="cta-button-wrap"
             >
-            <Icon
-              Name={icon}
-              colour="transparent"
-              width="2.0rem"
-              onClick={() => toggleAmount(id, DECREASE)}
-              className="icon"
-            />
+              <Icon
+                Name={icon}
+                colour="transparent"
+                width="2.0rem"
+                onClick={() => toggleAmount(id, DECREASE)}
+                className="icon"
+              />
             </button>
             <p
               style={{
-                color: '#fff',
-                paddingLeft: '.8rem',
-                paddingRight: '.8rem',
+                color: "#fff",
+                paddingLeft: ".8rem",
+                paddingRight: ".8rem",
               }}
             >
               {number}
             </p>
             <button className="cta-button-wrap">
-            <Icon
-              Name={icon2}
-              colour="transparent"
-              width="2.0rem"
-              onClick={() => toggleAmount(id, INCREASE)}
-              className="icon"
-            />
+              <Icon
+                Name={icon2}
+                colour="transparent"
+                width="2.0rem"
+                onClick={() => toggleAmount(id, INCREASE)}
+                className="icon"
+              />
             </button>
           </div>
         </div>
@@ -89,9 +95,9 @@ const CheckoutContainer = styled.div`
         min-width: 95%;
       }
     }
-  &__addMinFlex {
-    margin-top: 19px;
-  }
+    &__addMinFlex {
+      margin-top: 19px;
+    }
     &__midDetail {
       width: 100%;
     }
@@ -120,7 +126,7 @@ const CheckoutContainer = styled.div`
       letter-spacing: 0em;
       text-align: left;
       flex: 1;
-      color: #fff; 
+      color: #fff;
     }
     &__midDet2 > p {
       font-family: Space Grotesk;
@@ -166,7 +172,7 @@ const CheckoutContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -174,7 +180,8 @@ const CheckoutContainer = styled.div`
     color: #ddd;
   }
 
-  img, .img {
+  img,
+  .img {
     height: 86.38px;
     width: 82.51px;
     border-radius: 0rem;
@@ -182,20 +189,20 @@ const CheckoutContainer = styled.div`
   }
 
   .cta-button-wrap {
-      width: 18px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      border: 1px solid #ffffff;
-      background-color: transparent;
-      cursor: pointer;
-      &:disabled {
-        pointer-events: none;
-        cursor: default;
-        border-color: grey;
-      }
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    cursor: pointer;
+    &:disabled {
+      pointer-events: none;
+      cursor: default;
+      border-color: grey;
+    }
   }
 `;
 

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { links } from '../../util/constants';
-import Button from '../button';
-import colours from '../../lib/colours';
-import Icon from '../icon';
-import { useProductsContext } from '../../context/products_context';
-import { useUserContext } from '../../context/user_context';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { links } from "../../util/constants";
+import Button from "../button";
+import colours from "../../lib/colours";
+import Icon from "../icon";
+import { useProductsContext } from "../../context/products_context";
+import { useUserContext } from "../../context/user_context";
 
 function HomeNavbar() {
   const [isHover, setIsHover] = useState(false);
@@ -74,18 +74,18 @@ function HomeNavbar() {
               onMouseLeave={() => setIsHover(false)}
               onClick={openTakeoutSideBar}
             >
-              <Icon Name={isHover ? 'CartDark' : 'Cart'} />
+              <Icon Name={isHover ? "CartDark" : "Cart"} />
 
               <div
                 style={{
-                  height: '25px',
-                  width: '25px',
-                  background: '#DFC09A',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginRight: '10px',
+                  height: "25px",
+                  width: "25px",
+                  background: "#FCF9F5",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: "10px",
                 }}
               >
                 <p
@@ -101,15 +101,15 @@ function HomeNavbar() {
               </div>
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  paddingRight: '10px',
+                  display: "flex",
+                  alignItems: "center",
+                  paddingRight: "10px",
                 }}
                 className="takeout__cardFlex"
               >
                 <p className="lead">&#8358;</p>
                 <p className="lead">
-                  {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                  {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
                 </p>
               </div>
             </div>
@@ -120,7 +120,7 @@ function HomeNavbar() {
               Name="Home"
               colour={colours.neutral1}
               onClick={openProfileSideBar}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             />
           )}
         </div>
@@ -130,7 +130,7 @@ function HomeNavbar() {
 }
 
 const NavContainer = styled.div`
-border: 1px solid purple;
+  border: 1px solid purple;
   .nav-center {
     // margin: 0 auto;
     justify-content: space-between;
@@ -235,7 +235,7 @@ border: 1px solid purple;
         list-style: none;
       }
       a {
-        color: #000000;
+        color: #0a0a0a;
         font-size: 13px;
         font-weight: 300;
         text-decoration: none;
@@ -252,11 +252,11 @@ border: 1px solid purple;
       display: flex;
       align-items: center;
       justify-content: space-between;
-        border: 1px solid green;
+      border: 1px solid green;
       /* width: 24rem; */
       /* margin-left: -8.8rem; */
       a {
-        color: #000000;
+        color: #0a0a0a;
         font-size: 1.6rem;
         font-weight: 400;
         text-transform: capitalize;
@@ -313,7 +313,7 @@ border: 1px solid purple;
     &:hover {
       background: #fff;
       .lead {
-        color: #000;
+        color: #0a0a0a;
       }
     }
   }

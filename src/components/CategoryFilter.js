@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+
 
 const CategoryFilter = ({
   categories = [],
@@ -15,6 +17,7 @@ const CategoryFilter = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(true); // State for mobile collapse
 
   // Helper function to convert category name to URL parameter
   const getCategoryParam = (categoryName) => {
@@ -64,6 +67,7 @@ const CategoryFilter = ({
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     location.search,
     syncWithURL,
@@ -129,7 +133,17 @@ const CategoryFilter = ({
   return (
     <FilterContainer className={`category-filter ${className}`} layout={layout}>
       <div className="filter__header">
-        <h3 className="filter__title">{title}</h3>
+        <div className="filter__title-section">
+          <h3 className="filter__title">{title}</h3>
+          <button
+            className="mobile__toggle"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Collapse filters" : "Expand filters"}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <FiChevronUp size={20} /> : <FiChevronDown size={20} />}
+          </button>
+        </div>
         {showClearButton && selectedCategories.length > 0 && (
           <button
             className="clear__btn"
@@ -141,28 +155,34 @@ const CategoryFilter = ({
         )}
       </div>
 
-      <div className={`filter__${layout}`}>
-        {categories.map((category) => {
-          const categoryId =
-            typeof category === "string" ? category : category.id;
-          const categoryLabel =
-            typeof category === "string" ? category : category.label;
+      <div
+        className={`filter__content ${
+          isOpen ? "filter__content--open" : "filter__content--closed"
+        }`}
+      >
+        <div className={`filter__${layout}`}>
+          {categories.map((category) => {
+            const categoryId =
+              typeof category === "string" ? category : category.id;
+            const categoryLabel =
+              typeof category === "string" ? category : category.label;
 
-          return (
-            <label key={categoryId} className="filter__checkbox">
-              <input
-                type="checkbox"
-                checked={selectedCategories.includes(categoryId)}
-                onChange={() => handleCategoryToggle(categoryId)}
-                aria-describedby={`${categoryId}-label`}
-              />
-              <span className="checkmark" aria-hidden="true"></span>
-              <span className="label__text" id={`${categoryId}-label`}>
-                {categoryLabel}
-              </span>
-            </label>
-          );
-        })}
+            return (
+              <label key={categoryId} className="filter__checkbox">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(categoryId)}
+                  onChange={() => handleCategoryToggle(categoryId)}
+                  aria-describedby={`${categoryId}-label`}
+                />
+                <span className="checkmark" aria-hidden="true"></span>
+                <span className="label__text" id={`${categoryId}-label`}>
+                  {categoryLabel}
+                </span>
+              </label>
+            );
+          })}
+        </div>
       </div>
     </FilterContainer>
   );
@@ -171,10 +191,10 @@ const CategoryFilter = ({
 // ...existing styled component...
 const FilterContainer = styled.div`
   max-width: 100%;
-  background: #fff;
+  background: #fcf9f5;
   border-radius: 12px;
   padding: 2.4rem;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid #e0e0e0;
   font-family: "Montserrat", sans-serif;
 
   @media only screen and (max-width: 768px) {
@@ -198,6 +218,69 @@ const FilterContainer = styled.div`
 
     @media only screen and (max-width: 480px) {
       margin-bottom: 1.5rem;
+      flex-wrap: nowrap;
+    }
+  }
+
+  .filter__title-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+
+    @media only screen and (max-width: 480px) {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  .mobile__toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: #555;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: #333;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    @media only screen and (max-width: 480px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .filter__content {
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    @media only screen and (max-width: 480px) {
+      &.filter__content--open {
+        max-height: 1000px;
+        opacity: 1;
+      }
+
+      &.filter__content--closed {
+        max-height: 0;
+        opacity: 0;
+        margin-top: -1.5rem;
+      }
+    }
+
+    @media only screen and (min-width: 481px) {
+      max-height: none !important;
+      opacity: 1 !important;
+      margin-top: 0 !important;
     }
   }
 
@@ -205,7 +288,7 @@ const FilterContainer = styled.div`
     font-family: "Space Grotesk", sans-serif;
     font-size: 2.4rem;
     font-weight: 600;
-    color: #333;
+    color: #0a0a0a;
     margin: 0;
 
     @media only screen and (max-width: 768px) {
@@ -218,8 +301,7 @@ const FilterContainer = styled.div`
   }
 
   .clear__btn {
-    background: #d4af37;
-    color: white;
+    background: rgba(243, 233, 220, 0.95);
     border: none;
     padding: 0.8rem 1.6rem;
     border-radius: 8px;
@@ -229,9 +311,10 @@ const FilterContainer = styled.div`
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    color: #0a0a0a;
 
     &:hover {
-      background: #b8941f;
+      background: rgba(250, 231, 207, 1);
     }
 
     &:active {
@@ -288,17 +371,17 @@ const FilterContainer = styled.div`
     padding: 1.2rem;
     border-radius: 8px;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 1px solid #e0e0e0;
     background: #fafafa;
     user-select: none;
 
     &:hover {
       background: #f5f5f5;
-      border-color: rgba(212, 175, 55, 0.3);
+      border-color: rgba(245, 236, 225, 0.95);
     }
 
     &:focus-within {
-      outline: 2px solid #d4af37;
+      outline: 2px solid #f8f8f5;
       outline-offset: 2px;
     }
 
@@ -335,7 +418,7 @@ const FilterContainer = styled.div`
       width: 0;
 
       &:focus + .checkmark {
-        box-shadow: 0 0 0 2px #d4af37;
+        box-shadow: 0 0 0 2px #f8f8f5;
       }
     }
 
@@ -407,8 +490,8 @@ const FilterContainer = styled.div`
     }
 
     input[type="checkbox"]:checked + .checkmark {
-      background: #d4af37;
-      border-color: #d4af37;
+      background: #555;
+      border-color: #555;
 
       &::after {
         opacity: 1;

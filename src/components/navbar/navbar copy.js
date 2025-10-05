@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { zIndexes } from 'util/constants';
-import { links } from '../../util/constants';
-import LinkButton from '../../components/linkButton';
-import colours from '../../lib/colours';
-import Icon from '../icon';
-import { useProductsContext } from '../../context/products_context';
-import useWindowScroll from 'hooks/useWindowScroll';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { zIndexes } from "util/constants";
+import { links } from "../../util/constants";
+import LinkButton from "../../components/linkButton";
+import colours from "../../lib/colours";
+import Icon from "../icon";
+import { useProductsContext } from "../../context/products_context";
+import useWindowScroll from "hooks/useWindowScroll";
 
 function Navbar() {
   const [isHover, setIsHover] = useState(false);
@@ -18,23 +18,28 @@ function Navbar() {
     total,
     openTakeoutSideBar,
     openProfileSideBar,
-    headerNavThemeName
+    headerNavThemeName,
   } = useProductsContext();
 
   // const { isAuthenticated } = useUserContext();
-  const [ scroll ] = useWindowScroll();
+  const [scroll] = useWindowScroll();
 
   return (
     <NavContainer
-      className={
-        `${scroll <= 50 ? 'transparent' : 'opaque'} ${headerNavThemeName}`
-      }>
+      className={`${
+        scroll <= 50 ? "transparent" : "opaque"
+      } ${headerNavThemeName}`}
+    >
       <div className="container">
         <div className="container__inner">
           <div className="container__inner-homebtn">
             <Link to="/">
               <Icon
-                Name={headerNavThemeName === "dark-theme" ? "LightTheHouseLogo" : "DarkTheHouseLogo"}
+                Name={
+                  headerNavThemeName === "dark-theme"
+                    ? "LightTheHouseLogo"
+                    : "DarkTheHouseLogo"
+                }
                 width="144px"
                 height="22.4px"
               />
@@ -43,8 +48,8 @@ function Navbar() {
               <Icon
                 Name="List"
                 colour={colours.neutral1}
-                height='40px'
-                width='40px'
+                height="40px"
+                width="40px"
               />
             </button>
           </div>
@@ -53,14 +58,17 @@ function Navbar() {
             {links.map((link) => {
               const { id, text, url } = link;
               return (
-                <Link key={id} to={url}>{text}</Link>
+                <Link key={id} to={url}>
+                  {text}
+                </Link>
               );
             })}
           </div>
         </div>
         <div className="container__cta">
-          {!localStorage.user && (<Link to="/login">SIGN IN</Link>)}
-          {!window.location.href.includes('ordertakeout') && cart.length === 0 ? (
+          {!localStorage.user && <Link to="/login">SIGN IN</Link>}
+          {!window.location.href.includes("ordertakeout") &&
+          cart.length === 0 ? (
             <LinkButton
               to="/restaurant/ordertakeout"
               label="ORDER A TAKEOUT!"
@@ -74,15 +82,15 @@ function Navbar() {
               onClick={openTakeoutSideBar}
             >
               <Icon
-                Name={ isHover ? 'CartDark' : 'Cart' }
-                height='24px'
-                width='24px'
+                Name={isHover ? "CartDark" : "Cart"}
+                height="24px"
+                width="24px"
               />
-              <p className="lead bold quantity">{ quantity }</p>
+              <p className="lead bold quantity">{quantity}</p>
               <p className="lead summation">
                 <span>&#8358;</span>
                 <span>
-                  { total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
+                  {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
                 </span>
               </p>
             </button>
@@ -90,9 +98,9 @@ function Navbar() {
           {localStorage.user && (
             <Icon
               Name="Home"
-              colour={headerNavThemeName === "dark-theme" ? "#FFF" : '#333'}
+              colour={headerNavThemeName === "dark-theme" ? "#FFF" : "#333"}
               onClick={openProfileSideBar}
-              style={{ cursor: 'pointer', marginLeft: '30.25px' }}
+              style={{ cursor: "pointer", marginLeft: "30.25px" }}
             />
           )}
         </div>
@@ -114,7 +122,7 @@ const NavContainer = styled.div`
   transition: all 0.3s ease-in-out;
 
   &.opaque {
-    background-color: #FCF9F5;
+    background-color: #fcf9f5;
   }
   &.transparent {
     background-color: transparent;
@@ -122,10 +130,11 @@ const NavContainer = styled.div`
   &.dark-theme {
     background-color: transparent;
     .container__inner-homebtn svg {
-      color: #FFFF;
+      color: #ffff;
     }
-    .container__inner a, .container__cta a {
-      color: #FFFF;
+    .container__inner a,
+    .container__cta a {
+      color: #ffff;
     }
   }
   .container {
@@ -195,9 +204,9 @@ const NavContainer = styled.div`
       .btn {
         min-width: 159px;
         margin-left: 24px;
-        background-color: #000000;
+        background-color: #0a0a0a;
         .LinkButton__text {
-          color: #FFFFFF;
+          color: #ffffff;
           font-size: 13px;
         }
       }
@@ -213,11 +222,11 @@ const NavContainer = styled.div`
     width: fit-content;
     min-width: 148px;
     height: 42px;
-    background: #000000;
+    background: #0a0a0a;
     border: 0;
     border-radius: 40px;
     margin-left: 16px;
-    font-family: 'Space Grotesk';
+    font-family: "Space Grotesk";
     transition: all 0.2s ease-in-out;
     cursor: pointer;
 
@@ -231,24 +240,24 @@ const NavContainer = styled.div`
       height: fit-content;
       min-width: 26px;
       min-height: 26px;
-      background: #DFC09A;
+      background: #fcf9f5;
       border-radius: 40px;
       font-weight: 600;
       font-size: 14px;
       line-height: 18px;
-      color: #FFFFFF;
+      color: #ffffff;
     }
     .summation {
       font-weight: 600;
       font-size: 14px;
       line-height: 18px;
-      color: #FFFFFF;
+      color: #ffffff;
     }
     &:hover {
-      background-color: #FFFFFF;
-      color: #000000;
+      background-color: #ffffff;
+      color: #0a0a0a;
       .summation {
-        color: #000000;
+        color: #0a0a0a;
       }
     }
   }

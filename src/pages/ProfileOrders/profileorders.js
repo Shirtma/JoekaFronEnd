@@ -25,7 +25,7 @@ const Profileorders = () => {
           <Link to="/restaurant/ordertakeout">
             <Button
               text="MAKE YOUR FIRST ORDER"
-              backgroundColour="#000000"
+              backgroundColour="#0a0a0a"
               iconColour={colours.primarygold100}
               width="23.1rem"
               className="btn"

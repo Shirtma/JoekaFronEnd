@@ -572,7 +572,7 @@ const ReserveContainer = styled.div`
           font-weight: normal;
           font-size: 4rem;
           line-height: 4.8rem;
-          color: #000000;
+          color: #0a0a0a;
         }
 
         &--text2 {
@@ -581,7 +581,7 @@ const ReserveContainer = styled.div`
           font-weight: normal;
           font-size: 1.6rem;
           line-height: 2.8rem;
-          color: #000000;
+          color: #0a0a0a;
         }
 
         &--text3 {
@@ -590,7 +590,7 @@ const ReserveContainer = styled.div`
           font-weight: 600;
           font-size: 1.6rem;
           line-height: 3.2rem;
-          color: #000000;
+          color: #0a0a0a;
           margin: 24px 0px 16px;
         }
 
@@ -600,7 +600,7 @@ const ReserveContainer = styled.div`
           font-weight: 300;
           font-size: 1.4rem;
           line-height: 1.7rem;
-          color: #000000;
+          color: #0a0a0a;
         }
       }
 
@@ -628,7 +628,7 @@ const ReserveContainer = styled.div`
             font-size: 2rem;
             line-height: 3.2rem;
             margin-bottom: 0.5rem;
-            color: #000000;
+            color: #0a0a0a;
           }
 
           &-secondary {
@@ -637,7 +637,7 @@ const ReserveContainer = styled.div`
             font-weight: 300;
             font-size: 1.4rem;
             line-height: 1.7rem;
-            color: #000000;
+            color: #0a0a0a;
           }
         }
       }
@@ -681,7 +681,7 @@ const ReserveContainer = styled.div`
           font-weight: 600;
           font-size: 1.6rem;
           line-height: 3.2rem;
-          color: #000000;
+          color: #0a0a0a;
         }
 
         &-small {
@@ -824,7 +824,7 @@ const ReserveContainer = styled.div`
     transform: rotate(-45deg) translate(50%, 0%);
     transform-origin: center center;
     transition: transform ease-in-out 100ms;
-    color: #000;
+    color: #0a0a0a;
   }
 
   .summary:focus {
@@ -860,7 +860,7 @@ const ReserveContainer = styled.div`
     font-weight: 300;
     font-size: 1.4rem;
     line-height: 1.4rem;
-    color: #000000;
+    color: #0a0a0a;
     border-bottom: 1px solid #cccccc;
 
     &:hover {
@@ -889,7 +889,7 @@ const ReserveContainer = styled.div`
     font-weight: 300;
     font-size: 1.4rem;
     line-height: 1.4rem;
-    color: #000000;
+    color: #0a0a0a;
     padding-bottom: 0.6rem;
   }
 
@@ -910,7 +910,7 @@ const InputContainer = styled.div`
       font-size: 1.4rem;
       line-height: 1.4rem;
 
-      color: #000000;
+      color: #0a0a0a;
     }
     &__test {
       padding: 8px;
@@ -1006,7 +1006,7 @@ const InputContainer = styled.div`
   }
   .active {
     background: red;
-    border: 1px solid #dfc09a;
+    border: 1px solid #fcf9f5;
   }
 `;
 

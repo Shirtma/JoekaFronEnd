@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import colours from '../../lib/colours';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import colours from "../../lib/colours";
+import { Link } from "react-router-dom";
 
 export const CtaButtonLink = styled(Link)`
   display: flex;
@@ -27,12 +27,12 @@ const IndividualContainer = styled.div`
     &__name {
       grid-column: 1 / -1;
       grid-row: 1 / 2;
-      font-family: 'Space Grotesk';
+      font-family: "Space Grotesk";
       font-style: normal;
       font-weight: 700;
       font-size: 48px;
       line-height: 56px;
-      color: #000000;
+      color: #0a0a0a;
       padding: 40px 24px;
       will-change: font-size;
       text-transform: uppercase;
@@ -50,7 +50,8 @@ const IndividualContainer = styled.div`
         }
       }
       /* Space actual name */
-      &-noun {}
+      &-noun {
+      }
     }
 
     &__poster {
@@ -84,7 +85,7 @@ const IndividualContainer = styled.div`
         font-weight: 300;
         font-size: 16px;
         line-height: 32px;
-        color: #000000;
+        color: #0a0a0a;
         margin-bottom: 24px;
       }
 
@@ -104,8 +105,8 @@ const IndividualContainer = styled.div`
           height: 40px;
           width: 40px;
           border-radius: 56px;
-          color: #FFF;
-          border: 1px solid #E5CDAE;
+          color: #fff;
+          border: 1px solid #e5cdae;
           margin-right: 16px;
           transform: rotate(90deg);
         }
@@ -192,26 +193,26 @@ const IndividualContainer = styled.div`
     }
 
     &__intro {
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         grid-row: 2 / 3;
         grid-column: 1 / 5;
         transform: translateY(-350px);
       }
       &-heading {
-        font-family: 'Space Grotesk';
+        font-family: "Space Grotesk";
         font-style: normal;
         font-weight: 300;
         font-size: 40px;
         line-height: 48px;
-        color: #000000;
+        color: #0a0a0a;
         margin-bottom: 40px;
       }
       &-subheading {
-        font-family: 'Space Grotesk';
+        font-family: "Space Grotesk";
         font-weight: 600;
         font-size: 16px;
         line-height: 32px;
-        color: #000000;
+        color: #0a0a0a;
         padding-right: 24px;
       }
       &-items {
@@ -222,11 +223,11 @@ const IndividualContainer = styled.div`
         &--item {
           display: flex;
           align-items: flex-start;
-          font-family: 'Montserrat';
+          font-family: "Montserrat";
           font-weight: 300;
           font-size: 16px;
           line-height: 32px;
-          color: #000000;
+          color: #0a0a0a;
           svg {
             margin-right: 12px;
           }
@@ -270,98 +271,98 @@ const IndividualContainer = styled.div`
       font-weight: normal;
       font-size: 2rem;
       line-height: 2.8rem;
-      color: #000000;
+      color: #0a0a0a;
     }
 
     &__button {
       margin-top: 24px;
     }
   }
-    .cta {
-      display: grid;
-      grid-template: repeat(2, minmax(50px, auto)) / repeat(12, 1fr);
-      grid-row-gap: 24px;
-      margin-bottom: 120px;
+  .cta {
+    display: grid;
+    grid-template: repeat(2, minmax(50px, auto)) / repeat(12, 1fr);
+    grid-row-gap: 24px;
+    margin-bottom: 120px;
+    @media (min-width: 1024px) {
+      grid-template-rows: 1 auto;
+    }
+    .outside {
+      height: 243px;
+      grid-column: 1 / -1;
+      padding: 0 16px;
+      border-top: 1px solid ${colours.primarygold900};
+      border-bottom: 1px solid ${colours.primarygold900};
       @media (min-width: 1024px) {
-        grid-template-rows: 1 auto;
-      }
-      .outside {
-        height: 243px;
-        grid-column: 1 / -1;
-        padding: 0 16px;
-        border-top: 1px solid ${colours.primarygold900};
-        border-bottom: 1px solid ${colours.primarygold900};
-        @media (min-width: 1024px) {
         grid-column: 1 / 7;
-        &:nth-of-type(2){
+        &:nth-of-type(2) {
           grid-column: 7 / 13;
         }
-        }
+      }
 
-        .inside {
-          cursor: pointer;
-          border: none;
-          border-right: 1px solid ${colours.primarygold900};
-          border-left: 1px solid ${colours.primarygold900};
-          height: 100%;
-          width: 95%;
-          margin: 0 auto;
-          padding: 39px 40px;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: flex-end;
-          background-color: ${colours.primarygold100};
+      .inside {
+        cursor: pointer;
+        border: none;
+        border-right: 1px solid ${colours.primarygold900};
+        border-left: 1px solid ${colours.primarygold900};
+        height: 100%;
+        width: 95%;
+        margin: 0 auto;
+        padding: 39px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        background-color: ${colours.primarygold100};
+        &.pad-left {
+          .check {
+            align-self: flex-start;
+            transform: rotate(180deg);
+          }
+        }
+        &.pad-right {
+          p {
+            align-self: flex-start;
+          }
+        }
+        @media (min-width: 1024px) {
           &.pad-left {
-            .check {
-              align-self: flex-start;
-              transform: rotate(180deg);
-            }
+            margin-left: 25px;
           }
           &.pad-right {
-            p {
-              align-self: flex-start;
-            }
+            margin-right: 25px;
           }
-            @media (min-width: 1024px) {
-              &.pad-left {
-                margin-left: 25px;
-              }
-              &.pad-right {
-                margin-right: 25px;
-              }
-            }
-          p {
-            margin-bottom: 48px;
-            font-family: 'Space Grotesk';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 32px;
-            line-height: 44px;
-            color: ${colours.primarygold900};
-          }
+        }
+        p {
+          margin-bottom: 48px;
+          font-family: "Space Grotesk";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 32px;
+          line-height: 44px;
+          color: ${colours.primarygold900};
+        }
 
+        .check {
+          width: 72px;
+          height: 72px;
+          border: 1px solid #0a0a0a;
+          border-radius: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #0a0a0a;
+        }
+        &:hover {
+          background-color: ${colours.primarygold200};
           .check {
-            width: 72px;
-            height: 72px;
-            border: 1px solid #000000;
-            border-radius: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000000;
-          }
-          &:hover {
-            background-color: ${colours.primarygold200};
-            .check {
-              border-color: ${colours.primarygold600};
-              background-color: ${colours.primarygold600};
-              color: #FFF;
-            }
+            border-color: ${colours.primarygold600};
+            background-color: ${colours.primarygold600};
+            color: #fff;
           }
         }
       }
     }
+  }
 `;
 
 export default IndividualContainer;

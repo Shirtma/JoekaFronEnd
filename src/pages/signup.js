@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 // import Icon from '../components/icon'
 // import Sidebar from 'components/sidebar';
-import Input from '../components/input';
-import Button from '../components/button';
-import colours from '../lib/colours';
+import Input from "../components/input";
+import Button from "../components/button";
+import colours from "../lib/colours";
 
 function Signup() {
   return (
@@ -28,11 +28,11 @@ function Signup() {
                 labelClassName="contact__form-label"
                 className="contact__form-input"
                 outClassName="contact__form-out"
-             // value={state.firstName}
-             // onChange={(e) => onChangeInput(e, state, setState)}
+                // value={state.firstName}
+                // onChange={(e) => onChangeInput(e, state, setState)}
                 width="44.6rem"
                 placeholder="email address"
-             // error={state.validationErrors.lastName}
+                // error={state.validationErrors.lastName}
                 required
               />
             </div>
@@ -102,21 +102,21 @@ const SignupContainer = styled.div`
         justify-content: space-around;
 
         &--text1 {
-          font-family: 'Space Grotesk', sans-serif;
+          font-family: "Space Grotesk", sans-serif;
           font-style: normal;
           font-weight: 300;
           font-size: 4rem;
           line-height: 4.8rem;
-          color: #000000;
+          color: #0a0a0a;
         }
 
         &--text2 {
-          font-family: 'Space Grotesk', sans-serif;
+          font-family: "Space Grotesk", sans-serif;
           font-style: normal;
           font-weight: normal;
           font-size: 1.6rem;
           line-height: 2.8rem;
-          color: #000000;
+          color: #0a0a0a;
         }
       }
 
@@ -134,7 +134,7 @@ const SignupContainer = styled.div`
         width: 100%;
         text-align: center;
         border-bottom: 1px solid #c4c4c4;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: "Space Grotesk", sans-serif;
         font-style: normal;
         font-weight: normal;
         line-height: 0.1em;

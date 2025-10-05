@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function Radio({
   name,
@@ -43,12 +43,12 @@ const RadioContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #dfc09a;
+      border: 1px solid #fcf9f5;
       cursor: pointer;
 
       &:hover {
         background: rgba(223, 192, 154, 0.25);
-        border: 1px solid #dfc09a;
+        border: 1px solid #fcf9f5;
       }
     }
   }
@@ -73,8 +73,8 @@ const RadioContainer = styled.div`
 
   .active {
     transition: all 0.5s ease-in-out;
-    background: #dfc09a;
-    border: 1px solid #dfc09a;
+    background: #fcf9f5;
+    border: 1px solid #fcf9f5;
     pointer-events: none;
   }
 `;

@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Icon from '../icon';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Icon from "../icon";
 
 function CheckoutNavbar() {
   return (
@@ -19,7 +19,7 @@ function CheckoutNavbar() {
             Name="Lock"
             colour="transparent"
             width="20px"
-            style={{ paddingLeft: '8px' }}
+            style={{ paddingLeft: "8px" }}
           />
           <p>SECURE PAYMENT</p>
         </div>
@@ -44,29 +44,29 @@ const NavContainer = styled.nav`
     flex-grow: 1;
   }
 
-    .nav-user {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-width: 15.2rem;
-      width: fit-content;
-      background: #4d4d4d;
-      padding: 0 4px;
-      height: 32px;
-      border-radius: 32px;
+  .nav-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 15.2rem;
+    width: fit-content;
+    background: #4d4d4d;
+    padding: 0 4px;
+    height: 32px;
+    border-radius: 32px;
 
-      p {
-        font-family: Rubik;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 14px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: #dfc09a;
-        padding-right: 8px;
-      }
+    p {
+      font-family: Rubik;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #fcf9f5;
+      padding-right: 8px;
     }
+  }
 
   @media (min-width: 768px) {
     .nav-center {

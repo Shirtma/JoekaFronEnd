@@ -246,7 +246,7 @@ const RoomsContainer = styled.div`
       height: 4.8rem;
       width: 256px;
       padding: 8px 16px 8px 16px;
-      background: #000000;
+      background: #0a0a0a;
       margin: 2rem 4rem;
       display: flex;
       align-items: center;
@@ -257,7 +257,7 @@ const RoomsContainer = styled.div`
 
       &:hover {
         .hovered {
-          color: #dfc09a;
+          color: #fcf9f5;
         }
       }
 

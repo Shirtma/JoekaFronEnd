@@ -6,6 +6,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
 import logo from "../../images/JOEKA.png";
+import { useProductsContext } from "../../context/products_context";
 
 const categories = [
   "Shirts",
@@ -19,6 +20,7 @@ const categories = [
 ];
 
 const Navbar = () => {
+  const { cart } = useProductsContext();
   const [menuOpen, setMenuOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -27,6 +29,12 @@ const Navbar = () => {
   const profileRef = useRef(null);
   const drawerRef = useRef(null);
   const menuRef = useRef(null);
+
+  // Calculate total cart items
+  const cartItemCount = cart.reduce(
+    (total, item) => total + (item.amount || 1),
+    0
+  );
 
   // Helper function to convert category name to URL parameter
   const getCategoryParam = (categoryName) => {
@@ -101,7 +109,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="categories-menu"
               >
-                Shop by Categories <FiChevronDown color="#000" />
+                Shop by Categories <FiChevronDown color="#0a0a0a" />
               </button>
               <ul
                 id="categories-menu"
@@ -142,7 +150,8 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="profile-menu"
               >
-                <FiUser color="#000" /> Profile <FiChevronDown color="#000" />
+                <FiUser color="#0a0a0a" /> Profile{" "}
+                <FiChevronDown color="#0a0a0a" />
               </button>
               <ul
                 id="profile-menu"
@@ -161,8 +170,19 @@ const Navbar = () => {
               </ul>
             </div>
 
-            <Link to="/cart" className="cart-link" aria-label="Cart">
-              <AiOutlineShoppingCart color="#000" size={20} />
+            <Link
+              to="/cart"
+              className="cart-link"
+              aria-label={`Cart (${cartItemCount} items)`}
+            >
+              <div className="cart-icon-container">
+                <AiOutlineShoppingCart color="#0a0a0a" size={20} />
+                {cartItemCount > 0 && (
+                  <span className="cart-badge">
+                    {cartItemCount > 99 ? "99+" : cartItemCount}
+                  </span>
+                )}
+              </div>
             </Link>
           </div>
 
@@ -173,9 +193,9 @@ const Navbar = () => {
             ref={menuRef}
           >
             {menuOpen ? (
-              <FaTimes size={20} color="#000" />
+              <FaTimes size={20} color="#0a0a0a" />
             ) : (
-              <FaBars size={20} color="#000" />
+              <FaBars size={20} color="#0a0a0a" />
             )}
           </button>
         </div>
@@ -198,7 +218,7 @@ const Navbar = () => {
               aria-expanded={catOpen}
               aria-controls="drawer-cats"
             >
-              Shop by Categories <FiChevronDown color="#000" />
+              Shop by Categories <FiChevronDown color="#0a0a0a" />
             </button>
             <ul
               id="drawer-cats"
@@ -251,9 +271,9 @@ const Navbar = () => {
                     gap: "0.6rem",
                   }}
                 >
-                  <FiUser color="#000" /> Account
+                  <FiUser color="#0a0a0a" /> Account
                 </span>
-                <FiChevronDown color="#000" />
+                <FiChevronDown color="#0a0a0a" />
               </button>
               <ul
                 id="mobile-profile-list"
@@ -286,10 +306,18 @@ const Navbar = () => {
 
             <Link
               to="/cart"
-              className="mobile-link"
+              className="mobile-link cart-mobile-link"
               onClick={() => setMenuOpen(false)}
             >
-              <AiOutlineShoppingCart color="#000" /> Cart
+              <div className="cart-icon-container">
+                <AiOutlineShoppingCart color="#0a0a0a" />
+                {cartItemCount > 0 && (
+                  <span className="cart-badge">
+                    {cartItemCount > 99 ? "99+" : cartItemCount}
+                  </span>
+                )}
+              </div>
+              <span>Cart</span>
             </Link>
           </div>
         </nav>
@@ -300,8 +328,9 @@ const Navbar = () => {
 
 // ...existing styled component...
 const NavContainer = styled.header`
-  --nav-height: 7.2rem;
-  background: #d4af37;
+  --nav-height: 70px;
+  // border-bottom: 1px solid #0a0a0a;
+  background: #f8f8f5;
   height: var(--nav-height);
   display: flex;
   align-items: center;
@@ -329,7 +358,7 @@ const NavContainer = styled.header`
   }
 
   .center {
-    flex: 1;
+    // flex: 1;
     display: flex;
     justify-content: center;
   }
@@ -343,7 +372,7 @@ const NavContainer = styled.header`
   }
 
   .nav-item {
-    color: #000;
+    color: #0a0a0a;
     text-decoration: none;
     padding: 0.4rem 0.2rem;
     display: inline-flex;
@@ -365,7 +394,7 @@ const NavContainer = styled.header`
     background: transparent;
     border: none;
     font: inherit;
-    color: #000;
+    color: #0a0a0a;
     display: inline-flex;
     gap: 0.6rem;
     align-items: center;
@@ -384,14 +413,14 @@ const NavContainer = styled.header`
     position: absolute;
     top: calc(100% + 0.6rem);
     left: 0;
-    background: #fff;
+    background: #f8f8f5;
     min-width: 22rem;
     border-radius: 4px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     padding: 0.8rem 0;
     opacity: 0;
     transform-origin: top center;
-    transform: translateY(-6px) scale(0.98);
+    transform: translateY(-3px) scale(0.98);
     transition: opacity 180ms ease, transform 180ms ease;
     pointer-events: none;
     z-index: 9999;
@@ -433,14 +462,73 @@ const NavContainer = styled.header`
     display: inline-flex;
     gap: 0.6rem;
     align-items: center;
-    color: #000;
+    color: #0a0a0a;
     text-decoration: none;
     font-size: 1.6rem;
   }
 
   .cart-link {
-    color: #000;
+    color: #0a0a0a;
     text-decoration: none;
+    margin-left: 1.8rem;
+    position: relative;
+  }
+
+  .cart-icon-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1;
+    animation: cartBadgeAppear 0.3s ease-out;
+    box-shadow: 0 2px 4px rgba(255, 68, 68, 0.3);
+
+    @media (max-width: 991px) {
+      top: -6px;
+      right: -6px;
+      font-size: 1rem;
+      padding: 0.15rem 0.4rem;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 8px;
+    }
+  }
+
+  .cart-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  @keyframes cartBadgeAppear {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   /* profile dropdown adjustments */
@@ -480,7 +568,7 @@ const NavContainer = styled.header`
     pointer-events: auto;
   }
   .mobile-nav {
-    background: #fff;
+    background: #f8f8f5;
     width: 100%;
     max-width: 420px;
     height: 100%;

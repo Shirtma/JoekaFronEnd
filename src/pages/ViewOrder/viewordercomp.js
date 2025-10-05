@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Icon from "../../components/icon";
 import styled from "styled-components";
@@ -9,22 +9,27 @@ import MealSummary from "../../components/mealsummary";
 import { useProductsContext } from "../../context/products_context";
 
 const ViewOrderComp = () => {
-  const [orderDetails, setOrderDetails] = useState([])
+  const [orderDetails, setOrderDetails] = useState([]);
   let params = useParams();
-  console.log(params)
+  console.log(params);
 
   const fetchOrderHistory = async () => {
     try {
-      const response = await axios.get(`https://api.thehouseng.com/api/v1/order/details/${params.ref}` , {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
-      });
+      const response = await axios.get(
+        `https://api.thehouseng.com/api/v1/order/details/${params.ref}`,
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
+        }
+      );
       const history = response.data;
-      console.log(history)
+      console.log(history);
       setOrderDetails(history.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   useEffect(() => {
@@ -32,8 +37,7 @@ const ViewOrderComp = () => {
     fetchOrderHistory();
     // eslint-disable-next-line
   }, [params.ref]);
-  console.log(orderDetails)
-  
+  console.log(orderDetails);
 
   return (
     <ProfileContainer>
@@ -47,7 +51,7 @@ const ViewOrderComp = () => {
           </Link>
           <div className="profile__mainSection">
             {/* {orderDetails.map((hist) => ( */}
-            {orderDetails  && (
+            {orderDetails && (
               <div className="profile__gridCont">
                 <div>
                   <div className="profile__top">
@@ -72,7 +76,7 @@ const ViewOrderComp = () => {
                         height: "48px",
                         width: "48px",
                         borderRadius: "50%",
-                        background: "#DFC09A",
+                        background: "#FCF9F5",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -198,7 +202,8 @@ const ViewOrderComp = () => {
                             color: "#4d4d4d",
                           }}
                         >
-                          {orderDetails?.orderDate?.slice(0, 10)
+                          {orderDetails?.orderDate
+                            ?.slice(0, 10)
                             .replace(/[-]/g, "/")}
                         </span>
                       </div>
@@ -235,7 +240,8 @@ const ViewOrderComp = () => {
                       </p>
                       <div className="profile__orderCont">
                         {orderDetails?.orderHistoryDetails?.map((c, index) => (
-                          <MealSummary key={index}
+                          <MealSummary
+                            key={index}
                             Image={c.image}
                             text1={c.menuItem}
                             text2={c.description.slice(0, 80)}
@@ -309,7 +315,7 @@ const ViewOrderComp = () => {
                             fontFamily: "Montserrat",
                           }}
                         >
-                        Lagos
+                          Lagos
                         </p>
                         <p
                           style={{
@@ -388,7 +394,7 @@ const ViewOrderComp = () => {
                   </div>
                 </div>
               </div>
-           )}
+            )}
           </div>
         </div>
       </div>
@@ -408,7 +414,7 @@ const ProfileContainer = styled.div`
       bottom: 0;
       left: 0;
       right: 0;
-      background: #f5ece1;
+      background: #f8f8f5;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
@@ -468,7 +474,7 @@ const ProfileContainer = styled.div`
       padding-left: 1.6rem;
       font-size: 1.6rem;
       text-transform: uppercase;
-      color: #000;
+      color: #0a0a0a;
     }
     &__mainSection {
       width: 80rem;
@@ -496,7 +502,7 @@ const ProfileContainer = styled.div`
       font-size: 1.6rem;
       text-transform: uppercase;
       margin-left: 1rem;
-      color: #000;
+      color: #0a0a0a;
       cursor: pointer;
 
       &:hover {
@@ -605,7 +611,7 @@ const ProfileContainer = styled.div`
       line-height: 20px;
       letter-spacing: 0em;
       text-align: left;
-      color: #000;
+      color: #0a0a0a;
     }
 
     // &__midWrap {
@@ -623,7 +629,7 @@ const ProfileContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -634,13 +640,13 @@ const ProfileContainer = styled.div`
   .check3 {
     width: 3rem;
     height: 3rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     color: #fff;
-    background: #dfc09a;
+    background: #fcf9f5;
   }
 
   a {
@@ -653,10 +659,10 @@ const ProfileContainer = styled.div`
 
   .grey {
     background: #cccccc;
-    color: #000;
+    color: #0a0a0a;
   }
   .golden {
-    background: #dfc09a;
+    background: #fcf9f5;
   }
 
   .img {

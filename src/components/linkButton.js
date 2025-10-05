@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Icon from './icon';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Icon from "./icon";
 
 export default function LinkButton({
   endIcon,
@@ -16,29 +16,29 @@ export default function LinkButton({
 }) {
   return (
     <StyledLink className={`LinkButton ${className}`} {...props}>
-      {startIcon &&
+      {startIcon && (
         <Icon
           Name={startIcon}
           height="24"
           width="24"
-          className='LinkButton__startIcon'
+          className="LinkButton__startIcon"
           colour={endIconColor}
-        />}
-      <span
-        className={`LinkButton__text ${labelClassName}`}
-        style={labelStyle}
-      >
+        />
+      )}
+      <span className={`LinkButton__text ${labelClassName}`} style={labelStyle}>
         {label}
       </span>
-      {endIcon && <Icon
-        Name={endIcon}
-        height="24"
-        width="24"
-        className='LinkButton__endIcon'
-        colour={endIconColor}
-      />}
+      {endIcon && (
+        <Icon
+          Name={endIcon}
+          height="24"
+          width="24"
+          className="LinkButton__endIcon"
+          colour={endIconColor}
+        />
+      )}
     </StyledLink>
-  )
+  );
 }
 
 const StyledLink = styled(Link)`
@@ -50,7 +50,8 @@ const StyledLink = styled(Link)`
   padding: 0px 16px !important;
   cursor: pointer;
   z-index: 15;
-  background-color: #DFC09A;
+  color: #0a0a0a !important;
+  background-color: #fcf9f5;
 
   @media only screen and (max-width: 480px) {
     padding: 0px 6px !important;
@@ -61,7 +62,7 @@ const StyledLink = styled(Link)`
     font-weight: 400;
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
-    color: #000000;
+    color: #0a0a0a !important;
     line-height: 17px;
 
     @media only screen and (max-width: 480px) {
@@ -77,4 +78,4 @@ const StyledLink = styled(Link)`
   &.disabled {
     pointer-events: none;
   }
-`
+`;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Icon from '../../components/icon';
-import Profileorders from './profileorders';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Icon from "../../components/icon";
+import Profileorders from "./profileorders";
 
 function ProfileOrderComp() {
   return (
@@ -60,7 +60,7 @@ const ProfileContainer = styled.div`
       padding-left: 2.6rem;
       font-size: 1.6rem;
       text-transform: uppercase;
-      color: #000;
+      color: #0a0a0a;
     }
     &__mainSection {
       width: 80rem;
@@ -83,7 +83,7 @@ const ProfileContainer = styled.div`
       font-size: 1.6rem;
       text-transform: uppercase;
       margin-left: 1rem;
-      color: #000;
+      color: #0a0a0a;
       cursor: pointer;
 
       &:hover {
@@ -167,7 +167,7 @@ const ProfileContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -178,13 +178,13 @@ const ProfileContainer = styled.div`
   .check3 {
     width: 3rem;
     height: 3rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     color: #fff;
-    background: #dfc09a;
+    background: #fcf9f5;
 
     @media (max-width: 768px) {
       display: none;
@@ -197,13 +197,13 @@ const ProfileContainer = styled.div`
     @media (max-width: 768px) {
       width: 3rem;
       height: 3rem;
-      border: 2px solid #dfc09a;
+      border: 2px solid #fcf9f5;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
       color: #fff;
-      background: #dfc09a;
+      background: #fcf9f5;
     }
   }
 
@@ -213,7 +213,7 @@ const ProfileContainer = styled.div`
   .btn {
     &:hover {
       .text {
-        color: #dfc09a;
+        color: #fcf9f5;
         font-weight: 600;
       }
     }

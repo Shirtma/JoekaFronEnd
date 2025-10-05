@@ -11,8 +11,6 @@ import {
   COUNT_CART_TOTALS,
   REMOVE_CART_ITEM,
   TOGGLE_CART_ITEM_AMOUNT,
-  INCREASE,
-  DECREASE,
   CLEAR_CART,
   TAKEOUT_SIDEBAR_OPEN,
   TAKEOUT_SIDEBAR_CLOSE,
@@ -22,27 +20,8 @@ import {
   CHECKOUT_INFO_SUCCESS,
   GET_SPACES_SUCCESS,
   IS_NOT_TAKEOUT_PAGE,
-  SET_HEADER_THEME_NAME
-} from '../action';
-
-const addProductToCart = (product, state) => {
-  const updatedCart = [...state.cart];
-  const updatedItemIndex = updatedCart.findIndex(
-    (item) => item.id === product.id,
-  );
-
-  if (updatedItemIndex < 0) {
-    updatedCart.push({ ...product, quantity: 1 });
-  } else {
-    const updatedItem = {
-      ...updatedCart[updatedItemIndex],
-    };
-    updatedItem.quantity++;
-    updatedCart[updatedItemIndex] = updatedItem;
-  }
-
-  return { ...state, cart: updatedCart };
-};
+  SET_HEADER_THEME_NAME,
+} from "../action";
 
 const products_reducer = (state, action) => {
   switch (action.type) {
@@ -94,25 +73,64 @@ const products_reducer = (state, action) => {
         spaces: action.payload,
       };
     case ADD_TO_CART:
-      return addProductToCart(action.product, state);
+      const { product } = action;
+
+      // Create unique ID based on product ID and selected options
+      const cartItemId = `${product.id}-${product.size || "default"}-${
+        product.color || "default"
+      }`;
+
+      // Check if item already exists in cart
+      const existingCartItem = state.cart.find(
+        (item) => item.cartId === cartItemId
+      );
+
+      if (existingCartItem) {
+        // If item exists, increase quantity
+        const updatedCart = state.cart.map((item) =>
+          item.cartId === cartItemId
+            ? { ...item, amount: item.amount + (product.amount || 1) }
+            : item
+        );
+        return { ...state, cart: updatedCart };
+      } else {
+        // If item doesn't exist, add new item
+        const newCartItem = {
+          ...product,
+          cartId: cartItemId,
+          amount: product.amount || 1,
+        };
+        return { ...state, cart: [...state.cart, newCartItem] };
+      }
     case REMOVE_CART_ITEM:
+      console.log("REMOVE_CART_ITEM:", {
+        productId: action.productId,
+        cart: state.cart,
+      }); // Debug log
       return {
         ...state,
-        cart: state.cart.filter((cartItem) => cartItem.id !== action.productId),
+        cart: state.cart.filter((cartItem) => {
+          const itemCartId =
+            cartItem.cartId ||
+            `${cartItem.id}-${
+              cartItem.selectedSize || cartItem.size || "default"
+            }-${cartItem.selectedColor || cartItem.color || "default"}`;
+          return itemCartId !== action.productId;
+        }),
       };
     case COUNT_CART_TOTALS:
       let { total, quantity } = state.cart.reduce(
         (cartTotal, cartItem) => {
-          const { price, quantity } = cartItem;
-          const itemTotal = price * quantity;
+          const { price, amount } = cartItem;
+          const itemTotal = price * amount;
           cartTotal.total += itemTotal;
-          cartTotal.quantity += quantity;
+          cartTotal.quantity += amount;
           return cartTotal;
         },
         {
           total: 0,
           quantity: 0,
-        },
+        }
       );
       total = parseFloat(total.toFixed(2));
 
@@ -122,18 +140,32 @@ const products_reducer = (state, action) => {
         quantity,
       };
     case TOGGLE_CART_ITEM_AMOUNT:
+      const { id, type } = action.payload;
+      console.log("TOGGLE_CART_ITEM_AMOUNT:", { id, type, cart: state.cart }); // Debug log
+
       const tempCart = state.cart
         .map((cartItem) => {
-          if (cartItem.id === action.payload.id) {
-            if (action.payload.type === INCREASE) {
-              return { ...cartItem, quantity: cartItem.quantity + 1 };
-            } if (action.payload.type === DECREASE) {
-              return { ...cartItem, quantity: cartItem.quantity - 1 };
+          // Check both cartId and a constructed ID for backward compatibility
+          const itemCartId =
+            cartItem.cartId ||
+            `${cartItem.id}-${
+              cartItem.selectedSize || cartItem.size || "default"
+            }-${cartItem.selectedColor || cartItem.color || "default"}`;
+
+          if (itemCartId === id) {
+            console.log("Found matching item:", cartItem); // Debug log
+            if (type === "inc") {
+              return { ...cartItem, amount: cartItem.amount + 1 };
+            }
+            if (type === "dec") {
+              return { ...cartItem, amount: cartItem.amount - 1 };
             }
           }
           return cartItem;
         })
-        .filter((cartItem) => cartItem.quantity !== 0);
+        .filter((cartItem) => cartItem.amount > 0);
+
+      console.log("Updated cart:", tempCart); // Debug log
       return {
         ...state,
         cart: tempCart,
