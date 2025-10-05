@@ -1,69 +1,69 @@
-import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import BackgroundSlider from 'react-background-slider';
-import styled from 'styled-components';
-import Image1 from '../../images/restaurant.jpg';
-import Image2 from '../../images/restaurant-hero-img.jpg';
-import Image3 from '../../images/Aboutgallery3.jpg';
-import CarouselCont from '../../components/carousel/carousel';
-import Icon from '../../components/icon';
-import { useProductsContext } from 'context/products_context';
-import Footer from 'components/footer';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import BackgroundSlider from "react-background-slider";
+import styled from "styled-components";
+import Image1 from "../../images/restaurant.jpg";
+import Image2 from "../../images/restaurant-hero-img.jpg";
+import Image3 from "../../images/Aboutgallery3.jpg";
+import CarouselCont from "../../components/carousel/carousel";
+import Icon from "../../components/icon";
+import { useProductsContext } from "context/products_context";
+import Footer from "components/footer";
 
 function Restaurant() {
-    const { setHeaderThemeName } = useProductsContext();
+  const { setHeaderThemeName } = useProductsContext();
 
-    useEffect(() => {
-    setHeaderThemeName('transparent');
+  useEffect(() => {
+    setHeaderThemeName("transparent");
     return () => {
-      setHeaderThemeName('');
-    }
+      setHeaderThemeName("");
+    };
   }, []); // eslint-disable-line
-  
-  return (
-  <>
-    <RestaurantWrapper>
-      <div className="restaurant__container">
-        <BackgroundSlider
-          images={[Image1, Image2, Image3]}
-          duration={2}
-          transition={1}
-        />
-        <CarouselCont className="check1" />
-        <div className="restaurant__order">
-          <h2 className="restaurant__order-text">
-            BEGIN YOUR TAKEOUT ORDER BELOW
-          </h2>
-        </div>
-        <section className="cta">
-          <div className="outside">
-            {/* <div className='inside pr'> */}
-            <Link className="inside-route pr" to="/restaurant/ordertakeout">
-              <p>Order Food</p>
-              <span>
-                <div className="check">
-                  <Icon Name="Utensils" colour="transparent" />
-                </div>
-              </span>
-            </Link>
-            {/* </div> */}
-          </div>
 
-          <div className="outside">
-            {/* <div className='inside pl'> */}
-            <Link to="/restaurant/takeoutdine" className="inside-route pl">
-              <p>View Menu</p>
-              <span>
-                <div className="check">
-                  <Icon Name="ListBullet" colour="transparent" />
-                </div>
-              </span>
-            </Link>
+  return (
+    <>
+      <RestaurantWrapper>
+        <div className="restaurant__container">
+          <BackgroundSlider
+            images={[Image1, Image2, Image3]}
+            duration={2}
+            transition={1}
+          />
+          <CarouselCont className="check1" />
+          <div className="restaurant__order">
+            <h2 className="restaurant__order-text">
+              BEGIN YOUR TAKEOUT ORDER BELOW
+            </h2>
           </div>
-          {/* </div> */}
-        </section>
-      </div>
-    </RestaurantWrapper>
+          <section className="cta">
+            <div className="outside">
+              {/* <div className='inside pr'> */}
+              <Link className="inside-route pr" to="/restaurant/ordertakeout">
+                <p>Order Food</p>
+                <span>
+                  <div className="check">
+                    <Icon Name="Utensils" colour="transparent" />
+                  </div>
+                </span>
+              </Link>
+              {/* </div> */}
+            </div>
+
+            <div className="outside">
+              {/* <div className='inside pl'> */}
+              <Link to="/restaurant/takeoutdine" className="inside-route pl">
+                <p>View Menu</p>
+                <span>
+                  <div className="check">
+                    <Icon Name="ListBullet" colour="transparent" />
+                  </div>
+                </span>
+              </Link>
+            </div>
+            {/* </div> */}
+          </section>
+        </div>
+      </RestaurantWrapper>
       <Footer />
     </>
   );
@@ -123,7 +123,7 @@ const RestaurantWrapper = styled.div`
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(14, 1fr);
 
-          & #ReactBackgroundSlider figure {
+        & #ReactBackgroundSlider figure {
           height: 98.4rem;
         }
       }
@@ -192,8 +192,8 @@ const RestaurantWrapper = styled.div`
   }
   .outside {
     width: 76rem;
-    border-top: #dfc09a 1px solid;
-    border-bottom: #dfc09a 1px solid;
+    border-top: #fcf9f5 1px solid;
+    border-bottom: #fcf9f5 1px solid;
     text-decoration: none;
     @media only screen and (min-width: 1200px) and (max-width: 1290px) {
       width: 64rem;
@@ -221,8 +221,8 @@ const RestaurantWrapper = styled.div`
 
   .inside {
     &-route {
-      border-left: #dfc09a 1px solid;
-      border-right: #dfc09a 1px solid;
+      border-left: #fcf9f5 1px solid;
+      border-right: #fcf9f5 1px solid;
       width: 70.6rem;
       height: 24.3rem;
       margin: 0 auto;
@@ -232,12 +232,12 @@ const RestaurantWrapper = styled.div`
       grid-column-gap: 2.4rem;
       grid-row-gap: 6rem;
       background: rgba(178, 154, 123, 0.2);
-      /* box-shadow: 1px 0px 0px #dfc09a, -1px 0px 0px #dfc09a; */
+      /* box-shadow: 1px 0px 0px #FCF9F5, -1px 0px 0px #FCF9F5; */
 
       :hover {
         background: rgba(178, 154, 123, 0.4);
         .check {
-          background: #dfc09a;
+          background: #fcf9f5;
         }
       }
 
@@ -258,7 +258,7 @@ const RestaurantWrapper = styled.div`
         :hover {
           background: rgba(178, 154, 123, 0.4);
           .check {
-            background: #dfc09a;
+            background: #fcf9f5;
           }
         }
       }
@@ -267,7 +267,7 @@ const RestaurantWrapper = styled.div`
         :hover {
           background: rgba(178, 154, 123, 0.4);
           .check {
-            background: #dfc09a;
+            background: #fcf9f5;
           }
         }
       }
@@ -300,7 +300,7 @@ const RestaurantWrapper = styled.div`
   .check {
     width: 5rem;
     height: 5rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;

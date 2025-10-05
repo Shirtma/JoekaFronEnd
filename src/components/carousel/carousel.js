@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function CarouselCont() {
   return (
@@ -53,7 +53,7 @@ const CarouselWrapper = styled.div`
       font-weight: normal;
       font-size: 6.4rem;
       line-height: 8.8rem;
-      color: #dfc09a;
+      color: #fcf9f5;
 
       @media only screen and (max-width: 768px) {
         grid-column: 1/13;

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
-import styled from 'styled-components';
-import Icon from '../../components/icon';
-import Profileinfo from './profileinfo';
-import Profileorders from '../ProfileOrders/profileorders';
-import Sidegridinfo from './sidegridinfo';
+import React from "react";
+import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import Icon from "../../components/icon";
+import Profileinfo from "./profileinfo";
+import Profileorders from "../ProfileOrders/profileorders";
+import Sidegridinfo from "./sidegridinfo";
 
 function ProfileInfoComp() {
   const match = useRouteMatch();
@@ -20,10 +20,12 @@ function ProfileInfoComp() {
         </Link>
         <div className="profile__mainSection">
           <div className="profile__gridCont">
-            <Sidegridinfo activeTab={window.location.href.includes('orders') ? 1 : 0}/>
+            <Sidegridinfo
+              activeTab={window.location.href.includes("orders") ? 1 : 0}
+            />
             <Switch>
               <Route exact path={match.path} component={Profileinfo} />
-              <Route path={match.path +'/orders'} component={Profileorders} />
+              <Route path={match.path + "/orders"} component={Profileorders} />
             </Switch>
           </div>
         </div>
@@ -63,7 +65,7 @@ const ProfileContainer = styled.div`
       padding-left: 2.6rem;
       font-size: 1.6rem;
       text-transform: uppercase;
-      color: #000;
+      color: #0a0a0a;
     }
     &__mainSection {
       width: 100%;
@@ -86,7 +88,7 @@ const ProfileContainer = styled.div`
       font-size: 1.6rem;
       text-transform: uppercase;
       margin-left: 1rem;
-      color: #000;
+      color: #0a0a0a;
       cursor: pointer;
 
       &:hover {
@@ -125,7 +127,7 @@ const ProfileContainer = styled.div`
 
     &__gridRight {
       width: 100%;
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         grid-column: 3 / -1;
         .update-info-btn {
           width: 153px;
@@ -169,7 +171,7 @@ const ProfileContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,13 +182,13 @@ const ProfileContainer = styled.div`
   .check3 {
     width: 3rem;
     height: 3rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     color: #fff;
-    background: #dfc09a;
+    background: #fcf9f5;
 
     @media (min-width: 1024px) {
       transform: rotate(-90deg);

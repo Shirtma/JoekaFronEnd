@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Icon from './icon';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Icon from "./icon";
 
 function Mealcard({
   Image,
   text,
-  icon = '',
+  icon = "",
   className1,
   className2,
   className3,
@@ -25,10 +25,10 @@ function Mealcard({
         <div className={className2}>
           <p>{text}</p>
           <div className={className3}>
-            <p>{price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
+            <p>{price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}</p>
             <div className="icon_cont">
               <Icon
-                Name={hover ? 'PlusDark' : 'Plus2'}
+                Name={hover ? "PlusDark" : "Plus2"}
                 width="20px"
                 className="icon"
               />
@@ -53,18 +53,18 @@ const MealCardContainer = styled.div`
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
     cursor: pointer;
     .icon_cont {
-      background: #dfc09a;
-      color: #000;
+      background: #fcf9f5;
+      color: #0a0a0a;
     }
     .icon {
-      color: #000;
+      color: #0a0a0a;
     }
   }
 
   .icon_cont {
     height: 20px;
     width: 20px;
-    border: 1px solid #dfc09a;
+    border: 1px solid #fcf9f5;
     border-radius: 50%;
     display: flex;
     align-items: center;

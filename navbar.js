@@ -1,111 +1,117 @@
-import React, { useState, useRef, useEffect } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { FaBars, FaTimes } from 'react-icons/fa'
-import { FiChevronDown } from 'react-icons/fi'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { FiUser } from 'react-icons/fi'
-import logo from '../../images/JOEKA.png'
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { FiChevronDown } from "react-icons/fi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiUser } from "react-icons/fi";
+import logo from "../../images/JOEKA.png";
 
 const categories = [
-  'Shirts',
-  'Tees',
-  'Hoodies & Sweatshirts',
-  'Tank Tops',
-  'Hats / Caps',
-  'Shortsuits & Plays',
-  'Bold Exclusives',
-  'Accessories',
-]
+  "Shirts",
+  "Tees",
+  "Hoodies & Sweatshirts",
+  "Tank Tops",
+  "Hats / Caps",
+  "Shortsuits & Plays",
+  "Bold Exclusives",
+  "Accessories",
+];
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [catOpen, setCatOpen] = useState(false)
-  const catRef = useRef(null)
-  const menuRef = useRef(null)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [catOpen, setCatOpen] = useState(false);
+  const catRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (catRef.current && !catRef.current.contains(e.target)) {
-        setCatOpen(false)
+        setCatOpen(false);
       }
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         // keep menu open/close controlled by button only on mobile; clicking outside should close
         if (menuOpen && window.innerWidth < 992) {
-          setMenuOpen(false)
+          setMenuOpen(false);
         }
       }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [menuOpen])
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   // close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 992) setMenuOpen(false)
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+      if (window.innerWidth >= 992) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <NavContainer>
-      <div className='nav-inner'>
-        <div className='left'>
-          <Link to='/' className='logo-link' aria-label='Home'>
-            <img src={logo} alt='Joeka logo' />
+      <div className="nav-inner">
+        <div className="left">
+          <Link to="/" className="logo-link" aria-label="Home">
+            <img src={logo} alt="Joeka logo" />
           </Link>
         </div>
 
-        <div className='center desktop-only'>
-          <nav className='main-nav'>
+        <div className="center desktop-only">
+          <nav className="main-nav">
             <div
-              className='nav-item dropdown'
+              className="nav-item dropdown"
               onMouseEnter={() => setCatOpen(true)}
               onMouseLeave={() => setCatOpen(false)}
               ref={catRef}
             >
               <button
-                className='dropdown-toggle'
+                className="dropdown-toggle"
                 onClick={() => setCatOpen((s) => !s)}
                 aria-expanded={catOpen}
-                aria-haspopup='true'
+                aria-haspopup="true"
               >
                 Shop by Categories <FiChevronDown />
               </button>
-              <ul className={`dropdown-menu ${catOpen ? 'show' : ''}`}>
+              <ul className={`dropdown-menu ${catOpen ? "show" : ""}`}>
                 {categories.map((cat) => (
                   <li key={cat}>
-                    <Link to={`/category/${cat.toLowerCase().replace(/ & | /g, '-')}`}>{cat}</Link>
+                    <Link
+                      to={`/category/${cat
+                        .toLowerCase()
+                        .replace(/ & | /g, "-")}`}
+                    >
+                      {cat}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <Link to='/new-arrivals' className='nav-item'>
+            <Link to="/new-arrivals" className="nav-item">
               New Arrivals
             </Link>
-            <Link to='/story' className='nav-item'>
+            <Link to="/story" className="nav-item">
               Story
             </Link>
           </nav>
         </div>
 
-        <div className='right'>
-          <div className='actions desktop-only'>
-            <Link to='/signin' className='action-link'>
+        <div className="right">
+          <div className="actions desktop-only">
+            <Link to="/signin" className="action-link">
               <FiUser /> Profile
             </Link>
-            <Link to='/cart' className='cart-link' aria-label='Cart'>
+            <Link to="/cart" className="cart-link" aria-label="Cart">
               <AiOutlineShoppingCart size={20} />
             </Link>
           </div>
 
           <button
-            className='menu-toggle mobile-only'
+            className="menu-toggle mobile-only"
             onClick={() => setMenuOpen((s) => !s)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             ref={menuRef}
           >
             {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
@@ -114,20 +120,23 @@ const Navbar = () => {
       </div>
 
       {/* Mobile drawer */}
-      <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`}>
-        <nav className='mobile-nav'>
-          <div className='mobile-section'>
+      <div className={`mobile-drawer ${menuOpen ? "open" : ""}`}>
+        <nav className="mobile-nav">
+          <div className="mobile-section">
             <button
-              className='drawer-dropdown-toggle'
+              className="drawer-dropdown-toggle"
               onClick={() => setCatOpen((s) => !s)}
               aria-expanded={catOpen}
             >
               Shop by Categories <FiChevronDown />
             </button>
-            <ul className={`drawer-cats ${catOpen ? 'show' : ''}`}>
+            <ul className={`drawer-cats ${catOpen ? "show" : ""}`}>
               {categories.map((c) => (
                 <li key={c}>
-                  <Link to={`/category/${c.toLowerCase().replace(/ & | /g, '-')}`} onClick={() => setMenuOpen(false)}>
+                  <Link
+                    to={`/category/${c.toLowerCase().replace(/ & | /g, "-")}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     {c}
                   </Link>
                 </li>
@@ -135,36 +144,52 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <Link to='/new-arrivals' className='mobile-link' onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/new-arrivals"
+            className="mobile-link"
+            onClick={() => setMenuOpen(false)}
+          >
             New Arrivals
           </Link>
-          <Link to='/story' className='mobile-link' onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/story"
+            className="mobile-link"
+            onClick={() => setMenuOpen(false)}
+          >
             Story
           </Link>
 
-          <div className='mobile-actions'>
-            <Link to='/signin' className='mobile-link' onClick={() => setMenuOpen(false)}>
+          <div className="mobile-actions">
+            <Link
+              to="/signin"
+              className="mobile-link"
+              onClick={() => setMenuOpen(false)}
+            >
               <FiUser /> Login / My Account
             </Link>
-            <Link to='/cart' className='mobile-link' onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/cart"
+              className="mobile-link"
+              onClick={() => setMenuOpen(false)}
+            >
               <AiOutlineShoppingCart /> Cart
             </Link>
           </div>
         </nav>
       </div>
     </NavContainer>
-  )
-}
+  );
+};
 
 const NavContainer = styled.header`
-  --nav-height: 7.2rem;
-  background: #d4af37;
+  --nav-height: 70px;
+  background: #f8f8f5;
   height: var(--nav-height);
   display: flex;
   align-items: center;
   position: relative;
   z-index: 40;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 
   .nav-inner {
     width: 100%;
@@ -191,12 +216,12 @@ const NavContainer = styled.header`
     display: flex;
     gap: 2.4rem;
     align-items: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 1.6rem;
   }
 
   .nav-item {
-    color: #000;
+    color: #0a0a0a;
     text-decoration: none;
     padding: 0.4rem 0.2rem;
     display: inline-flex;
@@ -207,7 +232,7 @@ const NavContainer = styled.header`
   .nav-item:hover,
   .nav-item:focus {
     outline: none;
-    border-bottom: 2px solid rgba(0,0,0,0.2);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   }
 
   .dropdown {
@@ -218,7 +243,7 @@ const NavContainer = styled.header`
     background: transparent;
     border: none;
     font: inherit;
-    color: #000;
+    color: #0a0a0a;
     display: inline-flex;
     gap: 0.6rem;
     align-items: center;
@@ -233,7 +258,7 @@ const NavContainer = styled.header`
     background: #fff;
     min-width: 22rem;
     border-radius: 4px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     padding: 0.8rem 0;
     opacity: 0;
     transform-origin: top center;
@@ -260,7 +285,7 @@ const NavContainer = styled.header`
     font-size: 1.4rem;
   }
   .dropdown-menu a:hover {
-    background: rgba(0,0,0,0.03);
+    background: rgba(0, 0, 0, 0.03);
   }
 
   .right {
@@ -279,13 +304,13 @@ const NavContainer = styled.header`
     display: inline-flex;
     gap: 0.6rem;
     align-items: center;
-    color: #000;
+    color: #0a0a0a;
     text-decoration: none;
     font-size: 1.6rem;
   }
 
   .cart-link {
-    color: #000;
+    color: #0a0a0a;
     text-decoration: none;
   }
 
@@ -306,7 +331,7 @@ const NavContainer = styled.header`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.25);
     transform: translateY(-6px);
     opacity: 0;
     pointer-events: none;
@@ -324,7 +349,7 @@ const NavContainer = styled.header`
     height: 100%;
     padding: 2.4rem 1.6rem;
     overflow-y: auto;
-    box-shadow: 2px 0 18px rgba(0,0,0,0.12);
+    box-shadow: 2px 0 18px rgba(0, 0, 0, 0.12);
   }
   .mobile-section {
     margin-bottom: 1.2rem;
@@ -364,7 +389,7 @@ const NavContainer = styled.header`
   .mobile-link {
     display: block;
     padding: 1rem 0;
-    border-top: 1px solid rgba(0,0,0,0.04);
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
     color: #111;
     text-decoration: none;
     font-size: 1.6rem;
@@ -403,6 +428,6 @@ const NavContainer = styled.header`
       gap: 3.6rem;
     }
   }
-`
+`;
 
-export default Navbar
+export default Navbar;

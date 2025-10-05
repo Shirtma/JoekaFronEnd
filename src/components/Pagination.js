@@ -138,7 +138,7 @@ const PaginationContainer = styled.div`
     align-items: center;
     gap: 0.8rem;
     padding: 1rem 1.6rem;
-    border: 2px solid #e1e1e1;
+    border: 1px solid #e0e0e0;
     background: white;
     color: #555;
     border-radius: 8px;
@@ -149,13 +149,13 @@ const PaginationContainer = styled.div`
     transition: all 0.3s ease;
 
     &:hover:not(:disabled) {
-      border-color: #d4af37;
-      color: #d4af37;
+      background: #f5f5f5;
+      border-color: rgba(245, 236, 225, 0.95);
       transform: translateY(-1px);
     }
 
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.8;
       cursor: not-allowed;
       transform: none;
     }
@@ -195,7 +195,7 @@ const PaginationContainer = styled.div`
   .pagination__number {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #e1e1e1;
+    border: 1px solid #e0e0e0;
     background: white;
     color: #555;
     border-radius: 8px;
@@ -209,15 +209,14 @@ const PaginationContainer = styled.div`
     justify-content: center;
 
     &:hover {
-      border-color: #d4af37;
-      color: #d4af37;
+      background: #f5f5f5;
+      border-color: rgba(245, 236, 225, 0.95);
       transform: translateY(-1px);
     }
 
     &.active {
-      background: #d4af37;
-      border-color: #d4af37;
-      color: white;
+      background: #f5f5f5;
+      border-color: rgba(245, 236, 225, 0.95);
       transform: translateY(-1px);
     }
 

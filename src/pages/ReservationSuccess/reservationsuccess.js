@@ -19,7 +19,7 @@ const Reservationsuccess = () => {
             //   height: "48px",
             //   width: "48px",
             //   borderRadius: "50%",
-            //   background: "#DFC09A",
+            //   background: "#FCF9F5",
             //   display: "flex",
             //   alignItems: "center",
             //   justifyContent: "center",
@@ -62,7 +62,7 @@ const Reservationsuccess = () => {
             onMouseLeave={() => setHover(false)}
             className="reservation__form-btn"
           >
-            <a href='/rooms'>
+            <a href="/rooms">
               <Button
                 text="OK"
                 textClassName="tertiary-text"
@@ -140,7 +140,7 @@ const ReservationContainer = styled.div`
       height: 48px;
       width: 48px;
       border-radius: 50%;
-      background: #dfc09a;
+      background: #fcf9f5;
       display: flex;
       align-items: center;
       justify-content: center;

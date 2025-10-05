@@ -81,7 +81,8 @@ function Footer() {
 }
 
 const FooterContainer = styled.footer`
-  background-color: #f5ece1;
+  background-color: #f8f8f5;
+  // border-top: 1px solid #0a0a0a;
 
   .footer__container {
     padding: 40px 24px;
@@ -172,7 +173,6 @@ const FooterContainer = styled.footer`
         width: 150px;
         height: auto;
       }
-
 
       .social__links {
         display: flex;

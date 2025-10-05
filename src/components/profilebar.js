@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
-import colours from '../lib/colours';
-import Icon from './icon';
-import { useProductsContext } from '../context/products_context';
-import { order_history_url } from '../util/constants';
+import React from "react";
+import styled from "styled-components";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import colours from "../lib/colours";
+import Icon from "./icon";
+import { useProductsContext } from "../context/products_context";
+import { order_history_url } from "../util/constants";
 
 function Profilebar() {
   const {
@@ -20,7 +20,7 @@ function Profilebar() {
     try {
       const response = await axios.get(url, {
         headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
       const history = response.data;
@@ -43,14 +43,14 @@ function Profilebar() {
   const logout = () => {
     localStorage.clear();
     closeProfileSideBar();
-    history.push('/login');
+    history.push("/login");
   };
   return (
     <ProfilebarContainer>
-      <div className={`${isProfileSideBarOpen ? 'takeout__div' : ''}`}>
+      <div className={`${isProfileSideBarOpen ? "takeout__div" : ""}`}>
         <aside
           className={`${
-            isProfileSideBarOpen ? 'sidebar show-sidebar' : 'sidebar'
+            isProfileSideBarOpen ? "sidebar show-sidebar" : "sidebar"
           }`}
         >
           <div className="sidebar__header">
@@ -86,10 +86,16 @@ function Profilebar() {
               />
             </div>
             <div className="profilebar__flex">
-              <Link to="#" onClick={(e) => {
-                e.preventDefault();
-                logout();
-              }} role="button">Logout</Link>
+              <Link
+                to="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  logout();
+                }}
+                role="button"
+              >
+                Logout
+              </Link>
               <Icon
                 Name="Exit"
                 width="24px"
@@ -105,7 +111,6 @@ function Profilebar() {
 }
 
 export const ProfilebarContainer = styled.div`
-
   .takeout__div {
     position: fixed;
     z-index: 4000;
@@ -157,9 +162,9 @@ export const ProfilebarContainer = styled.div`
       position: relative;
       padding: 0px 32px;
     }
-      &__flex svg {
-        margin-left: auto;
-      }
+    &__flex svg {
+      margin-left: auto;
+    }
 
     &__flex > a {
       font-family: Montserrat;
@@ -171,7 +176,7 @@ export const ProfilebarContainer = styled.div`
       text-align: left;
       text-transform: uppercase;
       cursor: pointer;
-      color: #000;
+      color: #0a0a0a;
       position: absolute;
       left: 0;
       width: 100%;

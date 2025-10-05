@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import logo from '../../images/light.png';
-import { links } from '../../util/constants';
-import colours from '../../lib/colours';
-import Icon from '../icon';
-import { useProductsContext } from '../../context/products_context';
-import { useUserContext } from '../../context/user_context';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import logo from "../../images/light.png";
+import { links } from "../../util/constants";
+import colours from "../../lib/colours";
+import Icon from "../icon";
+import { useProductsContext } from "../../context/products_context";
+import { useUserContext } from "../../context/user_context";
 
 function TakeoutNavbar() {
   const {
@@ -40,7 +40,7 @@ function TakeoutNavbar() {
               const { id, text, url } = link;
               return (
                 <li key={id}>
-                  <Link style={{ color: '#fff' }} to={url}>
+                  <Link style={{ color: "#fff" }} to={url}>
                     {text}
                   </Link>
                 </li>
@@ -72,17 +72,17 @@ function TakeoutNavbar() {
             onMouseLeave={() => setIsHover(false)}
             onClick={!!selectedOption && openTakeoutSideBar}
           >
-            <Icon Name={isHover ? 'CartDark' : 'Cart'} width="2.5rem" />
+            <Icon Name={isHover ? "CartDark" : "Cart"} width="2.5rem" />
 
             <div
               style={{
-                height: '22px',
-                width: '22px',
-                background: '#DFC09A',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                height: "22px",
+                width: "22px",
+                background: "#FCF9F5",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 // marginRight: "10px",
               }}
             >
@@ -90,15 +90,15 @@ function TakeoutNavbar() {
             </div>
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                paddingRight: '10px',
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "10px",
               }}
               className="takeout__cardFlex"
             >
               <p className="lead">&#8358;</p>
               <p className="lead">
-                {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
               </p>
             </div>
           </div>
@@ -108,7 +108,7 @@ function TakeoutNavbar() {
               Name="Home"
               colour={colours.neutral1}
               onClick={openProfileSideBar}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             />
           )}
         </div>
@@ -232,7 +232,7 @@ const NavContainer = styled.nav`
         list-style: none;
       }
       a {
-        color: #000000;
+        color: #0a0a0a;
         font-size: 1.6rem;
         text-decoration: none;
         line-height: 2rem;
@@ -252,7 +252,7 @@ const NavContainer = styled.nav`
       margin-right: 4rem;
 
       a {
-        color: #000000;
+        color: #0a0a0a;
         font-size: 1.6rem;
         font-weight: 400;
         text-transform: capitalize;
@@ -309,7 +309,7 @@ const NavContainer = styled.nav`
     &:hover {
       background: #fff;
       .lead {
-        color: #000;
+        color: #0a0a0a;
       }
     }
   }

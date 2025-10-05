@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import logo from '../../images/light.png';
-import { links } from '../../util/constants';
-import Button from '../button';
-import colours from '../../lib/colours';
-import Icon from '../icon';
-import { useProductsContext } from '../../context/products_context';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import logo from "../../images/light.png";
+import { links } from "../../util/constants";
+import Button from "../button";
+import colours from "../../lib/colours";
+import Icon from "../icon";
+import { useProductsContext } from "../../context/products_context";
 // import { useUserContext } from "../../context/user_context";
 
 function RestaurantNavbar() {
@@ -37,7 +37,7 @@ function RestaurantNavbar() {
               const { id, text, url } = link;
               return (
                 <li key={id}>
-                  <Link style={{ color: '#fff' }} to={url}>
+                  <Link style={{ color: "#fff" }} to={url}>
                     {text}
                   </Link>
                 </li>
@@ -70,33 +70,33 @@ function RestaurantNavbar() {
               onMouseLeave={() => setIsHover(false)}
               onClick={openTakeoutSideBar}
             >
-              <Icon Name={isHover ? 'CartDark' : 'Cart'} />
+              <Icon Name={isHover ? "CartDark" : "Cart"} />
 
               <div
                 style={{
-                  height: '25px',
-                  width: '25px',
-                  background: '#DFC09A',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginRight: '10px',
+                  height: "25px",
+                  width: "25px",
+                  background: "#FCF9F5",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: "10px",
                 }}
               >
                 <p className="lead bold">{quantity}</p>
               </div>
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  paddingRight: '10px',
+                  display: "flex",
+                  alignItems: "center",
+                  paddingRight: "10px",
                 }}
                 className="takeout__cardFlex"
               >
                 <p className="lead">&#8358;</p>
                 <p className="lead">
-                  {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                  {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
                 </p>
               </div>
             </div>
@@ -223,7 +223,7 @@ const NavContainer = styled.nav`
         list-style: none;
       }
       a {
-        color: #000000;
+        color: #0a0a0a;
         font-size: 1.6rem;
         text-decoration: none;
         line-height: 2rem;
@@ -242,7 +242,7 @@ const NavContainer = styled.nav`
       width: 24rem;
       margin-left: -8.8rem;
       a {
-        color: #000000;
+        color: #0a0a0a;
         font-size: 1.6rem;
         font-weight: 400;
         text-transform: capitalize;
@@ -309,7 +309,7 @@ const NavContainer = styled.nav`
     &:hover {
       background: #fff;
       .lead {
-        color: #000;
+        color: #0a0a0a;
       }
     }
   }
@@ -324,7 +324,7 @@ const NavContainer = styled.nav`
   .btn {
     &:hover {
       .text {
-        color: #dfc09a;
+        color: #fcf9f5;
         font-weight: 600;
       }
     }

@@ -102,9 +102,9 @@ function Homepage() {
             label="This is Joeka"
             endIcon="RArrow"
             className="explore_tab__name"
-            endIconColor={`${hover1 ? "white" : "black"}`}
+            endIconColor={`${hover1 ? "black" : "black"}`}
             style={{ width: "256px" }}
-            labelStyle={{ color: `${hover1 ? "white" : "black"}` }}
+            labelStyle={{ color: `${hover1 ? "black" : "black"}` }}
             onMouseOver={changeHoverOn1}
             onMouseLeave={changeHoverOff1}
           />
@@ -112,7 +112,7 @@ function Homepage() {
 
         <div className="explore_tab home-3">
           <img
-            src={`https://res.cloudinary.com/dxjprordi/image/upload/v1758745413/joeka_web/shirt1_mfu7bp.jpg`}
+            src={`https://res.cloudinary.com/dxjprordi/image/upload/v1758745412/joeka_web/model2_wosxvy.jpg`}
             alt="House 1"
             className="explore_tab__img img"
             loading="lazy"
@@ -122,9 +122,9 @@ function Homepage() {
             label="Lookbook"
             endIcon="RArrow"
             className="explore_tab__name disabled"
-            endIconColor={`${hover2 ? "white" : "black"}`}
+            endIconColor={`${hover2 ? "black" : "black"}`}
             style={{ width: "256px" }}
-            labelStyle={{ color: `${hover2 ? "white" : "black"}` }}
+            labelStyle={{ color: `${hover2 ? "black" : "black"}` }}
             onMouseOver={changeHoverOn2}
             onMouseLeave={changeHoverOff2}
             disabled
@@ -195,11 +195,11 @@ const HomeContainer = styled.div`
     justify-content: center;
     flex-direction: column;
     color: white;
-    gap: 4vh;
+    gap: 3vh;
     margin-bottom: 10vh;
     h1 {
-      grid-column: 1 / 4;
-      font-weight: 300;
+      margin: 0;
+      font-weight: 600;
       font-size: 56px;
       line-height: 64px;
       font-family: Space Grotesk;
@@ -208,7 +208,6 @@ const HomeContainer = styled.div`
         grid-column: 1 / 8;
         font-size: 120px;
         line-height: 120px;
-        margin-left: 40px;
       }
     }
     .video-background {
@@ -232,17 +231,17 @@ const HomeContainer = styled.div`
         left: 0;
         height: 100vh;
         width: 100vw;
-        background: rgba(0, 0, 0, 0.75); /* opacity overlay */
+        background: rgba(0, 0, 0, 0.55); /* opacity overlay */
       }
     }
   }
   .about__subsection {
     padding: 0 16px;
     display: flex;
-    gap: 40px;
+    gap: 3vh;
     @media (max-width: 1024px) {
       flex-direction: column;
-      gap: 24px;
+      gap: 3vh;
     }
 
     h2 {
@@ -251,13 +250,13 @@ const HomeContainer = styled.div`
       font-weight: 300;
       font-size: 40px;
       line-height: 40px;
-      padding-right: 16px;
+      // padding-right: 16px;
       margin: 40px 0;
       @media (min-width: 1024px) {
         grid-column: 1 / 5;
         grid-row: 1 / 2;
         font-size: 64px;
-        line-height: 68px;
+        // line-height: 68px;
         margin: 0;
       }
     }
@@ -267,7 +266,6 @@ const HomeContainer = styled.div`
 
       @media (min-width: 1024px) {
         margin-top: 40px;
-        
       }
     }
     &-into {
@@ -315,10 +313,6 @@ const HomeContainer = styled.div`
         // margin-top: -60px;
       }
     }
-    @media (min-width: 1024px) {
-      margin-top: 20px;
-      padding: 0 40px;
-    }
   }
 
   .explore {
@@ -336,7 +330,11 @@ const HomeContainer = styled.div`
     }
     h3 {
       grid-column: 1 / -1;
-      font-family: Space Grotesk;
+      width: 100%;
+      text-align: center;
+      padding: 0 16px;
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 32px;
@@ -344,9 +342,11 @@ const HomeContainer = styled.div`
     }
 
     &_tab {
+      // max-height: 300px;
       .img {
         height: 100%;
         width: auto;
+        object-position: center-top;
         @media (min-width: 467px) {
           height: 100%;
           width: 100%;
@@ -471,7 +471,7 @@ const HomeContainer = styled.div`
         .check {
           width: 72px;
           height: 72px;
-          border: 1px solid #000000;
+          border: 1px solid #0a0a0a;
           border-radius: 56px;
           display: flex;
           align-items: center;

@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import about1 from '../../images/about-1.jpg';
-import aboutvision from '../../images/aboutvision.jpg';
-import aboutmission from '../../images/aboutmission.jpg';
-import ceosign from '../../images/ceosign.jpg';
-import aboutgallery1 from '../../images/Aboutgallery1.jpg';
-import aboutgallery2 from '../../images/Aboutgallery2.jpg';
-import aboutgallery3 from '../../images/Aboutgallery3.jpg';
-import Pdf from '../../components/pdf/the-house-story.pdf';
-import colours from '../../lib/colours';
-import Icon from '../../components/icon';
-import LinkButton from '../../components/linkButton';
+import React from "react";
+import styled from "styled-components";
+import about1 from "../../images/about-1.jpg";
+import aboutvision from "../../images/aboutvision.jpg";
+import aboutmission from "../../images/aboutmission.jpg";
+import ceosign from "../../images/ceosign.jpg";
+import aboutgallery1 from "../../images/Aboutgallery1.jpg";
+import aboutgallery2 from "../../images/Aboutgallery2.jpg";
+import aboutgallery3 from "../../images/Aboutgallery3.jpg";
+import Pdf from "../../components/pdf/the-house-story.pdf";
+import colours from "../../lib/colours";
+import Icon from "../../components/icon";
+import LinkButton from "../../components/linkButton";
 
 function Aboutus() {
   return (
@@ -35,12 +35,13 @@ function Aboutus() {
             entertainment, leaving our guests with a truly unique social
             exprience every time they visit is.
           </p>
-          <LinkButton to={Pdf}
+          <LinkButton
+            to={Pdf}
             target="_blank"
             rel="noopener noreferrer"
             label="EXPERIENCE OUR STORY"
             endIcon="RArrowWhite"
-            style={{ width: '261px', backgroundColor: '#000000' }}
+            style={{ width: "261px", backgroundColor: "#0a0a0a" }}
             labelClassName="link-btn"
           />
         </div>
@@ -50,22 +51,27 @@ function Aboutus() {
         <section className="vision">
           <div className="img">
             <img
-              loading='lazy'
-              src={ aboutvision }
+              loading="lazy"
+              src={aboutvision}
               alt="livingroom1"
               height="343px"
               width="343px"
             />
           </div>
-          <div className='vision__statement'>
+          <div className="vision__statement">
             <h2>OUR VISION</h2>
             <p>
-            THE HOUSE seeks to bring people from all cultures together into a vibrant melting point, where guests come to meet friends, do business and relax, creating a platform from which to base both their social and professional lives, all against the backdrop of a home.
+              THE HOUSE seeks to bring people from all cultures together into a
+              vibrant melting point, where guests come to meet friends, do
+              business and relax, creating a platform from which to base both
+              their social and professional lives, all against the backdrop of a
+              home.
             </p>
-            <LinkButton to="/register" 
+            <LinkButton
+              to="/register"
               label="PAY US A VISIT"
               endIcon="RArrowWhite"
-              style={{ width: '261px', backgroundColor: '#000000' }}
+              style={{ width: "261px", backgroundColor: "#0a0a0a" }}
               labelClassName="link-btn"
             />
           </div>
@@ -74,22 +80,27 @@ function Aboutus() {
         <section className="mission">
           <div className="img">
             <img
-              loading='lazy'
-              src={ aboutmission }
+              loading="lazy"
+              src={aboutmission}
               alt="livingroom1"
               height="343px"
               width="343px"
             />
-            </div>
-          <div className='mission__statement'>
+          </div>
+          <div className="mission__statement">
             <h2>OUR MISSION</h2>
             <p>
-              Ultimately, our aim is to grow THE HOUSE into a community of like-minded indivials with sister HOUSES around the world. The venture marks the first step on that journey. We hope that with excellent service delivery, your continued patronage and a fair wind in our sails, together, we can achieve this dream
+              Ultimately, our aim is to grow THE HOUSE into a community of
+              like-minded indivials with sister HOUSES around the world. The
+              venture marks the first step on that journey. We hope that with
+              excellent service delivery, your continued patronage and a fair
+              wind in our sails, together, we can achieve this dream
             </p>
-            <LinkButton to="/contact" 
+            <LinkButton
+              to="/contact"
               label="BECOME A MEMBER"
               endIcon="RArrowWhite"
-              style={{ width: '261px', backgroundColor: '#000000' }}
+              style={{ width: "261px", backgroundColor: "#0a0a0a" }}
               labelClassName="link-btn"
             />
           </div>
@@ -98,19 +109,19 @@ function Aboutus() {
         <section className="ceo__remark">
           <div className="">
             <p className="">
-              Our distinguishing factors are the emphasis we place on our guests’ social experience, and the vibe-driven approach we take with everything on offer. The infectious, high-energy atmosphere, coupled with the deliberately chic and homely decor, is designed to disarm
-              our guests and ecourage interaction and mingling.
+              Our distinguishing factors are the emphasis we place on our
+              guests’ social experience, and the vibe-driven approach we take
+              with everything on offer. The infectious, high-energy atmosphere,
+              coupled with the deliberately chic and homely decor, is designed
+              to disarm our guests and ecourage interaction and mingling.
             </p>
-              <p className="">
-                We look forward to welcoming you to THE HOUSE. Visiting us is never a bad idea.
-              </p>
+            <p className="">
+              We look forward to welcoming you to THE HOUSE. Visiting us is
+              never a bad idea.
+            </p>
           </div>
           <div className="img signature">
-            <img
-              loading='lazy'
-              src={ ceosign }
-              alt="livingroom1"
-            />
+            <img loading="lazy" src={ceosign} alt="livingroom1" />
           </div>
         </section>
       </main>
@@ -130,12 +141,12 @@ function Aboutus() {
             />
           </div>
 
-            <p className="testimonial__item-text">
-              The infectious, high-energy atmosphere, coupled with the
-              deliberately chic and homely decor, is designed to disarm our
-              guests and ecourage interaction and mingling.
-            </p>
-            <p className="testimonial__item-line">TOBI HAMILTON</p>
+          <p className="testimonial__item-text">
+            The infectious, high-energy atmosphere, coupled with the
+            deliberately chic and homely decor, is designed to disarm our guests
+            and ecourage interaction and mingling.
+          </p>
+          <p className="testimonial__item-line">TOBI HAMILTON</p>
 
           <div className="testimonial__item-arrows">
             <Icon
@@ -157,8 +168,8 @@ function Aboutus() {
       <section className="about__gallery">
         <div className="about__gallery-1">
           <img
-            loading='lazy'
-            src={ aboutgallery1 }
+            loading="lazy"
+            src={aboutgallery1}
             alt="livingroom1"
             className="img"
             height="248.21px"
@@ -166,8 +177,8 @@ function Aboutus() {
         </div>
         <div className="about__gallery-2">
           <img
-            loading='lazy'
-            src={ aboutgallery2 }
+            loading="lazy"
+            src={aboutgallery2}
             alt="livingroom1"
             className="img"
             height="578.36px"
@@ -175,8 +186,8 @@ function Aboutus() {
         </div>
         <div className="about__gallery-3">
           <img
-            loading='lazy'
-            src={ aboutgallery3 }
+            loading="lazy"
+            src={aboutgallery3}
             alt="livingroom1"
             className="img"
             height="423.33px"
@@ -219,47 +230,47 @@ const AboutContainer = styled.div`
           margin-left: -2px;
           position: relative;
           &:nth-of-type(2) {
-            color: #000000;
-            background-color: #dfc09a;
+            color: #0a0a0a;
+            background-color: #fcf9f5;
           }
           &:nth-of-type(3) {
-            color: #000000;
+            color: #0a0a0a;
             background-color: #fff;
+          }
         }
-      }
-      @media (min-width: 1024px) {
+        @media (min-width: 1024px) {
           grid-column: 1 / 8;
           h1 {
             font-size: 96px;
             line-height: 96px;
           }
         }
+      }
     }
-  }
-  &__img {
-    height: 182px;
-    width: 100%;
-    grid-row: 2 / 3;
-    grid-column: 4 / -1;
-    margin-top: -20px;
-    img {
+    &__img {
+      height: 182px;
       width: 100%;
+      grid-row: 2 / 3;
+      grid-column: 4 / -1;
+      margin-top: -20px;
+      img {
+        width: 100%;
+      }
+      @media (min-width: 1024px) {
+        grid-row: 1 / 4;
+        grid-column: 6 / 12;
+        height: 521px;
+        margin-top: 130px;
+      }
     }
-    @media (min-width: 1024px) {
-      grid-row: 1 / 4;
-      grid-column: 6 / 12;
-      height: 521px;
-      margin-top: 130px;
-    }
-  }
 
     &__tab1 {
       grid-row: 3 / 4;
       grid-column: 1 / -1;
       padding: 16px;
 
-      p{
-        font-family: 'Montserrat';
+      p {
+        font-family: "Montserrat";
         font-style: normal;
         font-weight: 300;
         font-size: 16px;
@@ -303,9 +314,9 @@ const AboutContainer = styled.div`
       &-3 {
         height: 423.33px;
       }
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         display: grid;
-        grid-gap: 15.79px;;
+        grid-gap: 15.79px;
         grid-template: repeat(1, minmax(50px, auto)) / repeat(12, 1fr);
         padding: 0 40px;
         gap: 40px;
@@ -323,7 +334,7 @@ const AboutContainer = styled.div`
           height: 527px;
         }
       }
-     }
+    }
   }
 
   main {
@@ -331,7 +342,8 @@ const AboutContainer = styled.div`
     display: grid;
     grid-template: repeat(3, minmax(200px, auto)) / repeat(12, 1fr);
     grid-row-gap: 80px;
-     .vision,.mission {
+    .vision,
+    .mission {
       grid-column: 1 / -1;
       grid-row: 1 / 2;
       padding: 0 16px;
@@ -348,30 +360,30 @@ const AboutContainer = styled.div`
         }
       }
       h2 {
-        font-family: 'Space Grotesk';
+        font-family: "Space Grotesk";
         font-weight: 600;
         font-size: 16px;
         line-height: 32px;
-        color: #000000;
+        color: #0a0a0a;
         margin: 40px 0 8px;
       }
       p {
-        font-family: 'Montserrat';
+        font-family: "Montserrat";
         font-weight: 300;
         font-size: 16px;
         line-height: 32px;
-        color: #000000;
+        color: #0a0a0a;
         margin-bottom: 24px;
       }
 
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         display: grid;
         grid-template: repeat(1, auto) / repeat(12, 1fr);
       }
     }
 
     .vision {
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         .img {
           grid-column: 4 / 6;
           height: 442px;
@@ -385,7 +397,7 @@ const AboutContainer = styled.div`
 
     .mission {
       grid-row: 2 / 3;
-      @media (min-width: 1024px){
+      @media (min-width: 1024px) {
         .img {
           grid-row: 1 / 2;
           grid-column: 8 / 12;
@@ -403,15 +415,15 @@ const AboutContainer = styled.div`
       grid-row: 3 / 4;
       grid-column: 1 / -1;
       padding: 40px 16px 40.26px;
-      color: #FFFFFF;
-      background-color: #000000;
+      color: #ffffff;
+      background-color: #0a0a0a;
       height: auto;
       p {
-        font-family: 'Space Grotesk';
+        font-family: "Space Grotesk";
         font-weight: 300;
         font-size: 24px;
         line-height: 32px;
-        &:nth-of-type(2){
+        &:nth-of-type(2) {
           margin-top: 48px;
         }
         @media (min-width: 1024px) {
@@ -471,7 +483,7 @@ const AboutContainer = styled.div`
           border-top: 3px solid;
           margin: 0 20px 0 0;
           flex: 1 0 20px;
-          color: #dfc09a;
+          color: #fcf9f5;
           width: 15.9rem;
         }
       }
@@ -481,7 +493,7 @@ const AboutContainer = styled.div`
         }
       }
     }
-    @media (min-width: 1024px){
+    @media (min-width: 1024px) {
       grid-template: repeat(1, minmax(50px, auto)) / repeat(12, 1fr);
       padding: 120px 40px;
       &__heading {

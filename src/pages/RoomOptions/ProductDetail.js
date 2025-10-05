@@ -8,23 +8,30 @@ import {
   FiShare2,
   FiChevronLeft,
   FiChevronRight,
+  FiCheck,
 } from "react-icons/fi";
 import { products } from "./data";
+import { useProductsContext } from "../../context/products_context";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { cart, addToCart } = useProductsContext();
+
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   // Mock additional data for demo
   const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   const colors = [
-    { name: "Black", code: "#000000" },
+    { name: "Black", code: "#0a0a0a" },
     { name: "White", code: "#FFFFFF" },
     { name: "Navy", code: "#001f3f" },
     { name: "Gray", code: "#808080" },
@@ -47,6 +54,27 @@ const ProductDetail = () => {
         .map((img, index) => ({ id: index, url: img }))
     : [];
 
+  // Check if product is already in cart
+  const isInCart = cart.some((item) => {
+    if (item.id !== product?.id) return false;
+    return item.size === selectedSize && item.color === selectedColor;
+  });
+
+  // Get cart item if it exists
+  const cartItem = cart.find((item) => {
+    if (item.id !== product?.id) return null;
+    return item.size === selectedSize && item.color === selectedColor;
+  });
+
+  // Show notification helper
+  const showNotificationMessage = (message) => {
+    setNotificationMessage(message);
+    setShowNotification(true);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
+  };
+
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
       prev === productImages.length - 1 ? 0 : prev + 1
@@ -63,18 +91,75 @@ const ProductDetail = () => {
     setCurrentImageIndex(index);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    // Validation
     if (!selectedSize) {
-      alert("Please select a size");
+      showNotificationMessage("Please select a size");
       return;
     }
-    // Add to cart logic here
-    console.log("Added to cart:", {
-      product,
-      size: selectedSize,
-      color: selectedColor,
-      quantity,
-    });
+
+    if (!selectedColor) {
+      showNotificationMessage("Please select a color");
+      return;
+    }
+
+    setIsAddingToCart(true);
+
+    try {
+      // Create cart product object
+      const cartProduct = {
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        category: product.category,
+        description: product.description,
+        size: selectedSize,
+        color: selectedColor,
+        amount: quantity,
+      };
+
+      // Add to cart using context
+      addToCart(cartProduct);
+
+      // Show success notification
+      showNotificationMessage(
+        `${product.name} (${selectedSize}, ${selectedColor}) added to cart!`
+      );
+
+      // Brief delay for UX feedback
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      showNotificationMessage("Failed to add item to cart. Please try again.");
+    } finally {
+      setIsAddingToCart(false);
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (!selectedSize) {
+      showNotificationMessage("Please select a size");
+      return;
+    }
+
+    if (!selectedColor) {
+      showNotificationMessage("Please select a color");
+      return;
+    }
+
+    // Add to cart first if not already in cart
+    if (!isInCart) {
+      handleAddToCart();
+    }
+
+    // Navigate to cart/checkout
+    setTimeout(
+      () => {
+        navigate("/checkout");
+      },
+      isInCart ? 0 : 1000
+    );
   };
 
   const relatedProducts = products
@@ -100,6 +185,16 @@ const ProductDetail = () => {
 
   return (
     <ProductDetailContainer>
+      {/* Notification Toast */}
+      {showNotification && (
+        <NotificationToast className={showNotification ? "show" : ""}>
+          <div className="notification-content">
+            <FiCheck className="notification-icon" />
+            <span>{notificationMessage}</span>
+          </div>
+        </NotificationToast>
+      )}
+
       <div className="container">
         {/* Breadcrumb & Back Button */}
         <div className="breadcrumb">
@@ -260,11 +355,41 @@ const ProductDetail = () => {
 
             {/* Add to Cart */}
             <div className="cart-section">
-              <button className="add-to-cart-btn" onClick={handleAddToCart}>
-                <FiShoppingCart />
-                Add to Cart
+              <button
+                className={`add-to-cart-btn ${isInCart ? "in-cart" : ""} ${
+                  isAddingToCart ? "loading" : ""
+                }`}
+                onClick={handleAddToCart}
+                disabled={isAddingToCart}
+              >
+                {isAddingToCart ? (
+                  <>
+                    <div className="spinner"></div>
+                    Adding...
+                  </>
+                ) : isInCart ? (
+                  <>
+                    <FiCheck />
+                    In Cart ({cartItem?.amount || 0})
+                  </>
+                ) : (
+                  <>
+                    <FiShoppingCart />
+                    Add to Cart
+                  </>
+                )}
               </button>
-              <button className="buy-now-btn">Buy Now</button>
+
+              <button className="buy-now-btn" onClick={handleBuyNow}>
+                Buy Now
+              </button>
+
+              {isInCart && (
+                <Link to="/cart" className="view-cart-btn">
+                  <FiShoppingCart />
+                  View Cart
+                </Link>
+              )}
             </div>
 
             {/* Product Details */}
@@ -304,6 +429,58 @@ const ProductDetail = () => {
   );
 };
 
+const NotificationToast = styled.div`
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #4caf50;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-width: 300px;
+  word-wrap: break-word;
+
+  @media (max-width: 480px) {
+    right: 10px;
+    left: 10px;
+    max-width: calc(100% - 20px);
+    transform: translateY(-100px);
+    top: 80px;
+  }
+
+  &.show {
+    transform: translateX(0);
+    opacity: 1;
+
+    @media (max-width: 480px) {
+      transform: translateY(0);
+    }
+  }
+
+  .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.4;
+
+    @media (max-width: 480px) {
+      font-size: 1.3rem;
+    }
+  }
+
+  .notification-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+`;
+
 const LoadingContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -326,7 +503,7 @@ const NotFoundContainer = styled.div`
   }
 
   a {
-    color: #d4af37;
+    color: #f8f8f5;
     text-decoration: none;
 
     &:hover {
@@ -337,7 +514,7 @@ const NotFoundContainer = styled.div`
 
 const ProductDetailContainer = styled.div`
   font-family: "Montserrat", sans-serif;
-  padding-top: 7.2rem;
+  padding-top: 5.2rem;
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -391,7 +568,7 @@ const ProductDetailContainer = styled.div`
     align-items: center;
     gap: 0.5rem;
     background: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid #e0e0e0;
     padding: 0.8rem 1.6rem;
     border-radius: 8px;
     cursor: pointer;
@@ -400,7 +577,7 @@ const ProductDetailContainer = styled.div`
     white-space: nowrap;
 
     &:hover {
-      background: #f5f5f5;
+      background: #f8f8f5;
     }
 
     @media (max-width: 480px) {
@@ -411,7 +588,7 @@ const ProductDetailContainer = styled.div`
 
   .breadcrumb-nav {
     font-size: 1.4rem;
-    color: #666;
+    color: #555;
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -426,7 +603,7 @@ const ProductDetailContainer = styled.div`
     }
 
     a {
-      color: #d4af37;
+      color: #b8941f;
       text-decoration: none;
 
       &:hover {
@@ -502,7 +679,7 @@ const ProductDetailContainer = styled.div`
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.9);
+        background: #f5f5f5f3;
         border: none;
         border-radius: 50%;
         width: 40px;
@@ -512,7 +689,7 @@ const ProductDetailContainer = styled.div`
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
-        color: #d4af37;
+        color: #555;
         z-index: 2;
 
         @media (max-width: 480px) {
@@ -521,7 +698,7 @@ const ProductDetailContainer = styled.div`
         }
 
         &:hover {
-          background: rgba(255, 255, 255, 1);
+          background: #f5f5f5;
           transform: translateY(-50%) scale(1.1);
         }
 
@@ -571,7 +748,7 @@ const ProductDetailContainer = styled.div`
           }
 
           &.active {
-            background: #d4af37;
+            background: #f8f8f5;
             transform: scale(1.2);
           }
 
@@ -602,7 +779,7 @@ const ProductDetailContainer = styled.div`
       }
 
       &::-webkit-scrollbar-thumb {
-        background: #d4af37;
+        background: #f8f8f5;
         border-radius: 2px;
       }
 
@@ -629,12 +806,12 @@ const ProductDetailContainer = styled.div`
         }
 
         &:hover {
-          border-color: rgba(212, 175, 55, 0.5);
+          border-color: #e0e0e0;
           transform: scale(1.05);
         }
 
         &.active {
-          border-color: #d4af37;
+          border-color: #e0e0e0;
           transform: scale(1.05);
         }
 
@@ -716,9 +893,9 @@ const ProductDetailContainer = styled.div`
           }
 
           &:hover {
-            background: #d4af37;
+            background: #f8f8f5;
             color: white;
-            border-color: #d4af37;
+            border-color: #f8f8f5;
           }
         }
       }
@@ -734,7 +911,7 @@ const ProductDetailContainer = styled.div`
       .current-price {
         font-size: 2.8rem;
         font-weight: 600;
-        color: #d4af37;
+        color: #333;
         margin-right: 1rem;
 
         @media (max-width: 768px) {
@@ -749,7 +926,7 @@ const ProductDetailContainer = styled.div`
 
       .original-price {
         font-size: 2rem;
-        color: #999;
+        color: #555;
         text-decoration: line-through;
 
         @media (max-width: 768px) {
@@ -806,7 +983,7 @@ const ProductDetailContainer = styled.div`
         font-size: 1.8rem;
         font-weight: 600;
         margin-bottom: 1rem;
-        color: #333;
+        color: #555;
 
         @media (max-width: 768px) {
           font-size: 1.6rem;
@@ -831,7 +1008,7 @@ const ProductDetailContainer = styled.div`
       .size-btn {
         width: 50px;
         height: 50px;
-        border: 2px solid #ddd;
+        border: 1px solid #e0e0e0;
         background: transparent;
         border-radius: 8px;
         cursor: pointer;
@@ -846,13 +1023,12 @@ const ProductDetailContainer = styled.div`
         }
 
         &:hover {
-          border-color: #d4af37;
+          border-color: rgba(245, 236, 225, 0.95);
         }
 
         &.active {
-          background: #d4af37;
-          color: white;
-          border-color: #d4af37;
+          background: #f5f5f5;
+          border-color: rgba(245, 236, 225, 0.95);
         }
       }
     }
@@ -881,7 +1057,7 @@ const ProductDetailContainer = styled.div`
         }
 
         &.active {
-          border-color: #d4af37;
+          border-color: rgba(245, 236, 225, 0.95);
           transform: scale(1.1);
         }
 
@@ -903,7 +1079,7 @@ const ProductDetailContainer = styled.div`
       .qty-btn {
         width: 40px;
         height: 40px;
-        border: 1px solid #ddd;
+        border: 1px solid #e0e0e0;
         background: transparent;
         border-radius: 8px;
         cursor: pointer;
@@ -918,9 +1094,8 @@ const ProductDetailContainer = styled.div`
         }
 
         &:hover {
-          background: #d4af37;
-          color: white;
-          border-color: #d4af37;
+          background: #f5f5f5;
+          border-color: rgba(245, 236, 225, 0.95);
         }
       }
 
@@ -942,6 +1117,7 @@ const ProductDetailContainer = styled.div`
       gap: 1rem;
       margin-bottom: 3rem;
       width: 100%;
+      flex-wrap: wrap;
 
       @media (max-width: 768px) {
         margin-bottom: 2rem;
@@ -954,7 +1130,8 @@ const ProductDetailContainer = styled.div`
       }
 
       .add-to-cart-btn,
-      .buy-now-btn {
+      .buy-now-btn,
+      .view-cart-btn {
         flex: 1;
         padding: 1.5rem 2rem;
         border-radius: 8px;
@@ -968,6 +1145,9 @@ const ProductDetailContainer = styled.div`
         gap: 0.8rem;
         white-space: nowrap;
         min-height: 50px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
 
         @media (max-width: 768px) {
           padding: 1.2rem 1.5rem;
@@ -978,17 +1158,46 @@ const ProductDetailContainer = styled.div`
           padding: 1rem 1.2rem;
           font-size: 1.4rem;
           gap: 0.6rem;
+          flex: none;
+        }
+
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
         }
       }
 
       .add-to-cart-btn {
-        background: #d4af37;
-        color: white;
-        border: none;
+        border: 1px solid #0a0a0a;
+        background: rgba(245, 236, 225, 0.95);
+        color: #0a0a0a;
 
-        &:hover {
-          background: #b8941f;
+        &:hover:not(:disabled) {
+          background: rgba(245, 236, 225, 1);
           transform: translateY(-2px);
+        }
+
+        &.in-cart {
+          background: #4caf50;
+          color: white;
+          border-color: #4caf50;
+
+          &:hover {
+            background: #45a049;
+          }
+        }
+
+        &.loading {
+          pointer-events: none;
+        }
+
+        .spinner {
+          width: 16px;
+          height: 16px;
+          border: 2px solid transparent;
+          border-top: 2px solid currentColor;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
         }
 
         @media (max-width: 480px) {
@@ -999,14 +1208,48 @@ const ProductDetailContainer = styled.div`
       }
 
       .buy-now-btn {
-        background: transparent;
-        color: #d4af37;
-        border: 2px solid #d4af37;
+        border: 1px solid #0a0a0a;
+        background: #0a0a0a;
+        color: white;
 
         &:hover {
-          background: #d4af37;
-          color: white;
+          background: #333;
+          transform: translateY(-2px);
         }
+
+        @media (max-width: 480px) {
+          &:hover {
+            transform: none;
+            background: #333;
+          }
+        }
+      }
+
+      .view-cart-btn {
+        background: transparent;
+        border: 1px solid #666;
+        color: #666;
+        flex: 0 0 auto;
+        min-width: 140px;
+
+        &:hover {
+          background: #f5f5f5;
+          border-color: #333;
+          color: #333;
+        }
+
+        @media (max-width: 480px) {
+          min-width: auto;
+        }
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
       }
     }
 
@@ -1151,7 +1394,7 @@ const ProductDetailContainer = styled.div`
 
         p {
           font-size: 1.4rem;
-          color: #d4af37;
+          color: #f8f8f5;
           font-weight: 600;
           margin: 0;
           padding: 0 0.5rem 0.5rem;

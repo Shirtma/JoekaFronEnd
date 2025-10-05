@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { zIndexes } from 'util/constants';
-import { links, accLinks } from '../util/constants';
-import Icon from './icon';
-import colours from '../lib/colours';
-import Button from './button';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { zIndexes } from "util/constants";
+import { links, accLinks } from "../util/constants";
+import Icon from "./icon";
+import colours from "../lib/colours";
+import Button from "./button";
 // import CartButtons from './CartButtons'
-import { useProductsContext } from '../context/products_context';
-import { useUserContext } from '../context/user_context';
+import { useProductsContext } from "../context/products_context";
+import { useUserContext } from "../context/user_context";
 
 function Sidebar() {
   const {
@@ -25,7 +25,7 @@ function Sidebar() {
   return (
     <SidebarContainer>
       <aside
-        className={`${isSideBarOpen ? 'sidebar show-sidebar' : 'sidebar'}`}
+        className={`${isSideBarOpen ? "sidebar show-sidebar" : "sidebar"}`}
       >
         <div className="sidebar-header">
           <button className="close-btn" type="button" onClick={closeSideBar}>
@@ -35,9 +35,7 @@ function Sidebar() {
         {isAuthenticated ? (
           <ul className="acctlinks">
             {accLinks.map((link) => {
-              const {
-                id, text, url, icon,
-              } = link;
+              const { id, text, url, icon } = link;
               return (
                 <li key={id} className="list_item">
                   <Link to={url} onClick={closeSideBar}>
@@ -110,33 +108,33 @@ function Sidebar() {
             onMouseLeave={() => setIsHover(false)}
             onClick={openTakeoutSideBar}
           >
-            <Icon Name={isHover ? 'CartDark' : 'Cart'} />
+            <Icon Name={isHover ? "CartDark" : "Cart"} />
 
             <div
               style={{
-                height: '25px',
-                width: '25px',
-                background: '#DFC09A',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginRight: '10px',
+                height: "25px",
+                width: "25px",
+                background: "#FCF9F5",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: "10px",
               }}
             >
               <p className="lead bold">{quantity}</p>
             </div>
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                paddingRight: '10px',
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "10px",
               }}
               className="takeout__cardFlex"
             >
               <p className="lead">&#8358;</p>
               <p className="lead">
-                {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                {total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
               </p>
             </div>
           </div>
@@ -229,7 +227,7 @@ const SidebarContainer = styled.div`
     text-transform: capitalize;
     padding: 2.5rem 1.5rem;
     padding-left: 0;
-    color: #000000;
+    color: #0a0a0a;
     transition: all 0.3s linear;
     letter-spacing: var(--spacing);
   }
@@ -273,7 +271,7 @@ const SidebarContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     a {
-      color: #000000;
+      color: #0a0a0a;
       font-size: 1.6rem;
       font-weight: 400;
       text-transform: capitalize;
@@ -311,7 +309,7 @@ const SidebarContainer = styled.div`
     &:hover {
       background: #fff;
       .lead {
-        color: #000;
+        color: #0a0a0a;
       }
     }
   }

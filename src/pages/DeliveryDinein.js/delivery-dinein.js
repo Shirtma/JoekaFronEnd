@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Icon from '../../components/icon';
-import Pdf from '../../components/pdf/new_menu.pdf';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Icon from "../../components/icon";
+import Pdf from "../../components/pdf/new_menu.pdf";
 
 function DeliveryDinein() {
   return (
@@ -18,7 +18,7 @@ function DeliveryDinein() {
           <div className="check2">
             <Icon Name="ListUL" colour="transparent" />
           </div>
-          <div className="delivery__sectionMain" style={{ width: '100%' }}>
+          <div className="delivery__sectionMain" style={{ width: "100%" }}>
             <Link to="/restaurant/ordertakeout">
               <p>TAKEOUT MENU</p>
             </Link>
@@ -74,7 +74,7 @@ const DeliveryDineinContainer = styled.div`
     &__flex > p {
       padding-left: 20px;
       font-size: 16px;
-      color: #dfc09a;
+      color: #fcf9f5;
     }
     &__section {
       width: 900px;
@@ -117,9 +117,9 @@ const DeliveryDineinContainer = styled.div`
       cursor: pointer;
 
       &:hover {
-        -webkit-text-fill-color: #dfc09a;
+        -webkit-text-fill-color: #fcf9f5;
         -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: #dfc09a;
+        -webkit-text-stroke-color: #fcf9f5;
       }
       @media (max-width: 768px) {
         font-size: 50px;
@@ -129,7 +129,7 @@ const DeliveryDineinContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,19 +140,19 @@ const DeliveryDineinContainer = styled.div`
   .check3 {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     color: #fff;
-    background: #dfc09a;
+    background: #fcf9f5;
   }
 
   .check2 {
     width: 5rem;
     height: 5rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;

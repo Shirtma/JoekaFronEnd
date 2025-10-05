@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Icon from './icon';
+import React from "react";
+import styled from "styled-components";
+import Icon from "./icon";
 
 function MealSummary({
   Image,
@@ -21,11 +21,11 @@ function MealSummary({
           <div className="menu__midDet1">
             <p
               style={{
-                color: '#000',
-                fontSize: '14px',
-                lineHeight: '1.8rem',
-                fontWeight: '500',
-                fontFamily: 'Space Grotesk',
+                color: "#000",
+                fontSize: "14px",
+                lineHeight: "1.8rem",
+                fontWeight: "500",
+                fontFamily: "Space Grotesk",
               }}
             >
               {text1}
@@ -38,9 +38,9 @@ function MealSummary({
             <Icon Name={icon} colour="transparent" width="2.0rem" />
             <p
               style={{
-                color: '#fff',
-                paddingLeft: '.8rem',
-                paddingRight: '.8rem',
+                color: "#fff",
+                paddingLeft: ".8rem",
+                paddingRight: ".8rem",
               }}
             >
               {number}
@@ -48,7 +48,7 @@ function MealSummary({
             <Icon Name={icon2} colour="transparent" width="2.0rem" />
           </div>
         </div>
-        <div style={{ width: '6.0rem' }} className="menu__rightDetail">
+        <div style={{ width: "6.0rem" }} className="menu__rightDetail">
           <p>
             &#8358;
             {price}
@@ -121,7 +121,7 @@ const CheckoutContainer = styled.div`
       line-height: 18px;
       letter-spacing: 0em;
       text-align: right;
-      color: #000;
+      color: #0a0a0a;
     }
 
     &__addMinFlex {
@@ -139,7 +139,7 @@ const CheckoutContainer = styled.div`
   .check {
     width: 4rem;
     height: 4rem;
-    border: 2px solid #dfc09a;
+    border: 2px solid #fcf9f5;
     display: flex;
     justify-content: center;
     align-items: center;

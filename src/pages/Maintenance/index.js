@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 function Maintenance() {
   useEffect(() => {
-    const head = document.getElementsByTagName('head')[0];
+    const head = document.getElementsByTagName("head")[0];
     head.innerHTML = `<title>The House - Site under construction</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,9 +50,11 @@ function Maintenance() {
   }, []);
 
   useEffect(() => {
-    const root = document.querySelector('#root');
+    const root = document.querySelector("#root");
     if (!root) return;
-    root.insertAdjacentHTML('afterend', `<!--jquery -->	
+    root.insertAdjacentHTML(
+      "afterend",
+      `<!--jquery -->	
 	<script src="https://res.cloudinary.com/dgkltr/raw/upload/v1647301013/THE%20HOUSE/coming-soon-util/vendor/jquery/jquery-3.2.1.min_nvl5lo.js"></script>
 <!--bootstrap js-->
 	<script src="https://res.cloudinary.com/dgkltr/raw/upload/v1647301013/THE%20HOUSE/coming-soon-util/vendor/bootstrap/js/popper_ph2l88.js"></script>
@@ -67,12 +69,14 @@ function Maintenance() {
 		})
 	</script>
 <!-- main js -->
-	<script src="https://res.cloudinary.com/dgkltr/raw/upload/v1647301024/THE%20HOUSE/coming-soon-util/js/main_eo0dnf.js"></script>`);
+	<script src="https://res.cloudinary.com/dgkltr/raw/upload/v1647301024/THE%20HOUSE/coming-soon-util/js/main_eo0dnf.js"></script>`
+    );
   }, []);
 
   return (
-    <div dangerouslySetInnerHTML={{
-      __html: `<!-- background media -->
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `<!-- background media -->
 	<div class="simpleslide100">
 		<div class="simpleslide100-item bg-img1" style="background-image: url('https://res.cloudinary.com/dgkltr/image/upload/v1639002445/THE%20HOUSE/Spaces/booth/booth-1_qzkeqm.jpg');"></div>
 		<div class="simpleslide100-item bg-img1" style="background-image: url('https://res.cloudinary.com/dgkltr/image/upload/v1638467507/THE%20HOUSE/Restaurant/food%20menu/main/peppered-turkey-n-smokey-jollof_vfix32.jpg');"></div>
@@ -104,12 +108,12 @@ function Maintenance() {
 				We can't wait for you to see what's new!
 			</p>
       <p style="color: #fff; font-family: space grotesk; font-size: 18px; text-align: center; line-height: 1.5">
-        <span style="color: #DFC09A; letter-spacing: 0.125em; font-size: 16px;">FOR RESERVATIONS</span>
+        <span style="color: #FCF9F5; letter-spacing: 0.125em; font-size: 16px;">FOR RESERVATIONS</span>
         <br>
         Contact  <b><a style="color: #fff; text-decoration: none;" href="mailto:bookings@thehouseng.com">bookings@thehouseng.com</b></a> or call <b><a style="color: #fff; text-decoration: none;" href="tel:+2349082919773">0908-291-9773</a></b>
       </p>
       <p class="m-t-20" style="color: #fff; font-family: space grotesk; font-size: 16px; text-align: center; line-height: 1.5">
-        <span style="color: #DFC09A; letter-spacing: 0.125em; font-size: 16px;">FOR TAKEOUTS</span>
+        <span style="color: #FCF9F5; letter-spacing: 0.125em; font-size: 16px;">FOR TAKEOUTS</span>
         <br>
         Contact <b><a style="color: #fff; text-decoration: none;" href="mailto:takeout@thehouseng.com">takeout@thehouseng.com</b></a> or call <b><a style="color: #fff; text-decoration: none;" href="tel:+23407067891693">0708-678-9169</a></b>
       </p>
@@ -133,7 +137,7 @@ function Maintenance() {
 
 		</div>
 	</div>`,
-    }}
+      }}
     />
   );
 }

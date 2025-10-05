@@ -12,11 +12,12 @@ function RoomComp({ Image, id, amount, title, desc }) {
           <h1>{title}</h1>
           <p>{desc}</p>
           <div>
-            <p>₦{amount}</p>
+            <p style={{ color: "#333" }}>₦{amount}</p>
             <LinkButton
               to={`/shop/product/${id}`}
               label="View Details"
               onClick={(e) => e.stopPropagation()}
+              className={"view__details-btn"}
             />
           </div>
         </div>
@@ -45,7 +46,7 @@ const RoomCont = styled.div`
     cursor: pointer;
     background: #fff;
     text-decoration: none;
-    color: inherit;
+    color: #0a0a0a;
 
     @media only screen and (max-width: 768px) {
       height: 35rem;
@@ -78,7 +79,7 @@ const RoomCont = styled.div`
       align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
-      background: rgba(245, 236, 225, 0.95);
+      background: #fcf9f5;
       backdrop-filter: blur(4px);
       border-radius: 8px;
       color: ${colours.primarygrey900};
@@ -178,7 +179,7 @@ const RoomCont = styled.div`
           letter-spacing: 0em;
           text-align: left;
           margin: 0;
-          color: #d4af37;
+          color: #f8f8f5;
           display: block;
           -webkit-line-clamp: unset;
           -webkit-box-orient: unset;
@@ -207,6 +208,10 @@ const RoomCont = styled.div`
     &:hover img {
       transform: scale(1.05);
     }
+  }
+  .view__details-btn {
+    background: rgba(245, 236, 225, 0.95);
+    border-radius: 4px; 
   }
 `;
 
