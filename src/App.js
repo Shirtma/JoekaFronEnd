@@ -10,6 +10,8 @@ import { UserProvider } from "./context/user_context";
 import ProductDetail from "./pages/RoomOptions/ProductDetail";
 import { ProductsProvider } from "./context/products_context";
 import CartPage from "./pages/RoomOptions/CartPage";
+import CheckoutPage from "./pages/RoomOptions/CheckoutPage";
+import OrderSuccessPage from "./pages/RoomOptions/OrderSuccessPage";
 // import Aboutus from './pages/AboutUs/aboutus';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
               <Route path="/shop" element={<Rooms />} />
               <Route path="/shop/product/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/order-success" element={<OrderSuccessPage />} />
               <Route path="/signin" element={<Signin />} />
               <Route path="/register" element={<Signup />} />
               {/* <Route path="/about" element={<Aboutus />} /> */}
