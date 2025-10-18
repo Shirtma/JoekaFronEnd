@@ -45,8 +45,14 @@ function Signin() {
           window.location.reload();
         }
       } catch (error) {
-        dispatch({ type: LOGIN_ERROR });
+        dispatch({
+          type: LOGIN_ERROR,
+          payload:
+            error.response?.data?.message || "Login failed. Please try again.",
+        });
       }
+    } else {
+      setState((prev) => ({ ...prev, validationErrors: errors }));
     }
   }
   return (
@@ -85,7 +91,7 @@ function Signin() {
             labelClassName="contact__form-label"
             className="contact__form-input"
             outClassName="contact__form-out"
-            value={state.firstName}
+            value={state.password}
             onChange={(e) => onChangeInput(e, state, setState)}
             placeholder="Password"
             error={state.validationErrors.password}
@@ -113,7 +119,7 @@ function Signin() {
         </div>
         <div className="signin__link">
           <p className="signin__link-text">
-            Don’t have an account with us?{" "}
+            Don't have an account with us?{" "}
             <Link to="/register" className="signup__link">
               Sign up here
             </Link>
@@ -127,164 +133,160 @@ function Signin() {
 export default Signin;
 
 const SigninContainer = styled.div`
-  background-color: #fcf9f5;
-  padding: 57px 16px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #fafafa;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
 
   .signin__form {
-    @media (min-width: 768px) {
-      width: 50%;
-      margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+
+    @media (max-width: 768px) {
+      padding: 2rem;
     }
-    @media (min-width: 1024px) {
-      width: 400px;
-      margin-bottom: 144px;
-    }
+
     &-intro {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+      text-align: center;
+      margin-bottom: 3rem;
 
       &--text1 {
         font-family: "Space Grotesk", sans-serif;
-        font-style: normal;
-        font-weight: 300;
-        font-size: 4rem;
-        line-height: 4.8rem;
-        color: #0a0a0a;
-      }
+        font-size: 2.8rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+        line-height: 1.2;
 
-      &--text2 {
-        font-family: "Space Grotesk", sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 1.6rem;
-        line-height: 2.8rem;
-        color: #0a0a0a;
+        @media (max-width: 768px) {
+          font-size: 2.4rem;
+        }
       }
     }
 
-    &-btn {
-      margin-top: -2rem;
-      cursor: pointer;
+    &-input1,
+    &-input2 {
+      margin-bottom: 2rem;
+    }
 
-      &:hover {
-        color: #fff;
+    .contact__form-out {
+      input {
+        width: 100%;
+        padding: 1.2rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1.4rem;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #d4af37;
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        &::placeholder {
+          color: #999;
+        }
+      }
+
+      label {
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: #333;
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+    }
+
+    .error__div {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 8px;
+
+      p {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  .signin_cont {
+    margin-bottom: 2rem;
+
+    .submit-btn {
+      width: 100%;
+      padding: 1.5rem;
+      background: #0a0a0a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      min-height: 48px;
+
+      &:hover:not(:disabled) {
+        background: #000;
+        transform: translateY(-1px);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .fa-spinner {
+        font-size: 1.4rem;
       }
     }
   }
 
   .signin__link {
-    text-decoration: none;
-    font-family: "Space Grotesk", sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    margin-top: 2rem;
-    color: #0a0a0a;
+    text-align: center;
+
+    &-text {
+      font-size: 1.4rem;
+      color: #666;
+      margin: 0;
+    }
 
     .signup__link {
-      font-weight: 500;
-    }
-  }
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 600;
 
-  .flex {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .tertiary-text {
-    padding-right: 10px;
-  }
-
-  .signin_cont {
-    margin-top: 24px;
-    height: 47px;
-    display: flex;
-    align-items: center;
-    .submit-btn {
-      height: 100%;
-      width: 100%;
-    }
-    &:hover {
-      .tertiary-text {
-        color: #fff;
+      &:hover {
+        text-decoration: underline;
       }
     }
-    @media (min-width: 1024px) {
-      width: 153px;
-    }
   }
 
-  img {
-    height: 40px;
-    width: 40px;
-    background: none;
-    border: 0;
-  }
-
-  .error__div {
-    margin-top: 1rem;
-  }
-
-  .error__div > p {
-    font-family: Space Grotesk;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #dc2626;
-  }
-
-  a {
-    text-decoration: none;
-    text-decoration-line: underline;
-    font-family: "Space Grotesk", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    color: #0a0a0a;
-  }
-  .contact__form-out {
-    margin-top: 16px;
-    input {
-      width: 100%;
-    }
-  }
-  .buttonload {
-    background-color: #fcf9f5;
-    border: none;
-    color: #0a0a0a;
-    min-height: 48px;
-    width: 100%;
+  .toggle-visibility {
     cursor: pointer;
-    font-family: Montserrat;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    /* &:hover {
-      color: #FCF9F5;
-    } */
-    @media (min-width: 1024px) {
-      width: 156px;
-    }
-  }
-
-  /* Add a right margin to each icon */
-  .fa,
-  .far {
     position: absolute;
-    left: 9px;
-    transform: translateY(0%, 50%);
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+
+    &:hover {
+      color: #333;
+    }
   }
 `;

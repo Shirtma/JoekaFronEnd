@@ -45,7 +45,7 @@ function Homepage() {
         <div className="about__subsection">
           <div>
             <h2 className="">Dare to Be Bold</h2>
-            <LinkButton to="/shop" label="Explore Shop" className="link-btn" />
+            <LinkButton to="/shop" label="Explore Shop" className="link-btn" style={{ color: "white"}} />
           </div>
         </div>
 
