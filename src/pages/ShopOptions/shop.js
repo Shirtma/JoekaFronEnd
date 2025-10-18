@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import styled from "styled-components";
-import RoomComp from "./roomComp";
+import ShopComp from "./shopComp";
 import { products } from "./data";
 import Pagination from "../../components/Pagination";
 import CategoryFilter from "../../components/CategoryFilter";
@@ -18,7 +18,7 @@ const categories = [
 
 const ITEMS_PER_PAGE = 8;
 
-const Rooms = () => {
+const Shop = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -59,16 +59,16 @@ const Rooms = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
     // Scroll to top of products section
-    document.querySelector(".rooms__div")?.scrollIntoView({
+    document.querySelector(".shops__div")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   };
-
+  
   return (
-    <RoomsContainer>
-      <div className="rooms__wrapper">
-        <div className="rooms__container">
+    <ShopContainer>
+      <div className="shop__wrapper">
+        <div className="shop__container">
           <CategoryFilter
             categories={categories}
             selectedCategories={selectedCategories}
@@ -89,9 +89,9 @@ const Rooms = () => {
             </h2>
           </div>
 
-          <div className="rooms__div">
+          <div className="shops__div">
             {paginatedProducts?.map((item, index) => (
-              <RoomComp
+              <ShopComp
                 key={`${item?.id}-${currentPage}`}
                 Image={item?.image}
                 id={item?.id}
@@ -122,12 +122,12 @@ const Rooms = () => {
           </p>
         </div>
       </div>
-    </RoomsContainer>
+    </ShopContainer>
   );
 };
 
 // ...existing styled component remains the same...
-const RoomsContainer = styled.div`
+const ShopContainer = styled.div`
   position: relative;
   width: 100%;
   padding: 40px 24px;
@@ -175,7 +175,7 @@ const RoomsContainer = styled.div`
     }
   }
 
-  .rooms {
+  .shops {
     &__wrapper {
     }
     &__container {
@@ -286,4 +286,4 @@ const RoomsContainer = styled.div`
   }
 `;
 
-export default Rooms;
+export default  Shop;

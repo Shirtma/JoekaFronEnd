@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -58,28 +58,74 @@ const CheckoutPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Shipping Options
-  const shippingOptions = [
-    {
-      id: "standard",
-      name: "Standard Delivery",
-      price: 0,
-      time: "5-7 business days",
-    },
-    {
-      id: "express",
-      name: "Express Delivery",
-      price: 2500,
-      time: "2-3 business days",
-    },
-    // {
-    //   id: "overnight",
-    //   name: "Overnight Delivery",
-    //   price: 5000,
-    //   time: "Next business day",
-    // },
-  ];
+  const getShippingOptions = useCallback(() => {
+    const subtotal = calculateSubtotal();
+    const isLagos = formData.state === "Lagos";
+    const isNigeria = formData.country === "Nigeria";
 
-  const [selectedShipping, setSelectedShipping] = useState("standard");
+    if (!isNigeria) {
+      return [
+        {
+          id: "international",
+          name: "International Shipping",
+          price: "TBC",
+          time: "Contact for delivery time",
+          description:
+            "Shipping cost will be calculated after entering your address and communicated via email before dispatch",
+        },
+      ];
+    }
+
+    // Free delivery for orders ₦200,000 and above
+    const isFreeDelivery = subtotal >= 200000;
+
+    return [
+      {
+        id: "within-lagos",
+        name: isLagos ? "Lagos Delivery" : "Within Lagos",
+        price: isFreeDelivery ? 0 : 3500,
+        time: "1-3 working days",
+        available: isLagos,
+        description: isLagos
+          ? isFreeDelivery
+            ? "Free delivery (order above ₦200,000)"
+            : "Standard Lagos delivery"
+          : "Not available for your location",
+      },
+      {
+        id: "outside-lagos",
+        name: "Outside Lagos (Other States)",
+        price: isFreeDelivery ? 0 : 8000,
+        time: "3-4 working days",
+        available: !isLagos,
+        description: !isLagos
+          ? isFreeDelivery
+            ? "Free delivery (order above ₦200,000)"
+            : "Delivery to other Nigerian states"
+          : "Not available for Lagos addresses",
+      },
+    ];
+  }, [formData.state, formData.country, total]);
+
+  const [selectedShipping, setSelectedShipping] = useState("");
+
+  // Auto-select appropriate shipping option when state/country changes
+  useEffect(() => {
+    const options = getShippingOptions();
+    const availableOption = options.find((opt) => opt.available !== false);
+    if (
+      availableOption &&
+      (!selectedShipping || !options.find((opt) => opt.id === selectedShipping))
+    ) {
+      setSelectedShipping(availableOption.id);
+    }
+  }, [
+    formData.state,
+    formData.country,
+    total,
+    selectedShipping,
+    getShippingOptions,
+  ]);
 
   // Payment Methods
   const paymentMethods = [
@@ -134,7 +180,7 @@ const CheckoutPage = () => {
   // Redirect to cart if empty
   useEffect(() => {
     if (cart.length === 0) {
-    //   navigate("/cart");
+      //   navigate("/cart");
     }
   }, [cart.length, navigate]);
 
@@ -171,9 +217,9 @@ const CheckoutPage = () => {
       if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
       if (!formData.address.trim()) newErrors.address = "Address is required";
       if (!formData.city.trim()) newErrors.city = "City is required";
-      if (!formData.state) newErrors.state = "State is required";
-    //   if (!formData.postalCode.trim())
-    //     newErrors.postalCode = "Postal code is required";
+      if (!formData.country) newErrors.country = "Country is required";
+      if (formData.country === "Nigeria" && !formData.state)
+        newErrors.state = "State is required";
     }
 
     if (step === 2 && selectedPayment === "card") {
@@ -230,11 +276,18 @@ const CheckoutPage = () => {
 
   // Calculate totals
   const calculateSubtotal = () => total;
-  const calculateShipping = () =>
-    shippingOptions.find((opt) => opt.id === selectedShipping)?.price || 0;
+  const calculateShipping = () => {
+    const options = getShippingOptions();
+    const selectedOption = options.find((opt) => opt.id === selectedShipping);
+    return selectedOption && typeof selectedOption.price === "number"
+      ? selectedOption.price
+      : 0;
+  };
   const calculateTax = () => Math.round(calculateSubtotal() * 0.075); // 7.5% VAT
-  const calculateTotal = () =>
-    calculateSubtotal() + calculateShipping() + calculateTax();
+  const calculateTotal = () => {
+    const shippingCost = calculateShipping();
+    return calculateSubtotal() + shippingCost + calculateTax();
+  };
 
   // Format card number display
   const formatCardNumber = (value) => {
@@ -248,7 +301,30 @@ const CheckoutPage = () => {
   };
 
   if (cart.length === 0) {
-    return null;
+    return (
+      <CheckoutContainer>
+        <div className="container">
+          <div style={{ textAlign: "center", padding: "4rem 0" }}>
+            <h2>Your cart is empty</h2>
+            <p>Add some items to your cart to proceed with checkout.</p>
+            <button
+              style={{
+                background: "#000",
+                color: "#fff",
+                border: "none",
+                padding: "12px 24px",
+                borderRadius: "4px",
+                cursor: "pointer",
+                marginTop: "1rem",
+              }}
+              onClick={() => navigate("/shop")}
+            >
+              Continue Shopping
+            </button>
+          </div>
+        </div>
+      </CheckoutContainer>
+    );
   }
 
   return (
@@ -412,25 +488,68 @@ const CheckoutPage = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="state">State *</label>
+                    <label htmlFor="country">Country *</label>
                     <select
-                      id="state"
-                      name="state"
-                      value={formData.state}
+                      id="country"
+                      name="country"
+                      value={formData.country}
                       onChange={handleInputChange}
-                      className={errors.state ? "error" : ""}
+                      className={errors.country ? "error" : ""}
                     >
-                      <option value="">Select State</option>
-                      {nigerianStates.map((state) => (
-                        <option key={state} value={state}>
-                          {state}
-                        </option>
-                      ))}
+                      <option value="">Select Country</option>
+                      <option value="Nigeria">Nigeria</option>
+                      <option value="United States">United States</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Germany">Germany</option>
+                      <option value="France">France</option>
+                      <option value="Australia">Australia</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="Ghana">Ghana</option>
+                      <option value="Kenya">Kenya</option>
+                      <option value="Other">Other</option>
                     </select>
-                    {errors.state && (
-                      <span className="error-text">{errors.state}</span>
+                    {errors.country && (
+                      <span className="error-text">{errors.country}</span>
                     )}
                   </div>
+
+                  {formData.country === "Nigeria" && (
+                    <div className="form-group">
+                      <label htmlFor="state">State *</label>
+                      <select
+                        id="state"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                        className={errors.state ? "error" : ""}
+                      >
+                        <option value="">Select State</option>
+                        {nigerianStates.map((state) => (
+                          <option key={state} value={state}>
+                            {state}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.state && (
+                        <span className="error-text">{errors.state}</span>
+                      )}
+                    </div>
+                  )}
+
+                  {formData.country && formData.country !== "Nigeria" && (
+                    <div className="form-group">
+                      <label htmlFor="state">State/Province/Region</label>
+                      <input
+                        type="text"
+                        id="state"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                        placeholder="Enter your state/province/region"
+                      />
+                    </div>
+                  )}
 
                   {/* <div className="form-group">
                     <label htmlFor="postalCode">Postal Code *</label>
@@ -452,26 +571,68 @@ const CheckoutPage = () => {
                 {/* Shipping Options */}
                 <div className="shipping-options">
                   <h3>Delivery Options</h3>
-                  {shippingOptions.map((option) => (
-                    <label key={option.id} className="shipping-option">
-                      <input
-                        type="radio"
-                        name="shipping"
-                        value={option.id}
-                        checked={selectedShipping === option.id}
-                        onChange={(e) => setSelectedShipping(e.target.value)}
-                      />
-                      <div className="shipping-info">
-                        <div className="shipping-name">{option.name}</div>
-                        <div className="shipping-time">{option.time}</div>
-                      </div>
-                      <div className="shipping-price">
-                        {option.price === 0
-                          ? "Free"
-                          : `₦${option.price.toLocaleString()}`}
-                      </div>
-                    </label>
-                  ))}
+                  {formData.state && formData.country && (
+                    <>
+                      {getShippingOptions().map((option) => (
+                        <label
+                          key={option.id}
+                          className={`shipping-option ${
+                            option.available === false ? "disabled" : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="shipping"
+                            value={option.id}
+                            checked={selectedShipping === option.id}
+                            onChange={(e) =>
+                              setSelectedShipping(e.target.value)
+                            }
+                            disabled={option.available === false}
+                          />
+                          <div className="shipping-info">
+                            <div className="shipping-name">{option.name}</div>
+                            <div className="shipping-time">{option.time}</div>
+                            {option.description && (
+                              <div className="shipping-description">
+                                {option.description}
+                              </div>
+                            )}
+                          </div>
+                          <div className="shipping-price">
+                            {option.price === "TBC"
+                              ? "TBC"
+                              : option.price === 0
+                              ? "Free"
+                              : `₦${option.price.toLocaleString()}`}
+                          </div>
+                        </label>
+                      ))}
+
+                      {calculateSubtotal() >= 200000 &&
+                        formData.country === "Nigeria" && (
+                          <div className="free-delivery-notice">
+                            🎉 You qualify for free delivery! Orders above
+                            ₦200,000 get free shipping within Nigeria.
+                          </div>
+                        )}
+
+                      {formData.country !== "Nigeria" && (
+                        <div className="international-notice">
+                          📧 For international orders, we'll contact you via
+                          email with the calculated shipping cost before
+                          dispatching your order.
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {(!formData.state || !formData.country) && (
+                    <div className="shipping-placeholder">
+                      Please select your country and state to see delivery
+                      options.
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -1035,8 +1196,14 @@ const CheckoutContainer = styled.div`
       cursor: pointer;
       transition: all 0.3s ease;
 
-      &:hover {
+      &:hover:not(.disabled) {
         border-color: #333;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #f8f9fa;
       }
 
       input[type="radio"] {
@@ -1055,6 +1222,13 @@ const CheckoutContainer = styled.div`
           font-size: 1.2rem;
           color: #666;
         }
+
+        .shipping-description {
+          font-size: 1.2rem;
+          color: #888;
+          margin-top: 0.5rem;
+          font-style: italic;
+        }
       }
 
       .shipping-price {
@@ -1062,6 +1236,35 @@ const CheckoutContainer = styled.div`
         font-size: 1.4rem;
         color: #333;
       }
+    }
+
+    .free-delivery-notice {
+      background: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: 500;
+      font-size: 1.3rem;
+    }
+
+    .international-notice {
+      background: #fff3cd;
+      color: #856404;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: 500;
+      font-size: 1.3rem;
+    }
+
+    .shipping-placeholder {
+      background: #f8f9fa;
+      color: #666;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.4rem;
     }
   }
 

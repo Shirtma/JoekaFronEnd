@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import colours from "../../lib/colours";
 import LinkButton from "../../components/linkButton";
 
-function RoomComp({ Image, id, amount, title, desc }) {
+function ShopComp({ Image, id, amount, title, desc }) {
   return (
-    <RoomCont>
-      <Link to={`/shop/product/${id}`} className="room__flex">
+    <ShopCont>
+      <Link to={`/shop/product/${id}`} className="shop__flex">
         <img src={Image} alt={title} />
-        <div className="room__flex__text">
+        <div className="shop__flex__text">
           <h1>{title}</h1>
           <p>{desc}</p>
           <div>
@@ -22,15 +22,15 @@ function RoomComp({ Image, id, amount, title, desc }) {
           </div>
         </div>
       </Link>
-    </RoomCont>
+    </ShopCont>
   );
 }
 
-const RoomCont = styled.div`
+const ShopCont = styled.div`
   width: 100%;
   height: auto;
 
-  .room__flex {
+  .shop__flex {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -215,4 +215,4 @@ const RoomCont = styled.div`
   }
 `;
 
-export default RoomComp;
+export default ShopComp;

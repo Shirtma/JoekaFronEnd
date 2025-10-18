@@ -29,7 +29,7 @@ function Aboutus() {
         <div className="about__tab1">
           <p className="">
             Borne out of a desire to socialise at a slower pace, in a
-            comfortable and beguilling environment, THE HOUSE is a unique
+            comfortable and beguilling environment, Joeka Inc is a unique
             concept that provides an alternative way of socialising by artfully
             blending elements of fine dining, good music and hearty
             entertainment, leaving our guests with a truly unique social
@@ -61,7 +61,7 @@ function Aboutus() {
           <div className="vision__statement">
             <h2>OUR VISION</h2>
             <p>
-              THE HOUSE seeks to bring people from all cultures together into a
+              Joeka Inc seeks to bring people from all cultures together into a
               vibrant melting point, where guests come to meet friends, do
               business and relax, creating a platform from which to base both
               their social and professional lives, all against the backdrop of a
@@ -90,7 +90,7 @@ function Aboutus() {
           <div className="mission__statement">
             <h2>OUR MISSION</h2>
             <p>
-              Ultimately, our aim is to grow THE HOUSE into a community of
+              Ultimately, our aim is to grow Joeka Inc into a community of
               like-minded indivials with sister HOUSES around the world. The
               venture marks the first step on that journey. We hope that with
               excellent service delivery, your continued patronage and a fair
@@ -116,7 +116,7 @@ function Aboutus() {
               to disarm our guests and ecourage interaction and mingling.
             </p>
             <p className="">
-              We look forward to welcoming you to THE HOUSE. Visiting us is
+              We look forward to welcoming you to Joeka Inc. Visiting us is
               never a bad idea.
             </p>
           </div>

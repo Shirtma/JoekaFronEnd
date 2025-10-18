@@ -3,22 +3,22 @@ import React, { useEffect } from "react";
 function Maintenance() {
   useEffect(() => {
     const head = document.getElementsByTagName("head")[0];
-    head.innerHTML = `<title>The House - Site under construction</title>
+    head.innerHTML = `<title>Joeka Inc - Site under construction</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	  <meta
       name="description"
-      content="The house restaurant, Food, House and Entertainment"
+      content="Joeka Inc restaurant, Food, House and Entertainment"
     />
 		<meta content="Webflow" name="generator">
-    <meta property='og:title' content='The House NG' />
+    <meta property='og:title' content='Joeka Inc NG' />
     <meta property='og:image' content='/favicon.png' />
     <meta property='og:description'
-      content='The house restaurant, Food, House and Entertainment' />
+      content='Joeka Inc restaurant, Food, House and Entertainment' />
     <meta property='og:url' content='https://thehouseng.com/' />
     <meta property="og:image" content="/favicon.png" />
-    <meta property="og:site_name" content="The House NG" />
-    <meta name="twitter:image:alt" content="The House NG" />
+    <meta property="og:site_name" content="Joeka Inc NG" />
+    <meta name="twitter:image:alt" content="Joeka Inc NG" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/x-icon" href="light.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
@@ -88,7 +88,7 @@ function Maintenance() {
 		<!-- header nav -->
 		<div class="w-full flex-w flex-sb-m">
 			<div class="wrappic1 m-r-30 m-t-10 m-b-10">
-				<a href="#"><img src="https://res.cloudinary.com/dgkltr/image/upload/v1638926557/THE%20HOUSE/logo/light_tvhvnj.png" alt="The House Logo" width="200"></a>
+				<a href="#"><img src="https://res.cloudinary.com/dgkltr/image/upload/v1638926557/THE%20HOUSE/logo/light_tvhvnj.png" alt="Joeka Inc Logo" width="200"></a>
 			</div>
 
 
