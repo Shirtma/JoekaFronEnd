@@ -20,7 +20,7 @@ const ProductDetail = () => {
 
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  // const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,19 +30,19 @@ const ProductDetail = () => {
 
   // Mock additional data for demo
   const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
-  const colors = [
-    { name: "Black", code: "#0a0a0a" },
-    { name: "White", code: "#FFFFFF" },
-    { name: "Navy", code: "#001f3f" },
-    { name: "Gray", code: "#808080" },
-  ];
+  // const colors = [
+  //   { name: "Black", code: "#0a0a0a" },
+  //   { name: "White", code: "#FFFFFF" },
+  //   { name: "Navy", code: "#001f3f" },
+  //   { name: "Gray", code: "#808080" },
+  // ];
 
   useEffect(() => {
     const foundProduct = products.find((p) => p.id.toString() === id);
     if (foundProduct) {
       setProduct(foundProduct);
-      setSelectedSize("M"); // Default to M
-      setSelectedColor("Black"); // Default to first color
+      setSelectedSize("M"); 
+      // setSelectedColor("Black"); 
     }
     setIsLoading(false);
   }, [id]);
@@ -57,13 +57,13 @@ const ProductDetail = () => {
   // Check if product is already in cart
   const isInCart = cart.some((item) => {
     if (item.id !== product?.id) return false;
-    return item.size === selectedSize && item.color === selectedColor;
+    return item.size === selectedSize ;
   });
 
   // Get cart item if it exists
   const cartItem = cart.find((item) => {
     if (item.id !== product?.id) return null;
-    return item.size === selectedSize && item.color === selectedColor;
+    return item.size === selectedSize ;
   });
 
   // Show notification helper
@@ -98,10 +98,10 @@ const ProductDetail = () => {
       return;
     }
 
-    if (!selectedColor) {
-      showNotificationMessage("Please select a color");
-      return;
-    }
+    // if (!selectedColor) {
+    //   showNotificationMessage("Please select a color");
+    //   return;
+    // }
 
     setIsAddingToCart(true);
 
@@ -115,7 +115,7 @@ const ProductDetail = () => {
         category: product.category,
         description: product.description,
         size: selectedSize,
-        color: selectedColor,
+        // color: selectedColor,
         amount: quantity,
       };
 
@@ -124,7 +124,7 @@ const ProductDetail = () => {
 
       // Show success notification
       showNotificationMessage(
-        `${product.name} (${selectedSize}, ${selectedColor}) added to cart!`
+        `${product.name} (${selectedSize}, added to cart!`
       );
 
       // Brief delay for UX feedback
@@ -143,10 +143,10 @@ const ProductDetail = () => {
       return;
     }
 
-    if (!selectedColor) {
-      showNotificationMessage("Please select a color");
-      return;
-    }
+    // if (!selectedColor) {
+    //   showNotificationMessage("Please select a color");
+    //   return;
+    // }
 
     // Add to cart first if not already in cart
     if (!isInCart) {
@@ -316,7 +316,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Color Selection */}
-            <div className="color-selection">
+            {/* <div className="color-selection">
               <h3>Color: {selectedColor}</h3>
               <div className="color-options">
                 {colors.map((color) => (
@@ -331,7 +331,7 @@ const ProductDetail = () => {
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Quantity */}
             <div className="quantity-selection">
@@ -1319,22 +1319,22 @@ const ProductDetailContainer = styled.div`
 
     .related-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
       gap: 2rem;
       width: 100%;
 
       @media (max-width: 1024px) {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
         gap: 1.5rem;
       }
 
       @media (max-width: 768px) {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
         gap: 1.2rem;
       }
 
       @media (max-width: 480px) {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
         gap: 1rem;
       }
 

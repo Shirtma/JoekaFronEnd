@@ -887,9 +887,9 @@ const CheckoutPage = () => {
                       {(item.size || item.selectedSize) && (
                         <p>Size: {item.size || item.selectedSize}</p>
                       )}
-                      {(item.color || item.selectedColor) && (
+                      {/* {(item.color || item.selectedColor) && (
                         <p>Color: {item.color || item.selectedColor}</p>
-                      )}
+                      )} */}
                       <p>Qty: {item.amount}</p>
                     </div>
                     <div className="item-total">

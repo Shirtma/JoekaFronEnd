@@ -197,12 +197,12 @@ const ShopContainer = styled.div`
       margin-bottom: 2rem;
       margin-top: 4rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
       gap: 2rem;
       min-height: 400px;
 
       @media only screen and (max-width: 768px) {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
         gap: 1.5rem;
         margin-top: 3rem;
         min-height: 350px;

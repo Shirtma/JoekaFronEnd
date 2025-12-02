@@ -1,85 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Icon from "./icon";
 import logo from "../images/JOEKA.png";
 import brandColours from "../lib/colours";
+import GlobalModal from "./modal/GlobalModal";
+import NewsletterForm from "./modal/modals/NewsletterForm";
 
 function Footer() {
   const currentDate = new Date();
-  const [newsletter, setNewsletter] = useState({
-    email: "",
-    isLoading: false,
-    isSubmitted: false,
-    error: "",
-  });
+  const [modalOpen, setModalOpen] = useState(false);
+  const [hasSubscribed, setHasSubscribed] = useState(
+    localStorage.getItem("hasSubscribed") === "true"
+  );
 
-  // Handle input change
-  const handleInputChange = (e) => {
-    const { value } = e.target;
-    setNewsletter((prev) => ({
-      ...prev,
-      email: value,
-      error: "",
-    }));
-  };
+  // Auto-open newsletter modal after 4 seconds
+  useEffect(() => {
+    if (!hasSubscribed) {
+      const timer = setTimeout(() => {
+        setModalOpen(true);
+      }, 4000);
 
-  // Handle form submission
-  const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!newsletter.email.trim()) {
-      setNewsletter((prev) => ({ ...prev, error: "Email is required" }));
-      return;
+      return () => clearTimeout(timer);
     }
-    if (!emailRegex.test(newsletter.email)) {
-      setNewsletter((prev) => ({
-        ...prev,
-        error: "Please enter a valid email address",
-      }));
-      return;
-    }
+  }, [hasSubscribed]);
 
-    setNewsletter((prev) => ({ ...prev, isLoading: true, error: "" }));
-
-    try {
-      // Simulate API call - replace with actual endpoint
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL || ""}/newsletter/subscribe`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: newsletter.email }),
-        }
-      );
-
-      if (response.ok) {
-        setNewsletter({
-          email: "",
-          isLoading: false,
-          isSubmitted: true,
-          error: "",
-        });
-
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setNewsletter((prev) => ({ ...prev, isSubmitted: false }));
-        }, 5000);
-      } else {
-        throw new Error("Subscription failed");
-      }
-    } catch (error) {
-      console.error("Newsletter subscription error:", error);
-      setNewsletter((prev) => ({
-        ...prev,
-        isLoading: false,
-        error: "Something went wrong. Please try again.",
-      }));
-    }
+  const handleSuccess = () => {
+    setHasSubscribed(true);
+    setModalOpen(false);
   };
 
   return (
@@ -97,45 +45,28 @@ function Footer() {
             <Link to="/contact">CONTACT US</Link>
           </div>
 
-          <form className="call-to-action" onSubmit={handleNewsletterSubmit}>
+          <form className="call-to-action">
             <p>
               Subscribe to hear the latest about events, news and activities
               from Joeka Inc
             </p>
-            {newsletter.isSubmitted && (
-              <div className="success-message">
-                <p>✅ Thank you for subscribing! We'll keep you updated.</p>
-              </div>
-            )}
-            {newsletter.error && (
-              <div className="error-message">
-                <p>❌ {newsletter.error}</p>
-              </div>
-            )}
             <span className="subscription__form">
-              <input
-                name="subscribe"
-                id="subscribe"
-                type="email"
-                className="subscription__form-input"
-                placeholder="Enter your email"
-                value={newsletter.email}
-                onChange={handleInputChange}
-                disabled={newsletter.isLoading || newsletter.isSubmitted}
-                required
-              />
               <button
-                type="submit"
-                className="subscription__form-btn"
-                disabled={newsletter.isLoading || newsletter.isSubmitted}
+                disabled={hasSubscribed}
+                className="open-subscribe-btn"
+                onClick={(e) => { e.preventDefault(); setModalOpen(true); }}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  background: "#000",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                }}
               >
-                {newsletter.isLoading ? (
-                  <span className="loading-spinner">⏳ SUBSCRIBING...</span>
-                ) : newsletter.isSubmitted ? (
-                  "✓ SUBSCRIBED"
-                ) : (
-                  "SUBSCRIBE"
-                )}
+                {hasSubscribed ? "SUBSCRIBED" : "SUBSCRIBE"}
               </button>
             </span>
           </form>
@@ -174,6 +105,11 @@ function Footer() {
           </div>
         </div>
       </div>
+
+      {/* GLOBAL MODAL */}
+      <GlobalModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <NewsletterForm onSuccess={handleSuccess} />
+      </GlobalModal>
     </FooterContainer>
   );
 }

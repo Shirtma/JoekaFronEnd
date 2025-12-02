@@ -16,9 +16,6 @@ const CartPage = () => {
 
   const navigate = useNavigate();
 
-  // Debug: Log cart items to see their structure
-  console.log("Cart items:", cart);
-
   // Helper function to get the correct cart item ID
   const getCartItemId = (item) => {
     if (item.cartId) {
@@ -26,19 +23,17 @@ const CartPage = () => {
     }
     // If no cartId, create one using the old system structure
     const size = item.selectedSize || item.size || "default";
-    const color = item.selectedColor || item.color || "default";
-    return `${item.id}-${size}-${color}`;
+    // const color = item.selectedColor || item.color || "default";
+    return `${item.id}-${size}`;
   };
 
   const handleQuantityChange = (item, type) => {
     const cartId = getCartItemId(item);
-    console.log("Quantity change:", { cartId, type, item }); // Debug log
     toggleAmount(cartId, type);
   };
 
   const handleRemoveItem = (item) => {
     const cartId = getCartItemId(item);
-    console.log("Removing item:", { cartId, item }); // Debug log
     removeFromCart(cartId);
   };
 
@@ -110,13 +105,13 @@ const CartPage = () => {
                       </div>
                     )}
 
-                    {(item.color || item.selectedColor) && (
+                    {/* {(item.color || item.selectedColor) && (
                       <div className="item-options">
                         <span className="option">
                           Color: {item.color || item.selectedColor}
                         </span>
                       </div>
-                    )}
+                    )} */}
 
                     <div className="mobile-price mobile-only">
                       ₦{item.price.toLocaleString()}
